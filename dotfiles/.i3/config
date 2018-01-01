@@ -26,7 +26,6 @@ font pango: Monospace 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-exec --no-startup-id xfsettingsd --sm-client-disable &
 
 # kill focused window
 bindsym Mod1+q kill
@@ -34,7 +33,6 @@ bindsym Mod1+Tab focus left
 exec autokey-gtk
 exec feh --bg-fill ~/Pictures/luckystar.jpg
 exec compton
-# exec kupfer
 exec gnome-do
 bindsym XF86AudioRaiseVolume exec amixer sset Master 3%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 3%-
@@ -223,6 +221,5 @@ bar {
         font pango:DejaVu Sans Mono 11
 }
 
-exec xbanish
 exec ~/bin/start.sh
 exec xrdb ~/.dotfiles/.Xresources
