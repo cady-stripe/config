@@ -1,8 +1,6 @@
 #!/bin/bash
 #pacmd set-default-sink 0
-powerline-daemon
-powerline-config tmux setup
-TERM=screen-256color-bce tilda
+#TERM=screen-256color-bce tilda
 
 # Desktop environment
 #gnome-settings-daemon &
