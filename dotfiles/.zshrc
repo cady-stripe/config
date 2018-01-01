@@ -47,6 +47,7 @@ zplug "bhilburn/powerlevel9k", as:theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time dir vcs root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh"
+zplug "~/.zsh_tgeng_extra", from:local, use:"directories.zsh", defer:3
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "

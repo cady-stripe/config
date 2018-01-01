@@ -342,7 +342,7 @@ vnoremap P pgvy
 nnoremap Q {gq}
 vnoremap Q gq
 nnoremap R :%s/\<<C-r><C-w>\>//g<Left><Left>
-vmap R *N:%s///g<Left><Left>
+vnoremap R "py:%s/<C-r>p//g<left><left>
 vmap <Right> *
 vmap <Left> #
 nmap <M-a> ggVGy
