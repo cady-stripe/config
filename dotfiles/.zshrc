@@ -61,7 +61,7 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='15'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='166'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh"
+zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh", defer:1
 zplug "~/.zsh_tgeng_extra", from:local, use:"directories.zsh", defer:3
 
 if ! zplug check --verbose; then
