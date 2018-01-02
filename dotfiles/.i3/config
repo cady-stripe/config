@@ -132,8 +132,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $RIGHT_MONITOR DP-1
-set $LEFT_MONITOR DVI-D-1
+set $RIGHT_MONITOR DP-4
+set $LEFT_MONITOR DVI-D-5
 
 workspace 1 output $LEFT_MONITOR
 workspace 2 output $LEFT_MONITOR

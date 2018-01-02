@@ -1,0 +1,75 @@
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+nnoremap <Home> ^
+nnoremap <End> $
+vnoremap <Home> ^
+vnoremap <End> $
+noremap <C-z> <C-a>
+
+nnoremap w l[bv]w
+vnoremap w ]w
+
+nnoremap W viw
+vnoremap W e
+
+vnoremap P pgvy
+nnoremap <Right> *
+nnoremap <Left> #
+nnoremap <Up> 3<c-y>
+nnoremap <Down> 3<c-e>
+vnoremap <Up> 3k
+vnoremap <Down> 3j
+inoremap <C-w> <C-o><C-w>
+nnoremap gm bimock<Esc>l~
+nnoremap s :action CommentByLineComment<CR>
+nnoremap J :action EditorJoinLines<CR>
+nnoremap R :action RenameElement<CR>
+nnoremap t :action ToggleLineBreakpoint<CR>
+nnoremap Q :action com.andrewbrookins.idea.wrap.WrapAction<CR>
+nnoremap T :action StringManipulation.AlignToColumns<CR>
+vnoremap Q :<Backspace><Backspace><Backspace><Backspace><Backspace>action com.andrewbrookins.idea.wrap.WrapAction<CR>
+inoremap <M-h> <C-w>h
+vnoremap <M-h> <C-w>h
+nnoremap <M-h> <C-w>h
+cnoremap <M-h> <C-w>h
+inoremap <M-l> <C-w>l
+vnoremap <M-l> <C-w>l
+nnoremap <M-l> <C-w>l
+cnoremap <M-l> <C-w>l
+nnoremap , :action GotoPreviousError<CR>
+nnoremap . :action GotoNextError<CR>
+nnoremap U :action Vcs.RollbackChangedLines<CR>
+nnoremap <space> %
+vnoremap <space> %
+nnoremap <CR> :action ShowErrorDescription<CR>
+
+vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
+vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
+nnoremap - :action StringManipulation.ToHyphenCaseOrCamelCase<CR>
+vnoremap C :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToPascalCaseOrCamelCase<CR>
+vnoremap _ :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToSnakeCaseOrCamelCase<CR>
+nnoremap _ :action StringManipulation.ToSnakeCaseOrCamelCase<CR>
+nnoremap <S-Up> :action MoveStatementUp<CR>
+nnoremap <S-Down> :action MoveStatementDown<CR>
+inoremap <S-Up> <C-o>:action MoveStatementUp<CR>
+inoremap <S-Down> <C-o>:action MoveStatementDown<CR>
+
+nnoremap [ vi[
+nnoremap ] va[
+nnoremap { vi{
+nnoremap } va{
+nnoremap ( vi(
+nnoremap ) va)
+nnoremap < vi<
+nnoremap > va<
+nnoremap " vi"
+nnoremap ' vi'
+nnoremap X @q
+
+set ignorecase
+set smartcase
+set number
+set clipboard=unnamed
+set timeoutlen=100
+set incsearch

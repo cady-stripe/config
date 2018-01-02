@@ -73,6 +73,9 @@ vnoremap s :call NERDComment(0,"toggle")<C-m>
 
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'glts/vim-magnum.git'
+Plugin 'glts/vim-radical.git'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -346,6 +349,19 @@ vnoremap R "py:%s/<C-r>p//g<left><left>
 vmap <Right> *
 vmap <Left> #
 nmap <M-a> ggVGy
+nnoremap [ vi[
+nnoremap ] va[
+nnoremap { vi{
+nnoremap } va{
+nnoremap ( vi(
+nnoremap ) va)
+nnoremap < vi<
+nnoremap > va<
+nnoremap " vi"
+nnoremap "" va"
+nnoremap ' vi'
+nnoremap '' va'
+nnoremap X @q
 
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |
