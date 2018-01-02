@@ -46,8 +46,20 @@ zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "bhilburn/powerlevel9k", as:theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time dir vcs root_indicator)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
+POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='26'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='88'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='white'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='58'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='white'
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh"
 zplug "~/.zsh_tgeng_extra", from:local, use:"directories.zsh", defer:3
 
