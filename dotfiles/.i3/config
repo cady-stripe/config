@@ -212,7 +212,7 @@ workspace Music output $RIGHT_MONITOR
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Mod1+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Mod1+e exec i3-msg exit
+bindsym $mod+Mod1+e exec ~/bin/logout.sh
 
 # mouse_warping none
 # Start i3bar to display a workspace bar (plus the system information i3status
