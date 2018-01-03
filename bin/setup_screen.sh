@@ -1,4 +1,8 @@
 #!/bin/sh
+until [ xrandr ];
+do sleep 1
+done
+
 while true
 do
 monitors=$(xrandr --query | grep " connected")

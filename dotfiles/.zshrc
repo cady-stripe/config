@@ -39,6 +39,7 @@ zplug "plugins/compleat", from:oh-my-zsh
 zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/dirpersist", from:oh-my-zsh
 zplug "plugins/encode64", from:oh-my-zsh
+zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/fasd", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extra", from:oh-my-zsh
