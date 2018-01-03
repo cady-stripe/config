@@ -41,6 +41,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 # bindsym XF86ScreenSaver exec sudo pm-suspend
 bindsym Pause exec ~/bin/lock.sh
+
 # bindsym $mod+s split h; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
 # bindsym $mod+Shift+s split v; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
 
@@ -132,8 +133,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $RIGHT_MONITOR DP-4
-set $LEFT_MONITOR DVI-D-5
+set $RIGHT_MONITOR DP-1
+set $LEFT_MONITOR DVI-D-1
 
 workspace 1 output $LEFT_MONITOR
 workspace 2 output $LEFT_MONITOR
