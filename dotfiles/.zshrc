@@ -33,7 +33,7 @@ source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
 zplug "Tarrasch/zsh-bd"
-zplug "zsh-users/zsh-syntax-highlighting", defer:3, use:zsh-syntax-highlighting.zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, use:zsh-syntax-highlighting.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "jimhester/per-directory-history"
@@ -46,7 +46,7 @@ zplug "plugins/git-extra", from:oh-my-zsh
 zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
-zplug "rupa/z", use:"*.sh"
+zplug "rupa/z", use:"*.sh", defer:3
 zplug "bhilburn/powerlevel9k", as:theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
