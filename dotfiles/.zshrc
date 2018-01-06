@@ -48,7 +48,7 @@ zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "rupa/z", use:"*.sh", defer:3
 zplug "bhilburn/powerlevel9k", as:theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
 POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
 POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
@@ -77,3 +77,5 @@ fi
 zplug load
 # Somehow this alias in calc plugin does not work without repeating it here.
 aliases[=]='noglob __calc_plugin'
+
+export PATH=/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
