@@ -1,4 +1,10 @@
-#!/bin/bash
+if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
+  /usr/lib/gnome-settings-daemon/gsd-xsettings
+  gnome-power-manager
+  /home/tgeng/bin/setup_screen.sh
+fi
+/home/tgeng/bin/kbd
+
 #pacmd set-default-sink 0
 #TERM=screen-256color-bce tilda
 
