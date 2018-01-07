@@ -2,8 +2,9 @@ if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
   /usr/lib/gnome-settings-daemon/gsd-xsettings
   gnome-power-manager
   /home/tgeng/bin/setup_screen.sh
+  nm-applet
 fi
-/home/tgeng/bin/kbd
+sleep 2; /home/tgeng/bin/kbd
 
 #pacmd set-default-sink 0
 #TERM=screen-256color-bce tilda
