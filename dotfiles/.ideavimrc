@@ -43,6 +43,8 @@ nnoremap U :action Vcs.RollbackChangedLines<CR>
 nnoremap <space> %
 vnoremap <space> %
 nnoremap <CR> :action ShowErrorDescription<CR>
+nnoremap gc :action Blaze.OpenInCodeSearch<CR>
+nnoremap gf :action Blaze.FixFile<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
@@ -54,6 +56,16 @@ nnoremap <S-Up> :action MoveStatementUp<CR>
 nnoremap <S-Down> :action MoveStatementDown<CR>
 inoremap <S-Up> <C-o>:action MoveStatementUp<CR>
 inoremap <S-Down> <C-o>:action MoveStatementDown<CR>
+vnoremap ' va'<Esc>gvovi'<Esc>f'
+vnoremap " va"<Esc>gvovi"<Esc>f"
+vnoremap ( va)<Esc>gvovi(<Esc>
+vnoremap ) va)<Esc>gvovi(<Esc>%
+vnoremap [ va]<Esc>gvovi[<Esc>
+vnoremap ] va]<Esc>gvovi[<Esc>%
+vnoremap { va}<Esc>gvovi{<Esc>
+vnoremap } va}<Esc>gvovi{<Esc>%
+vnoremap < va><Esc>gvovi<<Esc>
+vnoremap > va><Esc>gvovi<<Esc>%
 
 nnoremap [ vi[
 nnoremap ] va[
@@ -71,5 +83,5 @@ set ignorecase
 set smartcase
 set number
 set clipboard=unnamed
-set timeoutlen=100
+set timeoutlen=300
 set incsearch

@@ -363,6 +363,17 @@ nnoremap ' vi'
 nnoremap '' va'
 nnoremap X @q
 
+vnoremap ' va'<Esc>gvovi'<Esc>f'
+vnoremap " va"<Esc>gvovi"<Esc>f"
+vnoremap ( va)<Esc>gvovi(<Esc>
+vnoremap ) va)<Esc>gvovi(<Esc>%
+vnoremap [ va]<Esc>gvovi[<Esc>
+vnoremap ] va]<Esc>gvovi[<Esc>%
+vnoremap { va}<Esc>gvovi{<Esc>
+vnoremap } va}<Esc>gvovi{<Esc>%
+vnoremap < va><Esc>gvovi<<Esc>
+vnoremap > va><Esc>gvovi<<Esc>%
+
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |
 "+-----------------------------------------------------------------------------+
