@@ -26,6 +26,8 @@ autoload -U down-line-or-beginning-search
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 
+export EDITOR=vim
+
 # =============================================================================
 # zplug
 # =============================================================================
@@ -33,20 +35,19 @@ source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
 zplug "Tarrasch/zsh-bd"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, use:zsh-syntax-highlighting.zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "jimhester/per-directory-history"
+#zplug "jimhester/per-directory-history", defer:1
 zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/dirpersist", from:oh-my-zsh
 zplug "plugins/encode64", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
-#zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh, defer:2
 zplug "plugins/git-extra", from:oh-my-zsh
 zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
-zplug "rupa/z", use:"*.sh", defer:3
 zplug "bhilburn/powerlevel9k", as:theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
