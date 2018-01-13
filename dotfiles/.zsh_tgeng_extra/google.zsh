@@ -13,3 +13,5 @@ function bb() {
     cd "${PWD/\/google3//google3/blaze-bin}"
   fi
 }
+
+alias cdg='bd google3'
