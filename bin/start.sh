@@ -5,7 +5,7 @@ if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
   nm-applet
   xbindkeys
 fi
-sleep 2; /home/tgeng/bin/kbd
+sleep 4; /home/tgeng/bin/kbd
 
 #pacmd set-default-sink 0
 #TERM=screen-256color-bce tilda
