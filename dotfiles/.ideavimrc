@@ -43,8 +43,16 @@ nnoremap U :action Vcs.RollbackChangedLines<CR>
 nnoremap <space> %
 vnoremap <space> %
 nnoremap <CR> :action ShowErrorDescription<CR>
-nnoremap gc :action Blaze.OpenInCodeSearch<CR>
-nnoremap gf :action Blaze.FixFile<CR>
+nnoremap gs :action Blaze.OpenInCodeSearch<CR>
+nnoremap gc :action Blaze.OpenInCider<CR>
+nnoremap g3 :action Blaze.OpenInG3Doc<CR>
+nnoremap gf :action Blaze.FixDepsForFile<CR>
+nnoremap gb :action Blaze.OpenCorrespondingBuildFile<CR>
+nnoremap zz :action Blaze.PartialSync<CR>
+nnoremap <S-Left> :action MoveElementLeft<CR>
+nnoremap <S-Right> :action MoveElementRight<CR>
+nnoremap gr :action RearrangeCode<CR>
+nnoremap gD :action GotoImplementation<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>

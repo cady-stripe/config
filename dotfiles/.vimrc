@@ -340,7 +340,6 @@ inoremap <C-s> <Esc>:w<CR>
 vnoremap <C-s> v:w<CR>
 nnoremap zz mz1z=`z
 inoremap <C-g> <Esc>[s1z=`]a
-nnoremap x "xx
 vnoremap P pgvy
 nnoremap Q {gq}
 vnoremap Q gq

@@ -15,3 +15,15 @@ function bb() {
 }
 
 alias cdg='bd google3'
+alias gme='g fix5 && g multi export'
+alias gl='g log5'
+alias gr='g rb5'
+alias gms='g multi sync'
+alias gcm='g commit --amend --no-edit'
+alias gcam='g commit -a --amend --no-edit'
+alias gca='g commit -a'
+alias gfix='g fix5'
+alias grc='g rebase --continue'
+alias gra='g rebase --abort'
+alias ga='noglob g add'
+
