@@ -2,7 +2,7 @@
     "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "b8", 
+    "description": "alt-up", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,14 +12,18 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": null, 
-        "modifiers": []
+        "hotKey": "k", 
+        "modifiers": [
+            "<alt>"
+        ]
     }, 
-    "modes": [], 
+    "modes": [
+        3
+    ], 
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": null, 
+        "regex": "CoqIde.CoqIde", 
         "isRecursive": false
     }, 
     "type": "phrase", 

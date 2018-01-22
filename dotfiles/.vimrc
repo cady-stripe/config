@@ -76,6 +76,32 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'glts/vim-magnum.git'
 Plugin 'glts/vim-radical.git'
 
+Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
+Plugin 'ap/vim-buftabline'
+set hidden
+nnoremap <M-i> :bnext<CR>
+nnoremap <M-u> :bprev<CR>
+nnoremap <C-i> :bnext<CR>
+nnoremap <C-u> :bprev<CR>
+
+let g:rustfmt_autosave = 1
+
+if !filereadable('/usr/share/vim/google/google.vim')
+  Plugin 'vim-syntastic/syntastic'
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_rust_checkers = ['rustc']
+
+  Plugin 'Valloric/YouCompleteMe'
+endif
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -152,7 +178,7 @@ au BufRead,BufNewFile *.json set filetype=json
 if !has("gui_running")
     set t_Co=256
 else
-    set guifont=Hack\ 10
+    set guifont=Hack\ 12
 endif
 if has("mac")
     set clipboard=unnamed
