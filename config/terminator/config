@@ -3,6 +3,7 @@
   title_transmit_bg_color = "#008cff"
 [keybindings]
   copy = <Alt>c
+  edit_window_title = None
   layout_launcher = None
   paste = <Alt>v
 [layouts]

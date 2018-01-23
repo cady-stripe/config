@@ -1,4 +1,5 @@
-let mapleader = ','
+nnoremap <Space> <Nop>
+let mapleader = ' '
 "+-----------------------------------------------------------------------------+
 "| Vundle                                                                      |
 "+-----------------------------------------------------------------------------+
@@ -76,6 +77,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'glts/vim-magnum.git'
 Plugin 'glts/vim-radical.git'
 
+Plugin 'romainl/vim-qf'
+nmap . <Plug>qf_loc_next
+nmap , <Plug>qf_loc_previous
+
+Plugin 'vim-scripts/BufOnly.vim'
+nnoremap <M-w> :bd<CR>
+inoremap <M-w> <C-o>:bd<CR>
+
 Plugin 'rust-lang/rust.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'ap/vim-buftabline'
@@ -97,7 +106,7 @@ if !filereadable('/usr/share/vim/google/google.vim')
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
-  let g:syntastic_rust_checkers = ['rustc']
+  let g:syntastic_rust_checkers = ['cargo']
 
   Plugin 'Valloric/YouCompleteMe'
 endif
@@ -145,10 +154,10 @@ if filereadable('/usr/share/vim/google/google.vim')
 
 " set statusline=%<\ %n:%f\ %m%r%y%{SyntasticStatuslineFlag()}%=(%l\ ,\ %c%V)\ Total:\ %L\
 " work around for the location list bug
-autocmd FileType c,cpp,objc nnoremap ZQ :lcl<bar>q!<CR>
-vmap ZQ vZQ
-autocmd FileType c,cpp,objc nnoremap ZZ :lcl<bar>w<bar>lcl<bar>q<CR>
-vmap ZZ vZZ
+"autocmd FileType c,cpp,objc nnoremap ZQ :lcl<bar>q!<CR>
+"vmap ZQ vZQ
+"autocmd FileType c,cpp,objc nnoremap ZZ :lcl<bar>w<bar>lcl<bar>q<CR>
+"vmap ZZ vZZ
 
     Glug youcompleteme-google
     au Filetype c,cpp,objc,objcpp,python,cs noremap gd :YcmCompleter GoTo<CR>
@@ -299,8 +308,8 @@ vnoremap j gj
 vnoremap k gk
 vnoremap gj j
 vnoremap gk k
-nnoremap ZZ :xa<CR>
-nnoremap ZQ :qa!<CR>
+"nnoremap ZZ :xa<CR>
+"nnoremap ZQ :qa!<CR>
 
 nnoremap <C-Tab> <C-w>w
 vnoremap <C-Tab> <C-w>w
