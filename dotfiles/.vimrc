@@ -392,9 +392,7 @@ nnoremap ) va)
 nnoremap < vi<
 nnoremap > va<
 nnoremap " vi"
-nnoremap "" va"
 nnoremap ' vi'
-nnoremap '' va'
 nnoremap X @q
 
 vnoremap ' va'<Esc>gvovi'<Esc>f'
