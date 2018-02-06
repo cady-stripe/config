@@ -71,6 +71,12 @@ let NERDTreeShowHidden=1
 Plugin 'scrooloose/nerdcommenter'
 nnoremap s :call NERDComment(0,"toggle")<C-m>
 vnoremap s :call NERDComment(0,"toggle")<C-m>
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 Plugin 'tpope/vim-fugitive'
 

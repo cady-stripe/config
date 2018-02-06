@@ -79,4 +79,4 @@ zplug load
 # Somehow this alias in calc plugin does not work without repeating it here.
 aliases[=]='noglob __calc_plugin'
 
-export PATH=/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
+export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
