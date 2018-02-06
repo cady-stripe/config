@@ -40,19 +40,14 @@ cnoremap <M-l> <C-w>l
 nnoremap , :action GotoPreviousError<CR>
 nnoremap . :action GotoNextError<CR>
 nnoremap U :action Vcs.RollbackChangedLines<CR>
-nnoremap <space> %
-vnoremap <space> %
 nnoremap <CR> :action ShowErrorDescription<CR>
-nnoremap gs :action Blaze.OpenInCodeSearch<CR>
-nnoremap gc :action Blaze.OpenInCider<CR>
-nnoremap g3 :action Blaze.OpenInG3Doc<CR>
-nnoremap gf :action Blaze.FixDepsForFile<CR>
-nnoremap gb :action Blaze.OpenCorrespondingBuildFile<CR>
-nnoremap zz :action Blaze.PartialSync<CR>
+nnoremap C :action Blaze.OpenInCodeSearch<CR>
+nnoremap D :action Blaze.FixDepsForFile<CR>
+nnoremap B :action Blaze.OpenCorrespondingBuildFile<CR>
+nnoremap S :action Blaze.PartialSync<CR>
 nnoremap <S-Left> :action MoveElementLeft<CR>
 nnoremap <S-Right> :action MoveElementRight<CR>
-nnoremap gr :action RearrangeCode<CR>
-nnoremap gD :action GotoImplementation<CR>
+nnoremap I :action GotoImplementation<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
@@ -91,5 +86,5 @@ set ignorecase
 set smartcase
 set number
 set clipboard=unnamed
-set timeoutlen=300
+set timeoutlen=50
 set incsearch

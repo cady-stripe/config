@@ -89,7 +89,8 @@ for_window [title="^Database Console" ] floating disable
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
-assign [title="Untitled - Google Chrome"] Test
+assign [title="^Blaze Console"] 6
+#assign [title="Untitled - Google Chrome"] Test
 for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move absolute position 4720 px 1014 px resize set 400 px 400 px
 # change focus
 bindsym $mod+h focus left
@@ -134,8 +135,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $RIGHT_MONITOR DVI-D-0
-set $LEFT_MONITOR DP-0
+set $RIGHT_MONITOR DP-4
+set $LEFT_MONITOR DP-5
 
 workspace 1 output $LEFT_MONITOR
 workspace 2 output $LEFT_MONITOR
@@ -216,7 +217,7 @@ bindsym $mod+Mod1+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Mod1+e exec ~/bin/logout.sh
 
-# mouse_warping none
+ mouse_warping none
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
