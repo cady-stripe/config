@@ -3,7 +3,7 @@ if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
   gnome-power-manager
   /home/tgeng/bin/setup_screen.sh
   nm-applet
-  xbindkeys
+  coq_guard.sh
 fi
 sleep 4; /home/tgeng/bin/kbd
 
