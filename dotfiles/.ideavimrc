@@ -21,7 +21,7 @@ nnoremap <Down> 3<c-e>
 vnoremap <Up> 3k
 vnoremap <Down> 3j
 inoremap <C-w> <C-o><C-w>
-nnoremap gm bimock<Esc>l~
+nnoremap M bimock<Esc>l~
 nnoremap s :action CommentByLineComment<CR>
 nnoremap J :action EditorJoinLines<CR>
 nnoremap R :action RenameElement<CR>
