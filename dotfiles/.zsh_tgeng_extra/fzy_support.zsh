@@ -80,7 +80,7 @@ fi
 ###########################################################
 
 __fzfcmd_complete() {
-   echo "fzy"
+  echo "fzy"
 }
 
 __fzf_generic_path_completion() {

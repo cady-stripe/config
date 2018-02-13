@@ -15,7 +15,6 @@ if [[ -e /usr/local/google/home ]]; then
     fi
   }
 
-  alias cdg='bd google3'
   alias gme='g fix5 && g multi export'
   alias gl='g log5'
   alias gr='g rb5'
@@ -28,6 +27,16 @@ if [[ -e /usr/local/google/home ]]; then
   alias gra='g rebase --abort'
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
+  function gg() {
+    zz ${1}/google3
+  }
+
+  function cdg() {
+    bd google3
+    if [ $1 ]; then
+      cdt $1
+    fi
+  }
 
   source /etc/bash_completion.d/g4d
 fi
