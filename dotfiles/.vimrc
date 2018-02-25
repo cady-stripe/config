@@ -1,5 +1,6 @@
 nnoremap <Space> <Nop>
 let mapleader = ' '
+let maplocalleader = ' '
 "+-----------------------------------------------------------------------------+
 "| Vundle                                                                      |
 "+-----------------------------------------------------------------------------+
@@ -62,7 +63,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#555555  ctermbg=240
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333333   ctermbg=235
 
 Plugin 'scrooloose/nerdtree'
-nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap <leader>a :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=48
 let NERDTreeMouseMode=3
@@ -101,6 +102,9 @@ nnoremap <C-i> :bnext<CR>
 nnoremap <C-u> :bprev<CR>
 
 let g:rustfmt_autosave = 1
+
+Plugin 'idris-hackers/idris-vim'
+let g:idris_conceal = 1
 
 if !filereadable('/usr/share/vim/google/google.vim')
   Plugin 'vim-syntastic/syntastic'
@@ -247,7 +251,7 @@ function SpellCorrectionModeOff()
     iunmap k
     silent call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 endfunction
-nmap <silent> <Backspace> :call SpellCorrectionModeOn()<CR><F13>
+nmap <silent> <Return> :call SpellCorrectionModeOn()<CR><F13>
 
 set tw=0
 syntax on

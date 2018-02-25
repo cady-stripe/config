@@ -102,7 +102,7 @@ bindsym $mod+Tab workspace back_and_forth
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left resize shrink   width 5 px or 5 ppt
 bindsym $mod+Down resize grow   height 5 px or 5 ppt
-bindsym $mod+Up resize grow   height 5 px or 5 ppt
+bindsym $mod+Up resize shrink   height 5 px or 5 ppt
 bindsym $mod+Right resize grow   width 5 px or 5 ppt
 
 # move focused window

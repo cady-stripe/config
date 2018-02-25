@@ -3,9 +3,9 @@ if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
   gnome-power-manager
   /home/tgeng/bin/setup_screen.sh
   nm-applet
-  coq_guard.sh
+  # coq_guard.sh
 fi
-sleep 4; /home/tgeng/bin/kbd
+# sleep 4; /home/tgeng/bin/kbd
 
 #pacmd set-default-sink 0
 #TERM=screen-256color-bce tilda
