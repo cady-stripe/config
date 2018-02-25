@@ -104,7 +104,6 @@ nnoremap <C-u> :bprev<CR>
 let g:rustfmt_autosave = 1
 
 Plugin 'idris-hackers/idris-vim'
-let g:idris_conceal = 1
 
 if !filereadable('/usr/share/vim/google/google.vim')
   Plugin 'vim-syntastic/syntastic'
@@ -197,7 +196,8 @@ au BufRead,BufNewFile *.json set filetype=json
 if !has("gui_running")
     set t_Co=256
 else
-    set guifont=Hack\ 12
+    let g:idris_conceal = 1
+    set guifont=Fira\ Code\ 12
 endif
 if has("mac")
     set clipboard=unnamed
