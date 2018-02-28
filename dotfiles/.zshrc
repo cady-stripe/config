@@ -81,3 +81,9 @@ zplug load
 aliases[=]='noglob __calc_plugin'
 
 export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc'; fi

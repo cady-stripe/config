@@ -25,6 +25,7 @@ if [[ -e /usr/local/google/home ]]; then
   alias gfix='g fix5'
   alias grc='g rebase --continue'
   alias gra='g rebase --abort'
+  alias gco='g co'
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
   function gg() {
