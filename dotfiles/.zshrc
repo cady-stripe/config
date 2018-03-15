@@ -49,14 +49,14 @@ zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "bhilburn/powerlevel9k", as:theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs dir newline)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time vcs custom_get_client custom_get_dir newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
-POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
+# POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
+# POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
+# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
+# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
+# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
+# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
 POWERLEVEL9K_VCS_CLEAN_BACKGROUND='26'
 POWERLEVEL9K_VCS_CLEAN_FOREGROUND='15'
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='88'
@@ -65,6 +65,18 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='30'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
 POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND='yellow'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+_get_client() {
+  pwd | sed 's|/usr/local/google/home/tgeng/git/\([^/]\+\).*|\1|' | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|' | sed 's|.*/.*||'
+}
+_get_dir() {
+  print -rD $PWD | sed 's|.*/google3\(.*\)|G3 /\1|'
+}
+POWERLEVEL9K_CUSTOM_GET_CLIENT='_get_client'
+POWERLEVEL9K_CUSTOM_GET_CLIENT_FOREGROUND='15'
+POWERLEVEL9K_CUSTOM_GET_CLIENT_BACKGROUND='202'
+POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
+POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
+POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="black"
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh", defer:1
 zplug "~/.zsh_tgeng_extra", from:local, use:"directories.zsh", defer:3
 zplug "~/.zsh_tgeng_extra", from:local, use:"git.zsh", defer:3

@@ -103,6 +103,9 @@ nnoremap <C-u> :bprev<CR>
 
 let g:rustfmt_autosave = 1
 
+Plugin 'ihacklog/HiCursorWords'
+highlight! WordUnderTheCursor cterm=bold,underline gui=bold,underline
+
 Plugin 'idris-hackers/idris-vim'
 
 if !filereadable('/usr/share/vim/google/google.vim')
@@ -124,6 +127,7 @@ endif
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+
 "+-----------------------------------------------------------------------------+
 "| Google                                                                      |
 "+-----------------------------------------------------------------------------+
@@ -137,8 +141,13 @@ if filereadable('/usr/share/vim/google/google.vim')
     Glug blazedeps
 
     Glug codefmt
+    Glug codefmt-google
     nnoremap <M-f> :FormatCode<CR>
     inoremap <M-f> <Esc>:FormatCode<CR>
+
+    Glug corpweb
+    nnoremap C :CorpWebCsFile<CR>
+    nnoremap D :CorpDocFindFile<CR>
 
     Glug easygoogle
 
@@ -154,12 +163,17 @@ if filereadable('/usr/share/vim/google/google.vim')
 
     Glug googlestyle
 
+    Glug relatedfiles
+    nnoremap <leader>r :RelatedFiles<CR>
+
     Glug syntastic-google checkers=`{'python': 'gpylint'}`
     let g:syntastic_mode_map = {'mode': 'passive'}
     nnoremap <C-d> :SyntasticCheck<CR>
     let g:syntastic_auto_loc_list=1
     let g:syntastic_enable_signs=1
     let g:syntastic_loc_list_height=5
+
+    Glug ultisnips-google
 
 " set statusline=%<\ %n:%f\ %m%r%y%{SyntasticStatuslineFlag()}%=(%l\ ,\ %c%V)\ Total:\ %L\
 " work around for the location list bug
@@ -197,7 +211,7 @@ if !has("gui_running")
     set t_Co=256
 else
     let g:idris_conceal = 1
-    set guifont=Fira\ Code\ 12
+    set guifont=Hack\ 10
 endif
 if has("mac")
     set clipboard=unnamed
@@ -305,7 +319,6 @@ set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
 autocmd BufWritePre * :%s/\s\+$//e
-
 "+-----------------------------------------------------------------------------+
 "| Remaps                                                                      |
 "+-----------------------------------------------------------------------------+

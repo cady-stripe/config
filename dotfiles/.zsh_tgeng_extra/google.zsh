@@ -31,6 +31,22 @@ if [[ -e /usr/local/google/home ]]; then
   function gg() {
     zz ${1}/google3
   }
+  function depotp() {
+    pwd | sed 's|/usr/local/google/home/tgeng/git/[^/]\+/google3/\(.\+\)|\1|' | sed 's|/google/src/cloud/tgeng/[^/]\+/google3/\(.\+\)|\1|' | sed 's|^/.*||'
+  }
+  function sc() {
+    local current
+    current=$(depotp)
+    g4d $1 && cd $current
+  }
+  function sg() {
+    local current
+    current=$(depotp)
+    gg $1 && cd $current
+  }
+  function p() {
+    echo -n '//'`depotp` | xclip -selection clipboard
+  }
 
   function cdg() {
     bd google3
