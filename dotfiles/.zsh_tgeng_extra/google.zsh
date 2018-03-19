@@ -28,6 +28,7 @@ if [[ -e /usr/local/google/home ]]; then
   alias gco='g co'
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
+  alias apitool='/google/data/ro/teams/cloud-marketplace/apitool'
   function gg() {
     zz ${1}/google3
   }
@@ -56,4 +57,6 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   source /etc/bash_completion.d/g4d
+  # for pulling CITC change back to git multi, see https://docs.google.com/document/d/1gRXK5WAh7Ml_ezx7LmKwz40XMx3m7jwUftezrHhzUjU/edit#
+  PATH=$PATH:/google/data/ro/users/ho/hoffstaetter/scripts
 fi

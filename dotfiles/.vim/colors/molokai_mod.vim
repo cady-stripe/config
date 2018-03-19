@@ -163,9 +163,9 @@ if &t_Co > 255
    hi Define          ctermfg=81
    hi Delimiter       ctermfg=250
 
-   hi DiffAdd                     ctermbg=24
-   hi DiffChange      ctermfg=181 ctermbg=239
-   hi DiffDelete      ctermfg=162 ctermbg=53
+   hi DiffAdd         cterm=bold ctermbg=28 ctermfg=118 guifg=#bdffa8 guibg=#22ad35
+   hi DiffDelete      cterm=bold ctermbg=88 ctermfg=212 guifg=#ffa8a8 guibg=#ad2222
+   hi DiffChange      cterm=bold ctermbg=27 ctermfg=81  guifg=#a8c9ff guibg=#2277ad
    hi DiffText                    ctermbg=102 cterm=bold
 
    hi Directory       ctermfg=118               cterm=bold
@@ -255,8 +255,6 @@ if &t_Co > 255
        hi String          ctermfg=222
        hi Conditional     ctermfg=197               cterm=bold
        hi Constant        ctermfg=141               cterm=bold
-
-       hi DiffDelete      ctermfg=125 ctermbg=233
 
        hi Directory       ctermfg=154               cterm=bold
        hi Error           ctermfg=222 ctermbg=233

@@ -13,9 +13,14 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'airblade/vim-gitgutter'
-set signcolumn=yes
-let g:gitgutter_diff_args = 'HEAD'
+" Plugin 'airblade/vim-gitgutter'
+" set signcolumn=yes
+" let g:gitgutter_diff_args = 'HEAD'
+Plugin 'mhinz/vim-signify'
+let g:signify_vcs_cmds = {'perforce':'DIFF=%d" -U0" citcdiff %f || [[ $? == 1 ]]'}
+let g:signify_vcs_list = ['perforce', 'git']
+nmap <M-Down> <plug>(signify-next-hunk)
+nmap <M-Up> <plug>(signify-prev-hunk)
 
 Plugin 'bkad/CamelCaseMotion'
 omap <silent> iw <Plug>CamelCaseMotion_ie
