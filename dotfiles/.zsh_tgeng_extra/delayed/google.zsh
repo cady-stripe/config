@@ -35,6 +35,7 @@ if [[ -e /usr/local/google/home ]]; then
     if [[ -n $opened  ]]; then
       opened=$(echo $opened | fzy)
       if [[ -n $opened  ]]; then
+        fasd --add $opened $(dirname $opened)
         vim $opened
       fi
     else
@@ -42,7 +43,7 @@ if [[ -e /usr/local/google/home ]]; then
     fi
   }
   function gg() {
-    z ${1}/google3
+    cd ~/git/$1
   }
   function depotp() {
     pwd | sed 's|/usr/local/google/home/tgeng/git/[^/]\+/google3/\(.\+\)|\1|' | sed 's|/google/src/cloud/tgeng/[^/]\+/google3/\(.\+\)|\1|' | sed 's|^/.*||'

@@ -142,20 +142,7 @@ if filereadable('/usr/share/vim/google/google.vim')
   nnoremap <silent> gD :<C-u>LspDefinition<CR>
   au FileType java,python,cpp,go nnoremap <silent> gd :<C-u>LspDefinition<CR>
 
-  " Set fuzzy search for custom commands
-  function! FzyCommand(choice_command, vim_command)
-    try
-      let output = system(a:choice_command . " | fzy ")
-    catch /Vim:Interrupt/
-      " Swallow errors from ^C, allow redraw! below
-    endtry
-    redraw!
-    if v:shell_error == 0 && !empty(output)
-      exec a:vim_command . ' ' . output
-    endif
-  endfunction
-
-  au! BufRead,BufNewFile,BufEnter /google/src/cloud/* nnoremap <leader>m :call<space>FzyCommand("g4<space>whatsout<bar>sed<space>'s<bar>".getcwd()."/<bar><bar>'", ":e")<cr>
+  au! BufRead,BufNewFile,BufEnter /google/src/cloud/* let g:ctrlp_user_command='g4 whatsout|sed "s|'.getcwd().'/||"'
 else
   " only load if not on Google machine
   Plugin 'vim-syntastic/syntastic'
