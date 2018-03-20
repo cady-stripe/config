@@ -29,6 +29,18 @@ if [[ -e /usr/local/google/home ]]; then
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
   alias apitool='/google/data/ro/teams/cloud-marketplace/apitool'
+  function vimc() {
+    local opened
+    opened=$(g4 whatsout | sed "s|$PWD/||")
+    if [[ -n $opened  ]]; then
+      opened=$(echo $opened | fzy)
+      if [[ -n $opened  ]]; then
+        vim $opened
+      fi
+    else
+      echo "no opened file"
+    fi
+  }
   function gg() {
     zz ${1}/google3
   }
@@ -50,9 +62,22 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   function cdg() {
-    bd google3
-    if [ $1 ]; then
-      cdt $1
+    if [[ -n $1 ]]; then
+      bd google3
+      if [ $1 ]; then
+        cdt $1
+      fi
+    else
+      local opened
+      opened=$(g4 whatsout | sed "s|$PWD/||")
+      if [[ -n $opened  ]]; then
+        opened=$(echo $opened | fzy)
+        if [[ -n $opened  ]]; then
+          cdt $opened
+        fi
+      else
+        echo "no opened file"
+      fi
     fi
   }
 

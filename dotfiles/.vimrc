@@ -49,6 +49,20 @@ let g:ctrlp_map = '<leader><space>'
 set wildignore+=*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_working_path_mode = 'ra'
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+Bundle 'jasoncodes/ctrlp-modified.vim'
+nnoremap <Leader>m :CtrlPModified<CR>
+nnoremap <Leader>M :CtrlPBranch<CR>
+
 
 Plugin 'itchyny/lightline.vim'
 
@@ -73,6 +87,8 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=48
 let NERDTreeMouseMode=3
 let NERDTreeShowHidden=1
+
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'scrooloose/nerdcommenter'
 nnoremap s :call NERDComment(0,"toggle")<C-m>
@@ -113,7 +129,35 @@ highlight! WordUnderTheCursor cterm=bold,underline gui=bold,underline
 
 Plugin 'idris-hackers/idris-vim'
 
-if !filereadable('/usr/share/vim/google/google.vim')
+if filereadable('/usr/share/vim/google/google.vim')
+  " only load if on Google machine
+  Plugin 'prabirshrestha/async.vim'
+  Plugin 'prabirshrestha/vim-lsp'
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'Kythe Language Server',
+        \ 'cmd': {server_info->['/google/data/ro/teams/grok/tools/kythe_languageserver', '--google3']},
+        \ 'whitelist': ['python', 'go', 'java', 'cpp', 'proto', 'javascript'],
+        \})
+
+  nnoremap <silent> gD :<C-u>LspDefinition<CR>
+  au FileType java,python,cpp,go nnoremap <silent> gd :<C-u>LspDefinition<CR>
+
+  " Set fuzzy search for custom commands
+  function! FzyCommand(choice_command, vim_command)
+    try
+      let output = system(a:choice_command . " | fzy ")
+    catch /Vim:Interrupt/
+      " Swallow errors from ^C, allow redraw! below
+    endtry
+    redraw!
+    if v:shell_error == 0 && !empty(output)
+      exec a:vim_command . ' ' . output
+    endif
+  endfunction
+
+  au! BufRead,BufNewFile,BufEnter /google/src/cloud/* nnoremap <leader>m :call<space>FzyCommand("g4<space>whatsout<bar>sed<space>'s<bar>".getcwd()."/<bar><bar>'", ":e")<cr>
+else
+  " only load if not on Google machine
   Plugin 'vim-syntastic/syntastic'
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
