@@ -31,6 +31,7 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
+export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -43,7 +44,7 @@ zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/dirpersist", from:oh-my-zsh
 zplug "plugins/encode64", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh, defer:2
+# zplug "plugins/fasd", from:oh-my-zsh, defer:2
 zplug "plugins/git-extra", from:oh-my-zsh
 zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
@@ -78,8 +79,7 @@ POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
 POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
 POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="black"
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh", defer:1
-zplug "~/.zsh_tgeng_extra", from:local, use:"directories.zsh", defer:3
-zplug "~/.zsh_tgeng_extra", from:local, use:"git.zsh", defer:3
+zplug "~/.zsh_tgeng_extra", from:local, use:"delayed/*", defer:3
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -88,11 +88,10 @@ if ! zplug check --verbose; then
     fi
 fi
 
-zplug load
 # Somehow this alias in calc plugin does not work without repeating it here.
 aliases[=]='noglob __calc_plugin'
 
-export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
+zplug load
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc'; fi

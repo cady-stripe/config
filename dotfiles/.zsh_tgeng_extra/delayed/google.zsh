@@ -42,7 +42,7 @@ if [[ -e /usr/local/google/home ]]; then
     fi
   }
   function gg() {
-    zz ${1}/google3
+    z ${1}/google3
   }
   function depotp() {
     pwd | sed 's|/usr/local/google/home/tgeng/git/[^/]\+/google3/\(.\+\)|\1|' | sed 's|/google/src/cloud/tgeng/[^/]\+/google3/\(.\+\)|\1|' | sed 's|^/.*||'
@@ -62,22 +62,22 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   function cdg() {
-    if [[ -n $1 ]]; then
-      bd google3
-      if [ $1 ]; then
-        cdt $1
+    bd google3
+    if [ $1 ]; then
+      cdt $1
+    fi
+  }
+
+  function cdc() {
+    local opened
+    opened=$(g4 whatsout | sed "s|$PWD/||")
+    if [[ -n $opened  ]]; then
+      opened=$(echo $opened | fzy)
+      if [[ -n $opened  ]]; then
+        cdt $opened
       fi
     else
-      local opened
-      opened=$(g4 whatsout | sed "s|$PWD/||")
-      if [[ -n $opened  ]]; then
-        opened=$(echo $opened | fzy)
-        if [[ -n $opened  ]]; then
-          cdt $opened
-        fi
-      else
-        echo "no opened file"
-      fi
+      echo "no opened file"
     fi
   }
 
