@@ -27,21 +27,20 @@ if [ $commands[fasd] ]; then # check if fasd is installed
     candidates=$(fasd -Rfl "$2")
     if [[ -n $candidates ]]; then
       if [[ $(wc -l <<< $candidates) = 1 ]]; then
-        vim $candidates
+        $1 $candidates
       else
         file="$(echo $candidates | fzy)" && $1 "${file}" || return 1
       fi
     fi
   }
 
-  _cdt() {
+  cdt_() {
     if [[ -n $1 ]]; then
       cd $1 2> /dev/null || cd $(dirname $1)
-    else
-      f_ _cdt
     fi
   }
   alias v='f_ vim'
   alias gv='f_ gvim'
-  alias cdt='_cdt'
+  alias t='f_ cdt_'
+  alias cdt='cdt_'
 fi
