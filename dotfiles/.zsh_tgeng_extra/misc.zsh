@@ -40,3 +40,10 @@ fi
 
 # recognize comments
 setopt interactivecomments
+
+cdt_() {
+  if [[ -n $1 ]]; then
+    cd $1 2> /dev/null || cd $(dirname $1)
+  fi
+}
+alias cdt='cdt_'

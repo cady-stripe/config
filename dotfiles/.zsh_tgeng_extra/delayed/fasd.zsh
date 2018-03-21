@@ -34,13 +34,7 @@ if [ $commands[fasd] ]; then # check if fasd is installed
     fi
   }
 
-  cdt_() {
-    if [[ -n $1 ]]; then
-      cd $1 2> /dev/null || cd $(dirname $1)
-    fi
-  }
   alias v='f_ vim'
   alias gv='f_ gvim'
   alias t='f_ cdt_'
-  alias cdt='cdt_'
 fi

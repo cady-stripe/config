@@ -83,9 +83,18 @@ if [[ -e /usr/local/google/home ]]; then
       cs $file $@ --local
     fi
   }
-  alias csd='noglob csd_ --context=2 --max_num_results=10'
+  function csd_browser() {
+    local file="//depot$(pwd|sed "s|$_FASD_PREFIX||")"
+    if [[ -z $1 ]]; then
+      xdg-open "https://cs.corp.google.com/piper/$file" > /dev/null 2>&1
+    else
+      local q="$*"
+      xdg-open "https://cs.corp.google.com/search/?q=file:^$file $q" > /dev/null 2>&1
+    fi
+  }
+  alias csd='noglob csd_browser'
 
-  function vimc() {
+  function vc() {
     local opened
     opened=$(g4 whatsout | sed "s|$PWD/||")
     if [[ -n $opened  ]]; then
@@ -98,21 +107,27 @@ if [[ -e /usr/local/google/home ]]; then
       echo "no opened file"
     fi
   }
-  function vims_() {
+  function fs_() {
+    if [[ -z $_FASD_PREFIX ]]; then
+      echo "You must be in a Citc or git5 directory."
+      return
+    fi
+    local cmd=$1;shift
     local results
     results=$(csd_ -l --max_num_results=100 $@ 2> /dev/null | sed "s|$PWD/||")
     if [[ -n $results  ]]; then
       results=$(echo $results | fzy)
       if [[ -n $results  ]]; then
         fasd --add $results $(dirname $results)
-        vim $results
+        $cmd $results
       fi
     else
       echo "no opened file"
     fi
   }
 
-  alias vims='noglob vims_'
+  alias vs='noglob fs_ vim'
+  alias ts='noglob fs_ cdt_'
 
   source /etc/bash_completion.d/g4d
   # for pulling CITC change back to git multi, see https://docs.google.com/document/d/1gRXK5WAh7Ml_ezx7LmKwz40XMx3m7jwUftezrHhzUjU/edit#
