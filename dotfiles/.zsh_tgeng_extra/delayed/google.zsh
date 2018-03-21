@@ -29,21 +29,12 @@ if [[ -e /usr/local/google/home ]]; then
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
   alias apitool='/google/data/ro/teams/cloud-marketplace/apitool'
-  function vimc() {
-    local opened
-    opened=$(g4 whatsout | sed "s|$PWD/||")
-    if [[ -n $opened  ]]; then
-      opened=$(echo $opened | fzy)
-      if [[ -n $opened  ]]; then
-        fasd --add $opened $(dirname $opened)
-        vim $opened
-      fi
-    else
-      echo "no opened file"
-    fi
-  }
   function gg() {
-    cd ~/git/$1
+    if [[ -d ~/git/$1/google3 ]]; then
+      cd ~/git/$1/google3
+    else
+      g4d $1
+    fi
   }
   function depotp() {
     pwd | sed 's|/usr/local/google/home/tgeng/git/[^/]\+/google3/\(.\+\)|\1|' | sed 's|/google/src/cloud/tgeng/[^/]\+/google3/\(.\+\)|\1|' | sed 's|^/.*||'
@@ -81,6 +72,47 @@ if [[ -e /usr/local/google/home ]]; then
       echo "no opened file"
     fi
   }
+  alias csearch='noglob /google/data/ro/projects/codesearch/csearch'
+  alias cs='noglob /google/data/ro/projects/codesearch/cs'
+
+  function csd_() {
+    if [[ -z "$_FASD_PREFIX" ]]; then
+      cs $@ --local
+    else
+      local file="file:^//depot$(pwd|sed "s|$_FASD_PREFIX||")"
+      cs $file $@ --local
+    fi
+  }
+  alias csd='noglob csd_ --context=2 --max_num_results=10'
+
+  function vimc() {
+    local opened
+    opened=$(g4 whatsout | sed "s|$PWD/||")
+    if [[ -n $opened  ]]; then
+      opened=$(echo $opened | fzy)
+      if [[ -n $opened  ]]; then
+        fasd --add $opened $(dirname $opened)
+        vim $opened
+      fi
+    else
+      echo "no opened file"
+    fi
+  }
+  function vims_() {
+    local results
+    results=$(csd_ -l --max_num_results=100 $@ 2> /dev/null | sed "s|$PWD/||")
+    if [[ -n $results  ]]; then
+      results=$(echo $results | fzy)
+      if [[ -n $results  ]]; then
+        fasd --add $results $(dirname $results)
+        vim $results
+      fi
+    else
+      echo "no opened file"
+    fi
+  }
+
+  alias vims='noglob vims_'
 
   source /etc/bash_completion.d/g4d
   # for pulling CITC change back to git multi, see https://docs.google.com/document/d/1gRXK5WAh7Ml_ezx7LmKwz40XMx3m7jwUftezrHhzUjU/edit#
