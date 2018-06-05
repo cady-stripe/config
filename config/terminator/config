@@ -1,5 +1,4 @@
 [global_config]
-  borderless = True
   title_transmit_bg_color = "#008cff"
 [keybindings]
   copy = <Alt>c

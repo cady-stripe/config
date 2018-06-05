@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 stty -ixon -ixoff
 # =============================================================================
 # history
@@ -92,6 +93,10 @@ fi
 aliases[=]='noglob __calc_plugin'
 
 zplug load
+
+# if type "nvim" > /dev/null ; then
+  # alias vim=nvim
+# fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc'; fi

@@ -1,10 +1,14 @@
 if [[ -e /usr/local/google/home ]]; then
-  function sj() {
+  function psj() {
     if [[ $PWD =~ '(.*)/javatests(.*)' ]]; then
-      cd "${match[1]}/java${match[2]}"
+      echo "${match[1]}/java${match[2]}"
     else
-      cd "${PWD/\/google3\/java//google3/javatests}"
+      echo "${PWD/\/google3\/java//google3/javatests}"
     fi
+  }
+
+  function sj() {
+    cd $(psj)
   }
 
   function bb() {
@@ -25,7 +29,6 @@ if [[ -e /usr/local/google/home ]]; then
   alias gfix='g fix5'
   alias grc='g rebase --continue'
   alias gra='g rebase --abort'
-  alias gco='g co'
   alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
   alias apitool='/google/data/ro/teams/cloud-marketplace/apitool'
@@ -131,5 +134,54 @@ if [[ -e /usr/local/google/home ]]; then
 
   source /etc/bash_completion.d/g4d
   # for pulling CITC change back to git multi, see https://docs.google.com/document/d/1gRXK5WAh7Ml_ezx7LmKwz40XMx3m7jwUftezrHhzUjU/edit#
-  PATH=$PATH:/google/data/ro/users/ho/hoffstaetter/scripts
+  PATH=$PATH:/google/data/ro/users/ho/hoffstaetter/scripts:/google/data/ro/projects/goops
+
+  gput() {
+    if [ -n "$(git status --porcelain)" ]; then
+      # Uncommitted changes
+      echo "Workspace is not clean"
+      return
+    fi
+    local new_branch current_path current_branch
+    new_branch=$1
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ $new_branch = $current_branch ]];then
+      echo "Cannot send to current branch."
+      return
+    fi
+    shift
+    current_path=$(depotp)
+    all_files=$(realpath $@)
+    cdg &&\
+      gco $new_branch || g start $new_branch && g multi sync &&\
+      xargs rm -r <<< $all_files 2> /dev/null
+    gco $current_branch -- $(echo $all_files | sed "s|$PWD|./|") &&\
+    if [[ -z $(gl) ]]; then
+      # no outstanding commit
+      g commit -a
+    else
+      g commit -a --amend --no-edit
+    fi && gco $current_branch && cdg $current_path
+  }
+
+  gexport() {
+    local new_branch current_path current_branch
+    new_branch=$1
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    current_path=$(depotp)
+    gco $new_branch && g fix5 && g multi export && gco $current_branch && cdg $current_path
+  }
+
+  gsend() {
+    new_branch=$1
+    if [[ -z $2 ]]; then
+      if [[ -e $(psj) ]]; then
+        gput $1 . $(psj)
+      else
+        gput $1 .
+      fi
+    else
+      gput $@
+    fi && gexport $1
+  }
 fi

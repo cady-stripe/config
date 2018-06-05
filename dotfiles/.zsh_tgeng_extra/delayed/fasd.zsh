@@ -9,7 +9,7 @@ if [ $commands[fasd] ]; then # check if fasd is installed
   z_() {
     local dir
     local candidates
-    candidates=$(fasd -Rdl "$1")
+    candidates=$(fasd -Rdl "$1"| sed "s|$PWD/||")
     if [[ -n $candidates ]]; then
       if [[ $(wc -l <<< $candidates) = 1 ]]; then
         cd $candidates
@@ -24,7 +24,7 @@ if [ $commands[fasd] ]; then # check if fasd is installed
   f_() {
     local file
     local candidates
-    candidates=$(fasd -Rfl "$2")
+    candidates=$(fasd -Rfl "$2"| sed "s|$PWD/||")
     if [[ -n $candidates ]]; then
       if [[ $(wc -l <<< $candidates) = 1 ]]; then
         $1 $candidates
