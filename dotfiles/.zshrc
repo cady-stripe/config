@@ -98,6 +98,8 @@ zplug load
   # alias vim=nvim
 # fi
 
+PATH=/usr/local/google/home/tgeng/dev/.cabal-sandbox/bin:$PATH
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc'; fi
 

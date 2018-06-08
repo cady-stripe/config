@@ -1,10 +1,19 @@
-if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
-  /usr/lib/gnome-settings-daemon/gsd-xsettings
-  gnome-power-manager
-  /home/tgeng/bin/setup_screen.sh
-  nm-applet
-  # coq_guard.sh
-fi
+/usr/bin/cinnamon-settings-daemon &
+(sleep 2; nm-applet) &
+(sleep 2; /usr/share/goobuntu-indicator/goobuntu_indicator.py) &
+(sleep 2; /usr/bin/goobuntu-welcome) &
+gsettings-data-convert &
+(sleep 3; /usr/share/gsysnews/gsysnews-launcher.sh) &
+start-pulseaudio-x11 &
+(sleep 3; cinnamon-sound-applet)
+
+# if [ -f /usr/lib/gnome-settings-daemon/gsd-xsettings ]; then
+#   /usr/lib/gnome-settings-daemon/gsd-xsettings
+#   # gnome-power-manager
+#   # /home/tgeng/bin/setup_screen.sh
+#   nm-applet
+#   # coq_guard.sh
+# fi
 # sleep 4; /home/tgeng/bin/kbd
 
 #pacmd set-default-sink 0

@@ -129,7 +129,7 @@ highlight! WordUnderTheCursor cterm=bold,underline gui=bold,underline
 
 Plugin 'idris-hackers/idris-vim'
 
-if filereadable('/usr/share/vim/google/google.vim')
+if filereadable('/google/src/cloud')
   " only load if on Google machine
   Plugin 'prabirshrestha/async.vim'
   Plugin 'prabirshrestha/vim-lsp'
@@ -168,7 +168,7 @@ filetype plugin indent on    " required
 "| Google                                                                      |
 "+-----------------------------------------------------------------------------+
 
-if filereadable('/usr/share/vim/google/google.vim')
+if filereadable('/google/src/cloud')
     source /usr/share/vim/google/google.vim
     Glug magic
 

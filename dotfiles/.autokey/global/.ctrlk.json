@@ -1,8 +1,8 @@
 {
-    "usageCount": 0, 
+    "usageCount": 7, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "ctrl+j", 
+    "description": "ctrl+k", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,7 +12,7 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "j", 
+        "hotKey": "k", 
         "modifiers": [
             "<ctrl>"
         ]
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "code.Code", 
+        "regex": null, 
         "isRecursive": false
     }, 
     "type": "phrase", 

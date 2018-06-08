@@ -2,7 +2,7 @@
     "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "end", 
+    "description": "ctrl+e", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "crx_.*.Google-chrome-stable", 
+        "regex": null, 
         "isRecursive": false
     }, 
     "type": "phrase", 
