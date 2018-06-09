@@ -1,0 +1,23 @@
+#!/bin/bash
+# citcdiff <file> compares a file to its baseline in CitC.
+
+FILE="$1"; shift || { >&2 echo "usage: citcdiff <file>"; exit 2; }
+
+# Split path into depot root and relative part, or exit.
+[[ "$(/bin/readlink -f "$FILE")" =~ \
+    ^(/google/src/cloud/[^/]+/[^/]+(/\.snapshot/[^/]+)?)/(.*) ]] || \
+    { >&2 echo "Not in CitC: $FILE"; exit 3; }
+ROOT="${BASH_REMATCH[1]}"
+REL="${BASH_REMATCH[3]}"
+
+BASELINE="$ROOT/.citc/baseline/$REL"
+MODIFIED="$ROOT/.citc/modified/$REL"
+[[ -e "$BASELINE" ]] || BASELINE=/dev/null
+if [[ ! -e "$MODIFIED" ]]; then
+  if [[ -e "$ROOT/$REL" ]]; then
+    exit 0 # File exists and is unmodified.
+  else
+    MODIFIED=/dev/null # File was deleted.
+  fi
+fi
+${DIFF:-diff} "$BASELINE" "$MODIFIED"

@@ -33,7 +33,7 @@ bindsym Mod1+Tab focus left
 exec --no-startup-id ~/bin/start.sh
 exec compton
 exec autokey-gtk
-exec gnome-do
+exec albert
 exec powerline-daemon
 exec powerline-config tmux setup
 bindsym XF86AudioRaiseVolume exec amixer sset Master 3%+
@@ -79,19 +79,24 @@ for_window [title="Cider$" ] floating disable
 for_window [title="^MATLAB$" ] border none floating enable
 for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
+# bindsym $mod+XF86Search move scratchpad
+# bindsym XF86Search scratchpad show
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none
 for_window [title="^Merge Revisions" ] move absolute position 0 px 0 px
 for_window [title="^Page\(s\) Unresponsive" ] floating enable
 for_window [title="^Database Console" ] floating disable
-# for_window [class="jetbrains-idea.*" ] border none
+# for_window [class="^jetbrains-.+"][window_type=dialog] focus
+for_window [class="jetbrains-idea.*" ] border none
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
 assign [title="^Blaze Console"] 6
+assign [title="^Run - "] 6
+assign [title="^Debug - "] 6
 #assign [title="Untitled - Google Chrome"] Test
-for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move absolute position 4720 px 1014 px resize set 400 px 400 px
+# for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move absolute position 3600 px 2134 px resize set 400 px 400 px
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -135,8 +140,8 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-set $RIGHT_MONITOR DVI-D-0
-set $LEFT_MONITOR DP-0
+set $RIGHT_MONITOR DP-4
+set $LEFT_MONITOR DP-5
 
 workspace 1 output $LEFT_MONITOR
 workspace 2 output $LEFT_MONITOR
