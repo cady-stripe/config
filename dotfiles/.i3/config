@@ -33,7 +33,7 @@ bindsym Mod1+Tab focus left
 exec --no-startup-id ~/bin/start.sh
 exec compton
 exec autokey-gtk
-exec gnome-do
+exec QT_SCALE_FACTOR=1 albert
 exec powerline-daemon
 exec powerline-config tmux setup
 
@@ -95,6 +95,7 @@ for_window [class="jetbrains-idea.*" ] border none
 
 assign [title="^Database Console"] 6
 assign [title="^Blaze Console"] 6
+assign [instance="crx_gbchcmhmhahfdphkhkmpfmihenigjmpp"] Remote
 #assign [title="Untitled - Google Chrome"] Test
 for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move absolute position 1520 px 656 px resize set 400 px 400 px
 # change focus
@@ -228,6 +229,12 @@ bindsym $mod+Mod1+e exec ~/bin/logout.sh
 bar {
         status_command i3status
         font pango:DejaVu Sans Mono 11
+}
+
+bindsym Print mode "remote" workspace Remote
+mode "remote" {
+    bindsym Print mode "default" workspace back_and_forth
+    bindsym Shift+Print move container to workspace 1
 }
 
 exec xrdb ~/.dotfiles/.Xresources

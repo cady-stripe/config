@@ -116,8 +116,7 @@ hi BufTabLineActive      guibg=#1B1D1E guifg=#808080 gui=bold
 if s:molokai_original == 1
    hi Normal          guifg=#F8F8F2 guibg=#272822
    hi Comment         guifg=#75715E
-"    hi CursorLine                    guibg=#3E3D32
-   hi CursorLine                      guibg=NONE            gui=underline
+   hi CursorLine                      guibg=#444444
    hi CursorLineNr    guifg=#FD971F               gui=none
    hi CursorColumn                  guibg=#3E3D32
    hi ColorColumn                   guibg=#3B3A32
@@ -128,7 +127,7 @@ else
    hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
    hi Comment         guifg=#7E8E91
 "    hi CursorLine                                  gui=underline
-   hi CursorLine                      guibg=NONE            gui=underline
+   hi CursorLine          guibg=#444444
    hi CursorLineNr    guifg=#FD971F               gui=none
    hi CursorColumn                  guibg=#293739
    hi ColorColumn                   guibg=#232526
@@ -144,12 +143,12 @@ if &t_Co > 255
    if s:molokai_original == 1
 "       hi Normal                   ctermbg=232
 "       hi CursorLine               ctermbg=235   cterm=none
-      hi CursorLine                  cterm=underline
+      hi CursorLine                  cterm=underline guibg=#444444
       hi CursorLineNr ctermfg=208               cterm=none
    else
 "       hi Normal       ctermfg=15 ctermbg=16
 "       hi CursorLine               ctermbg=234   cterm=none
-      hi CursorLine                  cterm=underline
+      hi CursorLine                  cterm=underline guibg=#444444
       hi CursorLineNr ctermfg=208               cterm=none
    endif
    hi Boolean         ctermfg=135
@@ -245,8 +244,7 @@ if &t_Co > 255
 
    if exists("g:rehash256") && g:rehash256 == 1
 "        hi Normal       ctermfg=15 ctermbg=16
-"        hi CursorLine               ctermbg=236   cterm=none
-       hi CursorLine                  cterm=underline
+       hi CursorLine                  cterm=underline guibg=#444444
        hi CursorLineNr ctermfg=208               cterm=none
 
        hi Boolean         ctermfg=141

@@ -47,3 +47,8 @@ cdt_() {
   fi
 }
 alias cdt='cdt_'
+# function o() {
+  # nohup oni $@ > /dev/null 2>&1 &
+# }
+alias e='nvim-qt'
+alias c='clear'

@@ -1,5 +1,5 @@
 /usr/bin/cinnamon-settings-daemon &
-(sleep 2; nm-applet) &
+# (sleep 2; nm-applet) &
 (sleep 2; /usr/share/goobuntu-indicator/goobuntu_indicator.py) &
 (sleep 2; /usr/bin/goobuntu-welcome) &
 gsettings-data-convert &

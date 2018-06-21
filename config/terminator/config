@@ -1,10 +1,54 @@
 [global_config]
   title_transmit_bg_color = "#008cff"
 [keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
+  close_term = None
   copy = <Alt>c
+  cycle_next = None
+  cycle_prev = None
+  edit_tab_title = None
+  edit_terminal_title = None
   edit_window_title = None
+  full_screen = None
+  go_down = None
+  go_left = None
+  go_next = None
+  go_prev = None
+  go_right = None
+  go_up = None
+  group_all = None
+  group_tab = None
+  help = None
+  hide_window = None
+  insert_number = None
+  insert_padded = None
   layout_launcher = None
+  move_tab_left = None
+  move_tab_right = None
+  new_tab = None
+  new_terminator = None
+  new_window = None
+  next_tab = None
   paste = <Alt>v
+  prev_tab = None
+  reset = None
+  reset_clear = None
+  resize_down = None
+  resize_left = None
+  resize_right = None
+  resize_up = None
+  rotate_ccw = None
+  rotate_cw = None
+  scaled_zoom = None
+  search = None
+  split_horiz = None
+  split_vert = None
+  toggle_scrollbar = None
+  toggle_zoom = None
+  ungroup_all = None
+  ungroup_tab = None
 [layouts]
   [[default]]
     [[[child1]]]
@@ -19,7 +63,7 @@
     background_darkness = 0.52
     background_type = transparent
     cursor_color = "#ffffff"
-    custom_command = zsh
+    custom_command = tmux -2 new-session -A -s main
     font = Hack 11
     foreground_color = "#ffffff"
     palette = "#2e2e2e:#ff4848:#50ff50:#ffff29:#5891ff:#ff3dff:#56e7e7:#faebd7:#888a85:#ff7474:#97ff97:#ffff96:#9abaff:#ff97ff:#99ffff:#ffffff"

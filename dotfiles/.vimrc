@@ -1,6 +1,12 @@
 nnoremap <Space> <Nop>
 let mapleader = ' '
 let maplocalleader = ' '
+set viminfo='10,\"100,:20,%,n
+if has('nvim')
+  set viminfo+=~/.vim/nviminfo
+else
+  set viminfo+=~/.vim/viminfo
+endif
 "+-----------------------------------------------------------------------------+
 "| Vundle                                                                      |
 "+-----------------------------------------------------------------------------+
@@ -35,14 +41,14 @@ nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-w>j :TmuxNavigateDown<cr>
 nnoremap <silent> <C-w>k :TmuxNavigateUp<cr>
 nnoremap <silent> <C-w>l :TmuxNavigateRight<cr>
-nnoremap <M-h> :TmuxNavigateLeft<cr>
-nnoremap <M-j> :TmuxNavigateDown<cr>
-nnoremap <M-k> :TmuxNavigateUp<cr>
-nnoremap <M-l> :TmuxNavigateRight<cr>
-imap <M-h> <C-w>h
-imap <M-j> <C-w>j
-imap <M-k> <C-w>k
-imap <M-l> <C-w>l
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+imap <silent> <M-h> <C-w>h
+imap <silent> <M-j> <C-w>j
+imap <silent> <M-k> <C-w>k
+imap <silent> <M-l> <C-w>l
 
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<leader><space>'
@@ -247,7 +253,7 @@ if !has("gui_running")
     set t_Co=256
 else
     let g:idris_conceal = 1
-    set guifont=Hack\ 10
+    set guifont=Fira\ Code\ 10
 endif
 if has("mac")
     set clipboard=unnamed
@@ -319,7 +325,6 @@ set undofile
 set undodir=~/.vimundo/
 set undolevels=1000
 set undoreload=10000
-set viminfo='10,\"100,:20,%,n~/.viminfo
 set timeoutlen=500
 set autoread
 

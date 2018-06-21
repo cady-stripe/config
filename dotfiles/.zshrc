@@ -1,4 +1,5 @@
 export TERM="xterm-256color"
+fpath+=~/.zfunc
 stty -ixon -ixoff
 # =============================================================================
 # history
@@ -26,6 +27,8 @@ autoload -U down-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
+bindkey "\033[1~" beginning-of-line
+bindkey "\033[4~" end-of-line
 
 export EDITOR=vim
 
@@ -40,12 +43,10 @@ zplug "Tarrasch/zsh-bd"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-#zplug "jimhester/per-directory-history", defer:1
 zplug "plugins/dirhistory", from:oh-my-zsh
 zplug "plugins/dirpersist", from:oh-my-zsh
 zplug "plugins/encode64", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
-# zplug "plugins/fasd", from:oh-my-zsh, defer:2
 zplug "plugins/git-extra", from:oh-my-zsh
 zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
