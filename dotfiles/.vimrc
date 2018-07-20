@@ -1,12 +1,6 @@
 nnoremap <Space> <Nop>
 let mapleader = ' '
 let maplocalleader = ' '
-set viminfo='10,\"100,:20,%,n
-if has('nvim')
-  set viminfo+=~/.vim/nviminfo
-else
-  set viminfo+=~/.vim/viminfo
-endif
 "+-----------------------------------------------------------------------------+
 "| Vundle                                                                      |
 "+-----------------------------------------------------------------------------+
@@ -19,6 +13,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'airblade/vim-rooter'
 " Plugin 'airblade/vim-gitgutter'
 " set signcolumn=yes
 " let g:gitgutter_diff_args = 'HEAD'
@@ -26,7 +21,9 @@ Plugin 'mhinz/vim-signify'
 let g:signify_vcs_cmds = {'perforce':'DIFF=%d" -U0" citcdiff %f || [[ $? == 1 ]]'}
 let g:signify_vcs_list = ['perforce', 'git']
 nmap <M-Down> <plug>(signify-next-hunk)
+nmap <C-M-j> <plug>(signify-next-hunk)
 nmap <M-Up> <plug>(signify-prev-hunk)
+nmap <C-M-k> <plug>(signify-prev-hunk)
 
 Plugin 'bkad/CamelCaseMotion'
 omap <silent> iw <Plug>CamelCaseMotion_ie
@@ -50,27 +47,45 @@ imap <silent> <M-j> <C-w>j
 imap <silent> <M-k> <C-w>k
 imap <silent> <M-l> <C-w>l
 
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader><space>'
-set wildignore+=*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_working_path_mode = 'ra'
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+Plugin 'junegunn/fzf'
+nnoremap <leader><space> :FZF<CR>
+" Plugin 'ctrlpvim/ctrlp.vim'
+" let g:ctrlp_map = '<leader><space>'
+" set wildignore+=*.so,*.swp,*.zip
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_mruf_case_sensitive = 0
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+"
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --smart-case'
+"
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+" endif
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-Bundle 'jasoncodes/ctrlp-modified.vim'
-nnoremap <Leader>m :CtrlPModified<CR>
-nnoremap <Leader>M :CtrlPBranch<CR>
+nnoremap <C-F> :vim<space>//<space>**/*<space><bar><space>copen<left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+" Bundle 'jasoncodes/ctrlp-modified.vim'
+" nnoremap <Leader>m :CtrlPModified<CR>
+" nnoremap <Leader>M :CtrlPBranch<CR>
 
 
-Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ''
+nnoremap <M-i> :bnext<CR>
+nnoremap <M-u> :bprev<CR>
+nnoremap <C-i> :bnext<CR>
+nnoremap <C-u> :bprev<CR>
+inoremap <M-i> <Esc>:bnext<CR>
+inoremap <M-u> <Esc>:bprev<CR>
+inoremap <C-i> <Esc>:bnext<CR>
+inoremap <C-u> <Esc>:bprev<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+" Plugin 'itchyny/lightline.vim'
 
 Plugin 'jiangmiao/auto-pairs'
 
@@ -120,13 +135,10 @@ nnoremap <M-w> :bd<CR>
 inoremap <M-w> <C-o>:bd<CR>
 
 Plugin 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
 Plugin 'cespare/vim-toml'
-Plugin 'ap/vim-buftabline'
-set hidden
-nnoremap <M-i> :bnext<CR>
-nnoremap <M-u> :bprev<CR>
-nnoremap <C-i> :bnext<CR>
-nnoremap <C-u> :bprev<CR>
+" Plugin 'ap/vim-buftabline'
+" set hidden
 
 let g:rustfmt_autosave = 1
 
@@ -253,7 +265,7 @@ if !has("gui_running")
     set t_Co=256
 else
     let g:idris_conceal = 1
-    set guifont=Fira\ Code\ 10
+    set guifont=Fira\ Code\ 14
 endif
 if has("mac")
     set clipboard=unnamed
@@ -307,7 +319,7 @@ function SpellCorrectionModeOff()
     iunmap k
     silent call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 endfunction
-nmap <silent> <Return> :call SpellCorrectionModeOn()<CR><F13>
+nmap <silent> <Leader><z> :call SpellCorrectionModeOn()<CR><F13>
 
 set tw=0
 syntax on
@@ -358,6 +370,12 @@ set foldmethod=syntax
 set foldnestmax=2      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
+set hidden
+if has('nvim')
+  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.nviminfo
+else
+  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.viminfo
+endif
 
 autocmd BufWritePre * :%s/\s\+$//e
 "+-----------------------------------------------------------------------------+
@@ -470,6 +488,8 @@ vnoremap } va}<Esc>gvovi{<Esc>%
 vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
 
+nnoremap <silent> <S-Esc> :ccl<CR>
+
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |
 "+-----------------------------------------------------------------------------+
@@ -481,3 +501,5 @@ au FileType tex inoremap <M-4> $$<Left>
 au FileType tex inoremap <D-Space> $$<Left>
 au FileType tex inoremap <M-k> <CR>\[<CR>\]<Up><CR>
 au FileType tex inoremap <D-k> <CR>\[<CR>\]<Up><CR>
+
+

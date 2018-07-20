@@ -35,6 +35,6 @@ if [ $commands[fasd] ]; then # check if fasd is installed
   }
 
   alias v='f_ vim'
-  alias gv='f_ gvim'
+  alias gv='NVIM_GTK_NO_HEADERBAR=1 f_ nvim-gtk'
   alias t='f_ cdt_'
 fi

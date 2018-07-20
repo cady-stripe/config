@@ -35,7 +35,6 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -99,10 +98,10 @@ zplug load
   # alias vim=nvim
 # fi
 
-PATH=/usr/local/google/home/tgeng/dev/.cabal-sandbox/bin:$PATH
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -50,5 +50,5 @@ alias cdt='cdt_'
 # function o() {
   # nohup oni $@ > /dev/null 2>&1 &
 # }
-alias e='nvim-qt'
+alias gvim='NVIM_GTK_NO_HEADERBAR=1 nvim-gtk'
 alias c='clear'

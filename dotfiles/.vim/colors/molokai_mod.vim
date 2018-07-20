@@ -44,7 +44,7 @@ hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
 hi Directory       guifg=#A6E22E               gui=bold
-hi Error           guifg=#E6DB74 guibg=#1E0010
+hi Error           guibg=#232526 guifg=#ff2d2d gui=bold
 hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
 hi Exception       guifg=#A6E22E               gui=bold
 hi Float           guifg=#AE81FF
@@ -77,15 +77,15 @@ hi PreCondit       guifg=#A6E22E               gui=bold
 hi PreProc         guifg=#A6E22E
 hi Question        guifg=#66D9EF
 hi Repeat          guifg=#F92672               gui=bold
-hi Search          guifg=#000000 guibg=#b0b000
+hi Search          guifg=NONE guibg=NONE gui=bold,underline
 " marks
 hi SignColumn      guifg=#A6E22E guibg=#232526
 hi SpecialChar     guifg=#F92672               gui=bold
 hi SpecialComment  guifg=#7E8E91               gui=bold
 hi Special         guifg=#66D9EF guibg=bg      gui=italic
 if has("spell")
-    hi SpellBad    guisp=#FF0000 gui=undercurl
-    hi SpellCap    guisp=#7070F0 gui=undercurl
+    hi SpellBad    guisp=#FF8888 gui=undercurl
+    hi SpellCap    guisp=#FFFF88 gui=undercurl
     hi SpellLocal  guisp=#70F0F0 gui=undercurl
     hi SpellRare   guisp=#FFFFFF gui=undercurl
 endif
@@ -105,7 +105,7 @@ hi Underlined      guifg=#808080               gui=underline
 hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
 hi VisualNOS                     guibg=#504D4D
 hi Visual                        guibg=#404D4D
-hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
+hi WarningMsg      guifg=#ffdd2d guibg=NONE gui=bold,underline
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
 hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E ctermbg=241 ctermfg=234
@@ -162,12 +162,13 @@ if &t_Co > 255
    hi Define          ctermfg=81
    hi Delimiter       ctermfg=250
 
-   hi DiffAdd         cterm=bold ctermbg=28 ctermfg=118 guifg=#bdffa8 guibg=#22ad35
-   hi DiffDelete      cterm=bold ctermbg=88 ctermfg=212 guifg=#ffa8a8 guibg=#ad2222
-   hi DiffChange      cterm=bold ctermbg=27 ctermfg=81  guifg=#a8c9ff guibg=#2277ad
+   hi DiffAdd         cterm=bold ctermbg=233 ctermfg=118 guifg=#bdffa8 guibg=#232526
+   hi DiffDelete      cterm=bold ctermbg=233 ctermfg=212 guifg=#ffa8a8 guibg=#232526
+   hi DiffChange      cterm=bold ctermbg=233 ctermfg=81  guifg=#a8c9ff guibg=#232526
    hi DiffText                    ctermbg=102 cterm=bold
 
    hi Directory       ctermfg=118               cterm=bold
+   hi SyntasticWarningSign guifg=#ffff00 guibg=#232526 gui=bold
    hi Error           ctermfg=219 ctermbg=89
    hi ErrorMsg        ctermfg=199 ctermbg=16    cterm=bold
    hi Exception       ctermfg=118               cterm=bold
@@ -205,7 +206,7 @@ if &t_Co > 255
    hi Search          ctermfg=0   ctermbg=100   cterm=NONE
 
    " marks column
-   hi SignColumn      ctermfg=118 ctermbg=235
+   hi SignColumn      ctermfg=118 ctermbg=233
    hi SpecialChar     ctermfg=161               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
    hi Special         ctermfg=81

@@ -231,12 +231,14 @@ bar {
         font pango:DejaVu Sans Mono 11
 }
 
-bindsym Print mode "remote" workspace Remote
+bindsym Insert mode "remote" workspace Remote
 mode "remote" {
-    bindsym Print mode "default" workspace back_and_forth
-    bindsym Shift+Print move container to workspace 1
+    bindsym Insert mode "default" workspace back_and_forth
+    bindsym Shift+Insert move container to workspace 1
+    bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
+    bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
 }
 
 exec xrdb ~/.dotfiles/.Xresources
 exec bash -c "sleep 2; tilda"
-exec feh --bg-fill ~/Pictures/wallpaper.png
+exec feh --bg-fill ~/Pictures/wallpaper.jpg
