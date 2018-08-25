@@ -48,7 +48,13 @@ imap <silent> <M-k> <C-w>k
 imap <silent> <M-l> <C-w>l
 
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 nnoremap <leader><space> :FZF<CR>
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
 " Plugin 'ctrlpvim/ctrlp.vim'
 " let g:ctrlp_map = '<leader><space>'
 " set wildignore+=*.so,*.swp,*.zip
@@ -66,7 +72,7 @@ nnoremap <leader><space> :FZF<CR>
 "   let g:ctrlp_use_caching = 0
 " endif
 
-nnoremap <C-F> :vim<space>//<space>**/*<space><bar><space>copen<left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+nnoremap <C-F> :Ag<CR>
 " Bundle 'jasoncodes/ctrlp-modified.vim'
 " nnoremap <Leader>m :CtrlPModified<CR>
 " nnoremap <Leader>M :CtrlPBranch<CR>
@@ -136,6 +142,12 @@ inoremap <M-w> <C-o>:bd<CR>
 
 Plugin 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
+
+Plugin 'racer-rust/vim-racer'
+let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
+let g:ycm_rust_src_path = '/home/tgeng/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+
 Plugin 'cespare/vim-toml'
 " Plugin 'ap/vim-buftabline'
 " set hidden
@@ -324,6 +336,7 @@ nmap <silent> <Leader><z> :call SpellCorrectionModeOn()<CR><F13>
 set tw=0
 syntax on
 au FileType cpp,c,java,tex,text  set tw=99
+au FileType text  set tw=69 fo+=t
 set formatoptions=cq foldignore= wildignore+=*.py[co]
 syntax sync minlines=256
 set mouse=a
@@ -501,5 +514,4 @@ au FileType tex inoremap <M-4> $$<Left>
 au FileType tex inoremap <D-Space> $$<Left>
 au FileType tex inoremap <M-k> <CR>\[<CR>\]<Up><CR>
 au FileType tex inoremap <D-k> <CR>\[<CR>\]<Up><CR>
-
 
