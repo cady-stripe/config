@@ -2,22 +2,21 @@ nnoremap <Space> <Nop>
 let mapleader = ' '
 let maplocalleader = ' '
 "+-----------------------------------------------------------------------------+
-"| Vundle                                                                      |
+"| Vim-Plug                                                                    |
 "+-----------------------------------------------------------------------------+
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'airblade/vim-rooter'
-" Plugin 'airblade/vim-gitgutter'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-gitgutter'
 " set signcolumn=yes
 " let g:gitgutter_diff_args = 'HEAD'
-Plugin 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 let g:signify_vcs_cmds = {'perforce':'DIFF=%d" -U0" citcdiff %f || [[ $? == 1 ]]'}
 let g:signify_vcs_list = ['perforce', 'git']
 nmap <M-Down> <plug>(signify-next-hunk)
@@ -25,14 +24,14 @@ nmap <C-M-j> <plug>(signify-next-hunk)
 nmap <M-Up> <plug>(signify-prev-hunk)
 nmap <C-M-k> <plug>(signify-prev-hunk)
 
-Plugin 'bkad/CamelCaseMotion'
+Plug 'bkad/CamelCaseMotion'
 omap <silent> iw <Plug>CamelCaseMotion_ie
 xmap <silent> iw <Plug>CamelCaseMotion_ie
 nmap <silent> w viw
 vmap <silent> w <Plug>CamelCaseMotion_e
 nnoremap W viw
 
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-w>j :TmuxNavigateDown<cr>
@@ -47,15 +46,39 @@ imap <silent> <M-j> <C-w>j
 imap <silent> <M-k> <C-w>k
 imap <silent> <M-l> <C-w>l
 
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ }
+let g:LanguageClient_diagnosticsEnable = 0
+
+autocmd Filetype rust call SetRustOptions()
+function SetRustOptions()
+  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <silent> <leader>s :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <silent> <M-a> :call LanguageClient#textDocument_codeAction()<CR>
+  nnoremap <silent> <CR> :call LanguageClient#explainErrorAtPoint()<CR>
+endfunction
+
+" (Optional) Multi-entry selection UI.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 nnoremap <leader><space> :FZF<CR>
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-" Plugin 'ctrlpvim/ctrlp.vim'
+  \ call fzf#vim#ag(<q-args>, { 'options': ['--color', 'hl:81,hl+:117'] }, <bang>0)
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#ag(<q-args>,
+"   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \                 <bang>0)
+" Plug 'ctrlpvim/ctrlp.vim'
 " let g:ctrlp_map = '<leader><space>'
 " set wildignore+=*.so,*.swp,*.zip
 " let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -78,7 +101,7 @@ nnoremap <C-F> :Ag<CR>
 " nnoremap <Leader>M :CtrlPBranch<CR>
 
 
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ''
 nnoremap <M-i> :bnext<CR>
@@ -91,33 +114,36 @@ inoremap <C-i> <Esc>:bnext<CR>
 inoremap <C-u> <Esc>:bprev<CR>
 
 let g:airline#extensions#tabline#enabled = 1
-" Plugin 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 nnoremap T :Tab /
 vnoremap T :Tab /
 
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 set background=dark
 nmap <silent> <C-j> <Plug>IndentGuidesToggle
-autocmd FileType c,python,java,cpp,objc,ruby IndentGuidesEnable
+autocmd FileType c,python,java,cpp,objc,ruby,rust IndentGuidesEnable
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#555555  ctermbg=240
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333333   ctermbg=235
 
-Plugin 'scrooloose/nerdtree'
+Plug 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-comment'
+
+Plug 'scrooloose/nerdtree'
 nnoremap <leader>a :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=48
 let NERDTreeMouseMode=3
 let NERDTreeShowHidden=1
 
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 nnoremap s :call NERDComment(0,"toggle")<C-m>
 vnoremap s :call NERDComment(0,"toggle")<C-m>
 let g:NERDSpaceDelims = 1
@@ -127,42 +153,44 @@ let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-Plugin 'glts/vim-magnum.git'
-Plugin 'glts/vim-radical.git'
+" Plug 'glts/vim-magnum.git'
+" Plug 'glts/vim-radical.git'
 
-Plugin 'romainl/vim-qf'
-nmap . <Plug>qf_loc_next
-nmap , <Plug>qf_loc_previous
-
-Plugin 'vim-scripts/BufOnly.vim'
-nnoremap <M-w> :bd<CR>
+Plug 'vim-scripts/BufOnly.vim'
+map <M-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 inoremap <M-w> <C-o>:bd<CR>
 
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
 
-Plugin 'racer-rust/vim-racer'
-let g:racer_cmd = '~/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
-let g:ycm_rust_src_path = '/home/tgeng/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+" Use rls instead
+" Plug 'racer-rust/vim-racer'
+" let g:racer_cmd = '~/.cargo/bin/racer'
+" let g:racer_experimental_completer = 1
+" let g:ycm_rust_src_path = '/home/tgeng/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+" au FileType rust nmap gd <Plug>(rust-def)
+" au FileType rust nmap gs <Plug>(rust-def-split)
+" au FileType rust nmap gx <Plug>(rust-def-vertical)
+" au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
-Plugin 'cespare/vim-toml'
-" Plugin 'ap/vim-buftabline'
+Plug 'cespare/vim-toml'
+" Plug 'ap/vim-buftabline'
 " set hidden
 
 let g:rustfmt_autosave = 1
 
-Plugin 'ihacklog/HiCursorWords'
-highlight! WordUnderTheCursor cterm=bold,underline gui=bold,underline
+Plug 'tgeng/HiCursorWords'
+let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
-Plugin 'idris-hackers/idris-vim'
+Plug 'idris-hackers/idris-vim'
+Plug 'gabrielelana/vim-markdown'
 
 if filereadable('/google/src/cloud')
   " only load if on Google machine
-  Plugin 'prabirshrestha/async.vim'
-  Plugin 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
   au User lsp_setup call lsp#register_server({
         \ 'name': 'Kythe Language Server',
         \ 'cmd': {server_info->['/google/data/ro/teams/grok/tools/kythe_languageserver', '--google3']},
@@ -175,7 +203,7 @@ if filereadable('/google/src/cloud')
   au! BufRead,BufNewFile,BufEnter /google/src/cloud/* let g:ctrlp_user_command='g4 whatsout|sed "s|'.getcwd().'/||"'
 else
   " only load if not on Google machine
-  Plugin 'vim-syntastic/syntastic'
+  Plug 'vim-syntastic/syntastic'
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
@@ -185,13 +213,13 @@ else
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_rust_checkers = ['cargo']
+  let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
 
-  Plugin 'Valloric/YouCompleteMe'
+  Plug 'Valloric/YouCompleteMe'
 endif
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 
 "+-----------------------------------------------------------------------------+
@@ -352,6 +380,8 @@ set undolevels=1000
 set undoreload=10000
 set timeoutlen=500
 set autoread
+set splitbelow
+set previewheight=5
 
 function! ResCur()
   if line("'\"") <= line("$")
@@ -384,6 +414,11 @@ set foldnestmax=2      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 set hidden
+" skip quick fix for bnext and bprev
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
 if has('nvim')
   set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.nviminfo
 else
@@ -471,8 +506,8 @@ vnoremap <C-s> v:w<CR>
 nnoremap zz mz1z=`z
 inoremap <C-g> <Esc>[s1z=`]a
 vnoremap P pgvy
-nnoremap Q {gq}
-vnoremap Q gq
+nmap Q gwic
+vnoremap Q gw
 nnoremap R :%s/\<<C-r><C-w>\>//g<Left><Left>
 vnoremap R "py:%s/<C-r>p//g<left><left>
 vmap <Right> *
@@ -489,6 +524,9 @@ nnoremap > va<
 nnoremap " vi"
 nnoremap ' vi'
 nnoremap X @q
+nnoremap , :lprev<CR>
+nnoremap . :lnext<CR>
+
 
 vnoremap ' va'<Esc>gvovi'<Esc>f'
 vnoremap " va"<Esc>gvovi"<Esc>f"
