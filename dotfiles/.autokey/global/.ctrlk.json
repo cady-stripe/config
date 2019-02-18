@@ -1,5 +1,5 @@
 {
-    "usageCount": 7, 
+    "usageCount": 24, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "ctrl+k", 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": null, 
+        "regex": "^((?!Focus-Proxy-Window.FocusProxy).)*$", 
         "isRecursive": false
     }, 
     "type": "phrase", 

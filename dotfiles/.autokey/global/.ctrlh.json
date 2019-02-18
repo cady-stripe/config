@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": null, 
+        "regex": "^((?!Focus-Proxy-Window.FocusProxy).)*$", 
         "isRecursive": false
     }, 
     "type": "phrase", 

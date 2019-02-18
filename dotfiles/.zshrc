@@ -107,3 +107,7 @@ if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; th
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/tgeng/.sdkman"
+[[ -s "/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tgeng/.sdkman/bin/sdkman-init.sh"

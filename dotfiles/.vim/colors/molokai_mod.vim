@@ -60,8 +60,7 @@ hi Label           guifg=#E6DB74               gui=none
 hi Macro           guifg=#C4BE89               gui=italic
 hi SpecialKey      guifg=#66D9EF               gui=italic
 
-" hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
-hi MatchParen     cterm=bold ctermbg=none ctermfg=51 gui=bold guifg=#00ffff guibg=#1B1D1E
+hi MatchParen     cterm=bold ctermbg=202 ctermfg=51 gui=bold guifg=#00ffff guibg=#ff6e00
 
 hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
@@ -102,7 +101,7 @@ hi Typedef         guifg=#66D9EF
 hi Type            guifg=#66D9EF               gui=none
 hi Underlined      guifg=#808080               gui=underline
 
-hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
+hi VertSplit       guifg=#808080 guibg=bg gui=bold
 hi VisualNOS                     guibg=#504D4D
 hi Visual                        guibg=#404D4D
 hi WarningMsg      guifg=#ffdd2d guibg=NONE gui=bold,underline
@@ -185,8 +184,7 @@ if &t_Co > 255
    hi Macro           ctermfg=193
    hi SpecialKey      ctermfg=81
 
-"    hi MatchParen      ctermfg=233  ctermbg=208 cterm=bold
-   hi MatchParen     cterm=bold ctermbg=none ctermfg=51 gui=bold guifg=#00ffff guibg=#101010
+   hi MatchParen     cterm=bold ctermbg=202 ctermfg=51 gui=bold guifg=#00ffff guibg=#ff6e00
    hi ModeMsg         ctermfg=229
    hi MoreMsg         ctermfg=229
    hi Operator        ctermfg=161
@@ -229,7 +227,7 @@ if &t_Co > 255
    hi Type            ctermfg=81                cterm=none
    hi Underlined      ctermfg=244               cterm=underline
 
-   hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
+   hi VertSplit       ctermfg=244 ctermbg=none   cterm=bold
    hi VisualNOS                   ctermbg=243
    hi Visual                      ctermbg=238
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
@@ -279,6 +277,10 @@ if &t_Co > 255
        hi SpecialKey      ctermfg=239
    endif
 end
+
+hi ALEInfoSign guibg=#232526
+hi ALEWarningSign guibg=#232526
+hi ALEErrorSign guibg=#232526
 
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ

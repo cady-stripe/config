@@ -8,7 +8,7 @@ do
   WINDOW_ID="$(echo  $line | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')"
   NAME=$(xprop -id $WINDOW_ID | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
   # CURRENT_KEYBOARD="$(setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}')"
-  if [[ $NAME == *"tincan6.kir.corp.google.com - Chrome Remote Desktop"* ]]; then
+  if [[ $NAME == *" - Chrome Remote Desktop"* ]]; then
     killall albert
     killall tilda
     killall autokey-gtk
