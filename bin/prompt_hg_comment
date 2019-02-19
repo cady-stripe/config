@@ -1,0 +1,10 @@
+#/bin/sh
+
+workspace=`pwd | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|'`
+prompt_file=/usr/local/google/home/tgeng/.hg_prompts/${workspace}__summary
+if [ -f $prompt_file ]; then
+  cat $prompt_file
+  # head $prompt_file -n1 | grep -v p4head > /dev/null &&\
+  # head $prompt_file -n2 | tail -n1 | awk '{$1=$1};1' | tr -d '\n'
+fi
+

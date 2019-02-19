@@ -1,0 +1,21 @@
+.future : convert to Future
+	java.lang.Throwable      →  com.google.common.util.concurrent.Futures.immediateFailedFuture($expr$)
+	NON_VOID                 →  com.google.common.util.concurrent.Futures.immediateFuture($expr$)
+
+.promise : convert to Promise
+	java.lang.Throwable      →  com.google.async.promisegraph.PromiseGraph.immediateFailedPromise($expr$)
+  com.google.common.util.concurrent.ListenableFuture → com.google.async.promisegraph.PromiseGraph.toPromise($expr$)
+	NON_VOID                 →  com.google.async.promisegraph.PromiseGraph.immediatePromise($expr$)
+
+.try : wrap with try
+  java.lang.AutoCloseable  → try ($type*:expressionType(expr))$ $var:suggestVariableName()$ = $expr$) {\
+$END$\
+}
+  NON_VOID                 → try {\
+  $expr$$END$\
+} catch (Throwable e) {\
+}
+  VOID                     → try {\
+  $expr$;$END$\
+} catch (Throwable e) {\
+}

@@ -1,6 +1,8 @@
 #!/bin/sh
-xset dpms 300 0 0
+xset dpms 7200 0 0
 xset +dpms
+# gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 40
+# gsettings set org.gnome.desktop.peripherals.keyboard delay 100
 xset r rate 250 75
 if [ -f ~/.Xmodmap ]; then
   xmodmap ~/.Xmodmap

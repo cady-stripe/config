@@ -14,7 +14,7 @@ if [ $commands[fasd] ]; then # check if fasd is installed
       if [[ $(wc -l <<< $candidates) = 1 ]]; then
         cd $candidates
       else
-        dir="$(echo $candidates | fzy)" && cd "${dir}" || return 1
+        dir="$(echo $candidates | fzf --height=33% --reverse)" && cd "${dir}" || return 1
       fi
     fi
   }
@@ -29,7 +29,7 @@ if [ $commands[fasd] ]; then # check if fasd is installed
       if [[ $(wc -l <<< $candidates) = 1 ]]; then
         $1 $candidates
       else
-        file="$(echo $candidates | fzy)" && $1 "${file}" || return 1
+        file="$(echo $candidates | fzf --height=33% --reverse)" && $1 "${file}" || return 1
       fi
     fi
   }

@@ -31,7 +31,6 @@ floating_modifier $mod
 bindsym Mod1+q kill
 bindsym Mod1+Tab focus left
 exec --no-startup-id ~/bin/start.sh
-exec compton
 exec autokey-gtk
 exec albert
 exec powerline-daemon
@@ -42,6 +41,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 # bindsym XF86ScreenSaver exec sudo pm-suspend
 bindsym Pause exec ~/bin/lock.sh
+bindsym $mod+z exec ~/bin/takeover
 
 # bindsym $mod+s split h; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
 # bindsym $mod+Shift+s split v; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
@@ -54,33 +54,32 @@ bindsym XF86Sleep exec --no-startup-id i3lock && dbus-send --system --dest=org.f
 bindsym $mod+grave exec --no-startup-id fetchotp -x
 bindsym $mod+Return split h; exec terminator
 bindsym $mod+Shift+Return split v; exec terminator
-for_window [window_role="pop-up"] floating enable move absolute position 3440 px 775 px
+for_window [window_role="pop-up"] floating enable move absolute (position 3440 px 775 px
 for_window [class="Tilda"] floating enable border none move absolute  position 0 px 0 px
 for_window [instance="desktop-ssh"] border none
 for_window [title="^Application Finder"] floating enable
 for_window [title="^qtcreator"] floating enable
 # for_window [title="^QQ2012"] floating enable border none
 for_window [title="^cv:"] floating enable
-for_window [title="^Figure"] floating enable
 for_window [title=".*Preference.*"] floating enable
 for_window [class="Pidgin"] floating enable
 for_window [title="File Operation Progress"] floating enable
 for_window [title="File Operations"] floating enable
 for_window [title="^Volume Control"] floating enable
-for_window [title="^swing"] floating enable
+# for_window [title="^swing"] floating enable
 for_window [title="^xfce4-notifyd$"] floating enable border none
 for_window [title="^Yakuake"] floating enable
 for_window [class="^Google-chrome" ] border none
 for_window [class="^VirtualBox" ] border none
 for_window [title="Calendar$" ] floating disable
-assign [title="Calendar$"] → 20:Calendar
+assign [title="Calendar$"] → 20:Calendar)
 for_window [title="Google Docs$" ] floating disable
 for_window [title="Cider$" ] floating disable
 for_window [title="^MATLAB$" ] border none floating enable
 for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
-# bindsym $mod+XF86Search move scratchpad
-# bindsym XF86Search scratchpad show
+bindsym $mod+XF86Explorer move scratchpad
+bindsym XF86Explorer [instance="google-chrome"] scratchpad show, resize set 1440 1420, move position center
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none
@@ -89,6 +88,9 @@ for_window [title="^Page\(s\) Unresponsive" ] floating enable
 for_window [title="^Database Console" ] floating disable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="jetbrains-idea.*" ] border none
+for_window [class="jetbrains-clion" ] border none
+for_window [class="jetbrains-studio.*" ] border none
+for_window [title="^Android Emulator - .*"] floating enable
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
@@ -96,7 +98,7 @@ assign [title="^Blaze Console"] 6
 assign [title="^Run - "] 6
 assign [title="^Debug - "] 6
 #assign [title="Untitled - Google Chrome"] Test
-# for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move absolute position 3600 px 2134 px resize set 400 px 400 px
+for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move position center move to scratchpad
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -231,5 +233,5 @@ bar {
 }
 
 exec xrdb ~/.dotfiles/.Xresources
-exec bash -c "sleep 2; tilda"
+# exec bash -c "sleep 2; tilda"
 exec feh --bg-fill ~/Pictures/wallpaper.jpg

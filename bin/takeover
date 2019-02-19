@@ -1,0 +1,11 @@
+#!/bin/bash
+killall albert ; nohup albert > /dev/null 2>&1 &
+killall autokey-gtk
+rm ~/.autokey/global
+if is_remote_session; then
+  ln -sd ~/.tgeng_config/autokey_opt/global ~/.autokey/
+fi
+nohup autokey-gtk > /dev/null 2>&1 &
+feh --bg-fill ~/Pictures/wallpaper.jpg
+kbd
+killall albert ; nohup albert > /dev/null 2>&1 &

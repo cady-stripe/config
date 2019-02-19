@@ -1,5 +1,5 @@
 {
-    "usageCount": 0, 
+    "usageCount": 2, 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -19,5 +19,5 @@
         "isRecursive": false
     }, 
     "type": "folder", 
-    "showInTrayMenu": false
+    "showInTrayMenu": true
 }

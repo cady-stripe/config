@@ -75,7 +75,7 @@ vnoremap T :Tab /
 Plugin 'nathanaelkane/vim-indent-guides'
 set background=dark
 nmap <silent> <C-j> <Plug>IndentGuidesToggle
-autocmd FileType c,python,java,cpp,objc,ruby IndentGuidesEnable
+autocmd FileType c,python,java,cpp,objc,ruby,yaml,json IndentGuidesEnable
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#555555  ctermbg=240
@@ -239,6 +239,8 @@ if filereadable('/usr/share/vim/google/google.vim')
           \ -g ""'
 endif
 au BufRead,BufNewFile *.json set filetype=json
+
+com! FormatJSON %!python -m json.tool
 
 "+-----------------------------------------------------------------------------+
 "| Misc settings                                                              |
@@ -464,6 +466,7 @@ vnoremap { va}<Esc>gvovi{<Esc>
 vnoremap } va}<Esc>gvovi{<Esc>%
 vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
+nnoremap <C-b> :Gblame<CR>
 
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |
@@ -476,3 +479,4 @@ au FileType tex inoremap <M-4> $$<Left>
 au FileType tex inoremap <D-Space> $$<Left>
 au FileType tex inoremap <M-k> <CR>\[<CR>\]<Up><CR>
 au FileType tex inoremap <D-k> <CR>\[<CR>\]<Up><CR>
+au FileType hgcommit,text set fo+=t tw=79

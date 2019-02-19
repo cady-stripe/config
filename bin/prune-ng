@@ -1,0 +1,21 @@
+#!/bin/bash
+# Usage: `prune-ng` or `repo forall -c prune-ng`
+
+function check() {
+  local readonly branch=$1
+  local readonly downstream=$(git log $branch@{u}..$branch | grep Change-Id | awk '{print $2}' | sort)
+  local readonly upstream=$(git log $branch..$branch@{u} | grep Change-Id | awk '{print $2}' | sort)
+
+  local readonly unmerged=$(comm -23 <(echo "$downstream") <(echo "$upstream"))
+  if [ -z "$unmerged" ]; then
+    echo "$branch in $PWD fully merged, deleting."
+    repo abandon $branch .
+  else
+    echo "$branch in $PWD not fully merged yet."
+  fi
+}
+
+for branch in $(git for-each-ref --format='%(refname:short)' refs/heads/); do
+  check $branch
+done
+

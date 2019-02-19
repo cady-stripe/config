@@ -1,0 +1,8 @@
+#/bin/sh
+
+workspace=`pwd | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|'`
+prompt_file=/usr/local/google/home/tgeng/.hg_prompts/${workspace}__id
+if [ -f $prompt_file ]; then
+head $prompt_file -n1 | tr -d '\n'
+fi
+

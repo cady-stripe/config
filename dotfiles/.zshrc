@@ -20,25 +20,32 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
 [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 export EDITOR=vim
 
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
+export PATH=/usr/local/google/home/tgeng/dev/kotlin/kotlin-native-1.0.3/dist/bin:/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
 zplug "Tarrasch/zsh-bd"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=200
+bindkey "^f" forward-word
+bindkey "^b" backward-word
 zplug "zsh-users/zsh-completions"
 #zplug "jimhester/per-directory-history", defer:1
 zplug "plugins/dirhistory", from:oh-my-zsh
@@ -78,7 +85,17 @@ POWERLEVEL9K_CUSTOM_GET_CLIENT_FOREGROUND='15'
 POWERLEVEL9K_CUSTOM_GET_CLIENT_BACKGROUND='99'
 POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
 POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
-POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="black"
+POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="236"
+
+# POWERLEVEL9K_CUSTOM_HG_COMMIT='prompt_hg_commit'
+# POWERLEVEL9K_CUSTOM_HG_COMMIT_FOREGROUND='227'
+# POWERLEVEL9K_CUSTOM_HG_COMMIT_BACKGROUND='27'
+# POWERLEVEL9K_CUSTOM_HG_COMMENT='prompt_hg_comment'
+# POWERLEVEL9K_CUSTOM_HG_COMMENT_FOREGROUND='248'
+# POWERLEVEL9K_CUSTOM_HG_COMMENT_BACKGROUND='234'
+
+zplug "gradle/gradle-completion"
+
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh", defer:1
 zplug "~/.zsh_tgeng_extra", from:local, use:"delayed/*", defer:3
 
@@ -103,3 +120,31 @@ if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then sou
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
+
+
+# ==================== Android Studio ===================
+JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jdk/linux
+# somehow
+#
+# autoload -U +X compinit && compinit
+# autoload -U +X bashcompinit && bashcompinit
+# source ~/dev/zsh-completion/android-completion/repo
+#
+fpath=($HOME/.zplug/repos/gradle/gradle-completion $fpath)
+
+PATH=$HOME/dev/cmake-master-dev/prebuilts/ninja/linux-x86:$(echo "$PATH" | sed -e 's|:/google/data/ro/[^:]*||g')
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/usr/local/google/home/tgeng/.sdkman"
+[[ -s "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh"
+
+if [ -n "$TMUX" ]; then
+  -
+fi
+

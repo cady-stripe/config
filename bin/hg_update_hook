@@ -1,0 +1,7 @@
+#/bin/sh
+workspace=`pwd | sed 's|.*tgeng/\([^/]\+\).*|\1|'`
+prompt_file="/usr/local/google/home/tgeng/.hg_prompts/$workspace"
+# hg log --limit 1 | grep 'cl/' | sed 's|^.*\?CL:  cl/|cl/|' > "${prompt_file}__id"
+rm "${prompt_file}__summary" 2> /dev/null
+SUMMARY=$(hg summary)
+echo "$SUMMARY" | grep p4head >/dev/null || echo "$SUMMARY" | head -n 2 | tail -n 1 | sed 's|^ \+||' > "${prompt_file}__summary"

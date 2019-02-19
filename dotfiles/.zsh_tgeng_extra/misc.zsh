@@ -40,10 +40,23 @@ fi
 
 # recognize comments
 setopt interactivecomments
+alias locs='ls | xargs -I % sh -c "echo %; loc %; echo"'
 
-cdt_() {
-  if [[ -n $1 ]]; then
-    cd $1 2> /dev/null || cd $(dirname $1)
-  fi
+function foreachdo() {
+  cmd=$(echo $@)
+  xargs -I % sh -c "echo %; "$cmd"; echo"
 }
-alias cdt='cdt_'
+
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+

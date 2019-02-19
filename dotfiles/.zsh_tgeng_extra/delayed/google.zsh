@@ -12,10 +12,14 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   function bb() {
-    if [[ $PWD =~ '(.*)/blaze-bin(.*)' ]]; then
-      cd "${match[1]}${match[2]}"
+    if [[ $PWD =~ '(.*)/(blaze|bazel)-bin(.*)' ]]; then
+      cd "${match[1]}${match[3]}"
     else
-      cd "${PWD/\/google3//google3/blaze-bin}"
+      if [[ $PWD =~ '(.*)google3/(.*)' ]]; then
+        cd $(echo $PWD| sed 's!\(google3\)!\1/blaze-bin!')
+      else
+        cd $(echo $PWD| sed 's!\(studio-master-dev\)!\1/bazel-bin!')
+      fi
     fi
   }
 
@@ -57,9 +61,9 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   function cdg() {
-    bd google3
+    bd google3 > /dev/null
     if [ $1 ]; then
-      cdt $1
+      cdt_ $1
     fi
   }
 
@@ -67,7 +71,7 @@ if [[ -e /usr/local/google/home ]]; then
     local opened
     opened=$(g4 whatsout | sed "s|$PWD/||")
     if [[ -n $opened  ]]; then
-      opened=$(echo $opened | fzy)
+      opened=$(echo $opened | fzfi $1)
       if [[ -n $opened  ]]; then
         cdt $opened
       fi
@@ -97,11 +101,79 @@ if [[ -e /usr/local/google/home ]]; then
   }
   alias csd='noglob csd_browser'
 
+  cdt_() {
+    if [[ -n $1 ]]; then
+      cd $1 2> /dev/null || cd $(dirname $1)
+    fi
+  }
+  get_aosp_dir() {
+    current_dir=$(pwd)
+    while [ $current_dir != '/' ] && ! ls "$current_dir/.repo" > /dev/null 2>&1; do
+      current_dir=$(dirname $current_dir)
+    done
+    if [ $current_dir != '/' ]; then
+      echo $current_dir
+    fi
+  }
+  cd_aosp() {
+    aosp_dir=$(get_aosp_dir)
+    [ -n $aosp_dir ] && cd $aosp_dir
+  }
+  alias cda='cd_aosp'
+  alias cdt='cdt_'
+  alias c='clear'
+  fzfi() {
+    local FZF_OPTIONS
+    local FZF_QUERY
+    FZF_OPTIONS="-1 --reverse --tac --height=20 --min-height=1 --ansi"
+    if [ -n "$1" ]; then
+      FZF_OPTIONS="$FZF_OPTIONS -e -q"
+      FZF_QUERY="$1"
+    fi
+    fzf ${=FZF_OPTIONS} ${FZF_QUERY}
+  }
+  select_fig_branch_() {
+    hg xl --color always | sed "s%[:x*| /o@]\+\?  \(.*\)$%\1%" | head -n -1 | paste -d" " - - | fzfi "$1" | cut -f1 -d" "
+  }
+
+  select_aosp_branch_and_cd_to_it_() {
+    branches=$(script -q --return -c "repo branch" /dev/null)
+    if [ -z "$branches" ]; then
+      return
+    fi
+    selection=$(echo $branches | fzfi "$1" | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | tr -d '[:cntrl:]')
+    if [ -z "$selection" ]; then
+      return
+    fi
+    branch=$(echo "$selection" | sed 's/.[^ ]* \+\([^ ]\+\).*/\1/')
+    project=$(echo "$selection" | sed 's/.* \([^ ]\+\)/\1/')
+    cd_aosp && cd $project && git checkout $branch
+  }
+  alias prune-all='repo forall -c prune-ng'
+  return_fig_branch_() {
+    LBUFFER="${LBUFFER}$(select_fig_branch_)"
+    local ret=$?
+    zle redisplay
+    typeset -f zle-line-init >/dev/null && zle zle-line-init
+    return $ret
+  }
+  zle     -N   return_fig_branch_
+  function s() {
+    if [[ $(pwd) == "/google/src/cloud"* ]]; then
+      select_fig_branch_ "$*" | xargs -r hg update
+    else
+      select_aosp_branch_and_cd_to_it_ "$*"
+    fi
+  }
+  bindkey '^S' return_fig_branch_
+
+  FZF_CTRL_R_OPTS='--reverse'
+
   function vc() {
     local opened
     opened=$(g4 whatsout | sed "s|$PWD/||")
     if [[ -n $opened  ]]; then
-      opened=$(echo $opened | fzy)
+      opened=$(echo $opened | fzfi $1)
       if [[ -n $opened  ]]; then
         fasd --add $opened $(dirname $opened)
         vim $opened
@@ -119,7 +191,7 @@ if [[ -e /usr/local/google/home ]]; then
     local results
     results=$(csd_ -l --max_num_results=100 $@ 2> /dev/null | sed "s|$PWD/||")
     if [[ -n $results  ]]; then
-      results=$(echo $results | fzy)
+      results=$(echo $results | fzfi $1)
       if [[ -n $results  ]]; then
         fasd --add $results $(dirname $results)
         $cmd $results
@@ -130,7 +202,7 @@ if [[ -e /usr/local/google/home ]]; then
   }
 
   alias vs='noglob fs_ vim'
-  alias ts='noglob fs_ cdt_'
+  alias cds='noglob fs_ cdt_'
 
   source /etc/bash_completion.d/g4d
   # for pulling CITC change back to git multi, see https://docs.google.com/document/d/1gRXK5WAh7Ml_ezx7LmKwz40XMx3m7jwUftezrHhzUjU/edit#
@@ -185,3 +257,93 @@ if [[ -e /usr/local/google/home ]]; then
     fi && gexport $1
   }
 fi
+
+alias sp='span sql /span/global/cloud-commerce-eng:procurement-prod'
+alias spstg='span sql /span/nonprod/cloud-commerce-eng:procurement-staging'
+alias si='span sql /span/global/cloud-commerce-eng:inventory-prod'
+alias sistg='span sql /span/nonprod/cloud-commerce-eng:inventory-staging'
+rpcreplay() {
+  local error
+  error=$(cdg)
+  cdg > /dev/null
+  /google/data/ro/teams/frameworks-test-team/rpcreplay-cli/live/rpcreplay $@
+  if [ -z $error  ]; then
+    -
+  fi
+}
+
+alias afseu='hg amend && hg fix && hg sync && hg evolve && hg uploadall'
+alias afsu='hg amend && hg fix && hg sync && hg uploadchain'
+alias fsu='hg fix && hg sync && hg uploadchain'
+function goog-email-to-gaia-id() {
+  local emailAddress="$1"
+  echo "Username: '${emailAddress}'" |
+    stubby call blade:gaia-backend GaiaServerStubby.Lookup |
+    grep 'UserID' |
+    cut -d: -f2 |
+    xargs
+}
+
+
+function goog-gaia-id-to-email() {
+  # local user_id="$1"
+  echo "UserID: {ID: $user_id}" |
+    stubby call blade:gaia-backend GaiaServerStubby.Lookup |
+    grep 'Email:' |
+    cut -d: -f2 |
+    xargs |
+    tr " " "\n"
+}
+function adt_bazel() {
+  aosp_dir=$(get_aosp_dir)
+  if [ -z "$aosp_dir" ]; then
+    echo "Must be under an AOSP dir or subdir"
+    return
+  fi
+  $(get_aosp_dir)/tools/base/bazel/bazel $@
+}
+
+function repo_sync_to_bid() {
+  bid=$1
+  if [ -z "$bid" ]; then
+    echo "Must set a build ID"
+    return
+  fi
+  aosp_dir=$(get_aosp_dir)
+  if [ -z "$aosp_dir" ]; then
+    echo "Must be under an AOSP dir or subdir."
+    return
+  fi
+  current_dir=$(pwd)
+  cd /tmp &&\
+  /google/data/ro/projects/android/fetch_artifact --bid $bid --target studio "manifest_$bid.xml"  &&\
+  mv "manifest_$bid.xml" $aosp_dir/.repo/manifests/ &&\
+  cd $current_dir &&\
+  repo sync -j128 -d -m manifest_${bid}.xml
+}
+
+function repo_sync_to_branch() {
+  repo init -b $1 && repo sync -j128
+}
+alias kill_as="ps aux | grep intellij\.android\.jps | grep -v grep | fzf | tr -s ' ' | cut -d' ' -f 2 | xargs -r kill"
+
+function run_studio () {
+  local bid=$1
+  local studio_dir="$HOME/as-releases/android-studio-$bid"
+  if [ ! -d "$studio_dir" ]; then
+    if [ ! -f "$studio_dir.tar.gz" ]; then
+      local current_dir=$(pwd)
+      mkdir -p $HOME/as-releases
+      cd $HOME/as-releases
+      /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio "android-studio-$bid.tar.gz"
+      cd $current_dir
+    fi
+    if [ ! -f "$studio_dir.tar.gz" ]; then
+      echo "Failed downloading build $bid"
+      return
+    fi
+    mkdir -p $studio_dir
+    tar -xvf "$studio_dir.tar.gz" -C $studio_dir
+  fi
+  $studio_dir/bin/studio.sh || $studio_dir/android-studio/bin/studio.sh
+}

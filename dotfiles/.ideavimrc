@@ -1,10 +1,17 @@
 inoremap jk <Esc>
 inoremap kj <Esc>
 
+nnoremap <C-a> ^
 nnoremap <Home> ^
+nnoremap <C-e> $
 nnoremap <End> $
+inoremap <C-a> <C-o>^
 inoremap <Home> <C-o>^
+inoremap <C-e> <Esc>$a
+inoremap <End> <Esc>$a
+vnoremap <C-a> ^
 vnoremap <Home> ^
+vnoremap <C-e> $
 vnoremap <End> $
 noremap <C-z> <C-a>
 
@@ -94,8 +101,10 @@ nnoremap ' vi'
 nnoremap X @q
 vnoremap a <Esc>
 vnoremap i <Esc>
-nnoremap <Space> /[;{]<CR>Nj^vn
-vnoremap <Space> n
+nnoremap <space> v:action EditorSelectWord<CR>
+vnoremap <space> :action EditorSelectWord<CR>
+nnoremap <S-space> v:action EditorUnselectWord<CR>
+vnoremap <S-space> :action EditorUnselectWord<CR>
 
 set ignorecase
 set smartcase
