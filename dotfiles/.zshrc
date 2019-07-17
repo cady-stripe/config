@@ -1,4 +1,5 @@
 export TERM="xterm-256color"
+
 fpath+=~/.zfunc
 stty -ixon -ixoff
 # =============================================================================
@@ -111,3 +112,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tgeng/.sdkman"
 [[ -s "/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tgeng/.sdkman/bin/sdkman-init.sh"
+-

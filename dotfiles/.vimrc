@@ -149,11 +149,15 @@ Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 
 Plug 'scrooloose/nerdtree'
+nnoremap <leader>a :NERDTreeToggle<CR>
+nnoremap <M-a> :NERDTreeToggle<CR>
+nnoremap <leader>s :NERDTreeFind<CR>
 nnoremap <M-s> :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=48
 let NERDTreeMouseMode=3
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.pyc$', '\.ibc$']
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -166,6 +170,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCustomDelimiters = { 'agda': { 'left': '--'} }
 
 Plug 'tpope/vim-fugitive'
 
@@ -201,6 +206,8 @@ let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 Plug 'idris-hackers/idris-vim'
 Plug 'derekelkins/agda-vim'
 Plug 'gabrielelana/vim-markdown'
+Plug 'Nymphium/vim-koka'
+Plug 'rhysd/vim-llvm'
 
 if filereadable('/google/src/cloud')
   " only load if on Google machine
@@ -437,6 +444,7 @@ augroup END
 if has('nvim')
   set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.nviminfo
 else
+  set ttymouse=sgr
   set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.viminfo
 endif
 
@@ -460,8 +468,8 @@ nnoremap <C-Tab> <C-w>w
 vnoremap <C-Tab> <C-w>w
 inoremap <C-Tab> <C-w>w
 inoremap <C-w> <C-o><C-w>
-nnoremap <Right> *
-nnoremap <Left> #
+nnoremap <silent> <Right> *
+nnoremap <silent> <Left> #
 nnoremap <up> 3<c-y>
 nnoremap <down> 3<c-e>
 imap <Home> <C-o>^
@@ -525,8 +533,8 @@ nmap Q gwic
 vnoremap Q gw
 nnoremap R :%s/\<<C-r><C-w>\>//g<Left><Left>
 vnoremap R "py:%s/<C-r>p//g<left><left>
-vmap <Right> *
-vmap <Left> #
+" vmap <Right> *
+" vmap <Left> #
 nmap <M-a> ggVGy
 nnoremap [ vi[
 nnoremap ] va[
@@ -538,6 +546,7 @@ nnoremap < vi<
 nnoremap > va<
 nnoremap " vi"
 nnoremap ' vi'
+nnoremap ` vi`
 nnoremap X @q
 nnoremap , :lprev<CR>
 nnoremap . :lnext<CR>
@@ -545,6 +554,7 @@ nnoremap . :lnext<CR>
 
 vnoremap ' va'<Esc>gvovi'<Esc>f'
 vnoremap " va"<Esc>gvovi"<Esc>f"
+vnoremap ` va`<Esc>gvovi`<Esc>f`
 vnoremap ( va)<Esc>gvovi(<Esc>
 vnoremap ) va)<Esc>gvovi(<Esc>%
 vnoremap [ va]<Esc>gvovi[<Esc>

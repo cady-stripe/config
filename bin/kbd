@@ -1,4 +1,6 @@
 #!/bin/sh
+killall redshift
+nohup redshift -l 47.61:-122.33 -t 5700:3600 -g 0.8 -m randr -v > /dev/null&
 xset dpms 300 0 0
 xset +dpms
 xset r rate 250 75

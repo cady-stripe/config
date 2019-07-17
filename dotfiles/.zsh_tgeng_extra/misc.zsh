@@ -66,3 +66,4 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+zstyle ':completion:*:*:vim:*' file-patterns '^*.(png|jpg|jpeg|gif|eps|dvi|ps|nc|pdf|ibc):source-files' '*:all-files'
