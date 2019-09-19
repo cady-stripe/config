@@ -1,3 +1,26 @@
+if (&term == "pcterm" || &term == "win32")
+  set term=xterm t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+  set termencoding=utf8
+  set nocompatible
+
+  inoremap <Char-0x07F> <BS>
+  nnoremap <Char-0x07F> <BS>
+  vnoremap <Char-0x07F> <BS>
+  cnoremap <Char-0x07F> <BS>
+
+  inoremap <Esc>[H <C-o>^
+  vnoremap <Esc>[H ^
+  nnoremap <Esc>[H ^
+  cnoremap <Esc>[H <Home>
+
+  inoremap <Esc>[F <C-o>$
+  vnoremap <Esc>[F $
+  nnoremap <Esc>[F $
+  cnoremap <Esc>[F <End>
+endif
+set background=dark
 nnoremap <Space> <Nop>
 let mapleader = ' '
 let maplocalleader = ';'
@@ -6,16 +29,16 @@ let maplocalleader = ';'
 "+-----------------------------------------------------------------------------+
 set nocompatible              " be iMproved, required
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if has('nvim')
+  call plug#begin('c:\\Users\\tgeng\\AppData\\Local\\nvim\\plugged')
+else
+  call plug#begin('c:\\Users\\tgeng\\vimfiles\\plugged')
 endif
-call plug#begin('~/.vim/plugged')
+
 Plug 'airblade/vim-rooter'
-" Plug 'airblade/vim-gitgutter'
-" set signcolumn=yes
-" let g:gitgutter_diff_args = 'HEAD'
+Plug 'airblade/vim-gitgutter'
+set signcolumn=yes
+let g:gitgutter_diff_args = 'HEAD'
 Plug 'mhinz/vim-signify'
 let g:signify_vcs_cmds = {'perforce':'DIFF=%d" -U0" citcdiff %f || [[ $? == 1 ]]'}
 let g:signify_vcs_list = ['perforce', 'git']
@@ -31,62 +54,14 @@ nmap <silent> w viw
 vmap <silent> w <Plug>CamelCaseMotion_e
 nnoremap W viw
 
-Plug 'christoomey/vim-tmux-navigator'
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-w>j :TmuxNavigateDown<cr>
-nnoremap <silent> <C-w>k :TmuxNavigateUp<cr>
-nnoremap <silent> <C-w>l :TmuxNavigateRight<cr>
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-imap <silent> <M-h> <C-w>h
-imap <silent> <M-j> <C-w>j
-imap <silent> <M-k> <C-w>k
-imap <silent> <M-l> <C-w>l
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-set rtp+=~/.vim/plugged/LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['hie-wrapper'],
-    \ }
-
-autocmd FileType rust,haskell call SetKeyBindings()
-function SetKeyBindings()
-  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <silent> <M-/> :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <silent> <M-F7> :call LanguageClient#textDocument_references()<CR>
-  nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <silent> <M-a> :call LanguageClient#textDocument_codeAction()<CR>
-  nnoremap <silent> <M-d> :call LanguageClient_contextMenu()<CR>
-  nnoremap <silent> <CR> :call LanguageClient#explainErrorAtPoint()<CR>
-endfunction
-
-autocmd FileType haskell call SetHaskellOptions()
-function SetHaskellOptions()
-  let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
-endfunction
-
-autocmd Filetype rust call SetRustOptions()
-function SetRustOptions()
-  let g:LanguageClient_diagnosticsEnable = 0
-endfunction
-
 " (Optional) Multi-entry selection UI.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-nnoremap <leader><space> :FZF<CR>
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, { 'options': ['--color', 'hl:81,hl+:117'] }, <bang>0)
+"Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf.vim'
+"nnoremap <leader><space> :FZF<CR>
+"command! -bang -nargs=* Ag
+"  \ call fzf#vim#ag(<q-args>, { 'options': ['--color', 'hl:81,hl+:117'] }, <bang>0)
 " command! -bang -nargs=* Ag
 "   \ call fzf#vim#ag(<q-args>,
 "   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -115,20 +90,21 @@ nnoremap <C-F> :Ag<CR>
 " nnoremap <Leader>M :CtrlPBranch<CR>
 
 
-Plug 'vim-airline/vim-airline'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ''
-nnoremap <M-i> :bnext<CR>
-nnoremap <M-u> :bprev<CR>
-nnoremap <C-i> :bnext<CR>
-nnoremap <C-u> :bprev<CR>
-inoremap <M-i> <Esc>:bnext<CR>
-inoremap <M-u> <Esc>:bprev<CR>
-inoremap <C-i> <Esc>:bnext<CR>
-inoremap <C-u> <Esc>:bprev<CR>
-
-let g:airline#extensions#tabline#enabled = 1
-" Plug 'itchyny/lightline.vim'
+if (&term == "nvim")
+  Plug 'vim-airline/vim-airline'
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  nnoremap <M-i> :bnext<CR>
+  nnoremap <M-u> :bprev<CR>
+  nnoremap <C-i> :bnext<CR>
+  nnoremap <C-u> :bprev<CR>
+  inoremap <M-i> <Esc>:bnext<CR>
+  inoremap <M-u> <Esc>:bprev<CR>
+  inoremap <C-i> <Esc>:bnext<CR>
+  inoremap <C-u> <Esc>:bprev<CR>
+  let g:airline_symbols_ascii = 1
+  let g:airline#extensions#tabline#enabled = 1
+endif
 
 Plug 'jiangmiao/auto-pairs'
 
@@ -181,8 +157,8 @@ Plug 'vim-scripts/BufOnly.vim'
 map <M-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 inoremap <M-w> <C-o>:bd<CR>
 
-Plug 'rust-lang/rust.vim'
-let g:rustfmt_autosave = 1
+"Plug 'rust-lang/rust.vim'
+"let g:rustfmt_autosave = 1
 
 " Use rls instead
 " Plug 'racer-rust/vim-racer'
@@ -194,7 +170,7 @@ let g:rustfmt_autosave = 1
 " au FileType rust nmap gx <Plug>(rust-def-vertical)
 " au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
-Plug 'cespare/vim-toml'
+"Plug 'cespare/vim-toml'
 " Plug 'ap/vim-buftabline'
 " set hidden
 
@@ -203,11 +179,12 @@ let g:rustfmt_autosave = 1
 Plug 'tgeng/HiCursorWords'
 let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
-Plug 'idris-hackers/idris-vim'
-Plug 'derekelkins/agda-vim'
+"Plug 'idris-hackers/idris-vim'
+"Plug 'derekelkins/agda-vim'
 Plug 'gabrielelana/vim-markdown'
-Plug 'Nymphium/vim-koka'
-Plug 'rhysd/vim-llvm'
+"Plug 'Nymphium/vim-koka'
+"Plug 'rhysd/vim-llvm'
+Plug 'heaths/vim-msbuild'
 
 if filereadable('/google/src/cloud')
   " only load if on Google machine
@@ -225,19 +202,19 @@ if filereadable('/google/src/cloud')
   au! BufRead,BufNewFile,BufEnter /google/src/cloud/* let g:ctrlp_user_command='g4 whatsout|sed "s|'.getcwd().'/||"'
 else
   " only load if not on Google machine
-  Plug 'vim-syntastic/syntastic'
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
+  "Plug 'vim-syntastic/syntastic'
+  "set statusline+=%#warningmsg#
+  "set statusline+=%{SyntasticStatuslineFlag()}
+  "set statusline+=%*
 
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-  let g:syntastic_rust_checkers = ['cargo']
-  let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
+  "let g:syntastic_always_populate_loc_list = 1
+  "let g:syntastic_auto_loc_list = 1
+  "let g:syntastic_check_on_open = 1
+  "let g:syntastic_check_on_wq = 0
+  "let g:syntastic_rust_checkers = ['cargo']
+  "let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
 
-  Plug 'Valloric/YouCompleteMe'
+  "Plug 'Valloric/YouCompleteMe'
 endif
 
 " All of your Plugins must be added before the following line
@@ -329,31 +306,27 @@ else
     let g:idris_conceal = 1
     set guifont=Fira\ Code\ 14
 endif
-if has("mac")
-    set clipboard=unnamed
-    map [A <Up>
-    map [B <Down>
-    map [D <Left>
-    map [C <Right>
-    imap [A <Up>
-    imap [B <Down>
-    imap [D <Left>
-    imap [C <Right>
-    vmap [A <Up>
-    vmap [B <Down>
-    vmap [D <Left>
-    vmap [C <Right>
-    nmap [A <Up>
-    nmap [B <Down>
-    nmap [D <Left>
-    nmap [C <Right>
-    cmap [A <Up>
-    cmap [B <Down>
-    cmap [D <Left>
-    cmap [C <Right>
-else
-    set clipboard=unnamedplus
-endif
+map [A <Up>
+map [B <Down>
+map [D <Left>
+map [C <Right>
+imap [A <Up>
+imap [B <Down>
+imap [D <Left>
+imap [C <Right>
+vmap [A <Up>
+vmap [B <Down>
+vmap [D <Left>
+vmap [C <Right>
+nmap [A <Up>
+nmap [B <Down>
+nmap [D <Left>
+nmap [C <Right>
+cmap [A <Up>
+cmap [B <Down>
+cmap [D <Left>
+cmap [C <Right>
+set clipboard=unnamed
 set laststatus=2
 
 function SpellCorrectionModeOn()
@@ -551,7 +524,6 @@ nnoremap X @q
 nnoremap , :lprev<CR>
 nnoremap . :lnext<CR>
 
-
 vnoremap ' va'<Esc>gvovi'<Esc>f'
 vnoremap " va"<Esc>gvovi"<Esc>f"
 vnoremap ` va`<Esc>gvovi`<Esc>f`
@@ -565,6 +537,7 @@ vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
 
 nnoremap <silent> <S-Esc> :ccl<CR>
+inoremap <tab> <tab>
 
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |
