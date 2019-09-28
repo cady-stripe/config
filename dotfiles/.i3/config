@@ -44,6 +44,7 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && k
 
 bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
+bindsym XF86Display exec --no-startup-id /usr/bin/xbacklight -set 1
 
 # bindsym XF86ScreenSaver exec sudo pm-suspend
 bindsym Pause exec ~/bin/lock.sh
@@ -243,13 +244,23 @@ mode "remoteLinux" {
     bindsym Next mode "remoteWindows" workspace RemoteWindows
     bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
+    bindsym XF86Display exec --no-startup-id /usr/bin/xbacklight -set 1
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status
 }
 mode "remoteWindows" {
-    bindsym Next mode "default" workspace 1
+  bindsym Next mode "default" workspace 1
     bindsym Shift+Next move container to workspace 1
     bindsym Prior mode "remoteLinux" workspace RemoteLinux
     bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
+    bindsym XF86Display exec --no-startup-id /usr/bin/xbacklight -set 1
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status
 }
 
 exec xrdb ~/.dotfiles/.Xresources
