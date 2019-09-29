@@ -923,5 +923,8 @@
             ]
         }
     ],
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Blue Light Theme",
+    "editor.fontFamily": "'Fira Code', 'monospace', monospace, 'Hack'",
+    "editor.fontLigatures": true
 }
