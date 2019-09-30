@@ -94,6 +94,7 @@ for_window [title="^Merge Revisions" ] move absolute position 0 px 0 px
 for_window [title="^Page\(s\) Unresponsive" ] floating enable
 for_window [title="^Database Console" ] floating disable
 for_window [class="jetbrains-idea.*" ] border none
+for_window [class="Code" ] border none
 for_window [class="jetbrains-studio" ] border none
 for_window [title="^Android Emulator -.*"] floating enable move to scratchpad
 # for_window [class="studio.*" ] boUPDATE rder none
