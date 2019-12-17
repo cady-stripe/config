@@ -106,17 +106,8 @@ if [[ -e /usr/local/google/home ]]; then
       cd $1 2> /dev/null || cd $(dirname $1)
     fi
   }
-  get_aosp_dir() {
-    current_dir=$(pwd)
-    while [ $current_dir != '/' ] && ! ls "$current_dir/.repo" > /dev/null 2>&1; do
-      current_dir=$(dirname $current_dir)
-    done
-    if [ $current_dir != '/' ]; then
-      echo $current_dir
-    fi
-  }
   cd_aosp() {
-    aosp_dir=$(get_aosp_dir)
+    aosp_dir=$(get_dir_containing .repo)
     [ -n $aosp_dir ] && cd $aosp_dir
   }
   alias cda='cd_aosp'
@@ -165,7 +156,7 @@ if [[ -e /usr/local/google/home ]]; then
       select_aosp_branch_and_cd_to_it_ "$*"
     fi
   }
-  bindkey '^S' return_fig_branch_
+  # bindkey '^S' return_fig_branch_
 
   FZF_CTRL_R_OPTS='--reverse'
 
@@ -295,55 +286,24 @@ function goog-gaia-id-to-email() {
     tr " " "\n"
 }
 function adt_bazel() {
-  aosp_dir=$(get_aosp_dir)
+  aosp_dir=$(get_dir_containing .repo)
   if [ -z "$aosp_dir" ]; then
     echo "Must be under an AOSP dir or subdir"
     return
   fi
-  $(get_aosp_dir)/tools/base/bazel/bazel $@
-}
-
-function repo_sync_to_bid() {
-  bid=$1
-  if [ -z "$bid" ]; then
-    echo "Must set a build ID"
-    return
-  fi
-  aosp_dir=$(get_aosp_dir)
-  if [ -z "$aosp_dir" ]; then
-    echo "Must be under an AOSP dir or subdir."
-    return
-  fi
-  current_dir=$(pwd)
-  cd /tmp &&\
-  /google/data/ro/projects/android/fetch_artifact --bid $bid --target studio "manifest_$bid.xml"  &&\
-  mv "manifest_$bid.xml" $aosp_dir/.repo/manifests/ &&\
-  cd $current_dir &&\
-  repo sync -j128 -d -m manifest_${bid}.xml
+  $(get_dir_containing .repo)/tools/base/bazel/bazel $@
 }
 
 function repo_sync_to_branch() {
-  repo init -b $1 && repo sync -j128
+  repo init -u persistent-https://googleplex-android.git.corp.google.com/platform/manifest -b $1 && repo sync -j128
 }
-alias kill_as="ps aux | grep intellij\.android\.jps | grep -v grep | fzf | tr -s ' ' | cut -d' ' -f 2 | xargs -r kill"
+alias kill_debug_as="ps aux | grep intellij\.android\.jps | grep -v grep | fzf | tr -s ' ' | cut -d' ' -f 2 | xargs -r kill"
+alias kill_release_as="ps aux | grep as-releases | grep -v grep | fzf | tr -s ' ' | cut -d' ' -f 2 | xargs -r kill -9"
+cdgit() {
+  git_dir=$(get_dir_containing .git)
+  [ -n $git_dir ] && cd $git_dir
+}
 
-function run_studio () {
-  local bid=$1
-  local studio_dir="$HOME/as-releases/android-studio-$bid"
-  if [ ! -d "$studio_dir" ]; then
-    if [ ! -f "$studio_dir.tar.gz" ]; then
-      local current_dir=$(pwd)
-      mkdir -p $HOME/as-releases
-      cd $HOME/as-releases
-      /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio "android-studio-$bid.tar.gz"
-      cd $current_dir
-    fi
-    if [ ! -f "$studio_dir.tar.gz" ]; then
-      echo "Failed downloading build $bid"
-      return
-    fi
-    mkdir -p $studio_dir
-    tar -xvf "$studio_dir.tar.gz" -C $studio_dir
-  fi
-  $studio_dir/bin/studio.sh || $studio_dir/android-studio/bin/studio.sh
+function greview() {
+  git fetch "sso://googleplex-android/platform/tools/base" refs/changes/95/8252395/1 && git checkout FETCH_HEAD && guncommit
 }

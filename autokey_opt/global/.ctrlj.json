@@ -1,5 +1,5 @@
 {
-    "usageCount": 0, 
+    "usageCount": 7, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "ctrl+j", 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "tilda.Tilda|albert.albert", 
+        "regex": "tilda.Tilda|albert.albert|google-chrome.Google-chrome|code.Code", 
         "isRecursive": false
     }, 
     "type": "phrase", 

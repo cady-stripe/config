@@ -42,6 +42,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # bindsym XF86ScreenSaver exec sudo pm-suspend
 bindsym Pause exec ~/bin/lock.sh
 bindsym $mod+z exec ~/bin/takeover
+# bindsym $mod+c exec sh -c '~/bin/snipit > /tmp/snipit_output'
 
 # bindsym $mod+s split h; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
 # bindsym $mod+Shift+s split v; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
@@ -78,8 +79,8 @@ for_window [title="Cider$" ] floating disable
 for_window [title="^MATLAB$" ] border none floating enable
 for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
-bindsym $mod+XF86Explorer move scratchpad
-bindsym XF86Explorer [instance="google-chrome"] scratchpad show, resize set 1440 1420, move position center
+bindsym $mod+XF86Launch5 move scratchpad
+bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 1440 1420, move position center
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none
@@ -88,17 +89,20 @@ for_window [title="^Page\(s\) Unresponsive" ] floating enable
 for_window [title="^Database Console" ] floating disable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="jetbrains-idea.*" ] border none
+# for_window [class="jetbrains-idea.*" title="^Evaluate$"] resize set 1440 1420, move position center
 for_window [class="jetbrains-clion" ] border none
 for_window [class="jetbrains-studio.*" ] border none
-for_window [title="^Android Emulator - .*"] floating enable
+for_window [title="^Android Emulator - .*"] floating enable, resize set 540 960, border normal
+for_window [title="^Welcome to Android Studio"] floating enable
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
 assign [title="^Blaze Console"] 6
 assign [title="^Run - "] 6
 assign [title="^Debug - "] 6
+assign [title="^Version Control - "] 9
 #assign [title="Untitled - Google Chrome"] Test
-for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move position center move to scratchpad
+# for_window [instance="crx_nckgahadagoaajjgafhacjanaoiihapd" ] floating enable move position center move tk scratchpad
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -222,7 +226,9 @@ workspace Music output $RIGHT_MONITOR
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Mod1+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Mod1+e exec ~/bin/logout.sh
+bindsym $mod+Mod1+p exec ~/bin/logout.sh
+bindsym --release XF86Launch6 exec ~/bin/snipit
+bindsym --release Mod1+XF86Launch6 exec ~/bin/snipit --upload
 
  mouse_warping none
 # Start i3bar to display a workspace bar (plus the system information i3status

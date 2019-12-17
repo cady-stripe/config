@@ -34,5 +34,5 @@ alias pu='pushd'
 alias po='popd'
 
 pathto(){
-    echo -n $PWD/$1 | xclip -selection clipboard
+    realpath $1 | tr -d '\n' |xclip -selection clipboard
 }

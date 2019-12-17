@@ -35,7 +35,7 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=/usr/local/google/home/tgeng/dev/kotlin/kotlin-native-1.0.3/dist/bin:/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:$PATH
+export PATH=/usr/local/google/home/tgeng/dev/kotlin/kotlin-native-1.0.3/dist/bin:/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:/usr/local/google/home/tgeng/.local/node_modules/.bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -73,7 +73,6 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='15'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='36'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
 POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND='yellow'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
 _get_client() {
   pwd | sed 's|/usr/local/google/home/tgeng/git/\([^/]\+\).*|\1|' | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|' | sed 's|.*/.*||'
 }
@@ -84,8 +83,17 @@ POWERLEVEL9K_CUSTOM_GET_CLIENT='_get_client'
 POWERLEVEL9K_CUSTOM_GET_CLIENT_FOREGROUND='15'
 POWERLEVEL9K_CUSTOM_GET_CLIENT_BACKGROUND='99'
 POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
-POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
-POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="236"
+if [ -z "$INSIDE_INTELLIJ" ]; then
+  POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
+  POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="236"
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+else
+  POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="darkgray"
+  POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="white"
+  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+  POWERLEVEL9K_TIME_FOREGROUND='darkgray'
+  POWERLEVEL9K_TIME_BACKGROUND='white'
+fi
 
 # POWERLEVEL9K_CUSTOM_HG_COMMIT='prompt_hg_commit'
 # POWERLEVEL9K_CUSTOM_HG_COMMIT_FOREGROUND='227'
@@ -140,6 +148,7 @@ JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jd
 fpath=($HOME/.zplug/repos/gradle/gradle-completion $fpath)
 
 PATH=$HOME/dev/cmake-master-dev/prebuilts/ninja/linux-x86:$(echo "$PATH" | sed -e 's|:/google/data/ro/[^:]*||g')
+PATH=$HOME/.cabal/bin:$PATH
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/usr/local/google/home/tgeng/.sdkman"
 [[ -s "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh"
@@ -148,3 +157,5 @@ if [ -n "$TMUX" ]; then
   -
 fi
 
+export ANDROID_HOME=/usr/local/google/home/tgeng/Android/Sdk/
+export ANDROID_SDK_ROOT=/usr/local/google/home/tgeng/Android/Sdk/

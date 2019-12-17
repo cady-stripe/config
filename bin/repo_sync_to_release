@@ -1,0 +1,18 @@
+#!/bin/bash
+
+bid=$(/usr/local/google/home/tgeng/bin/convert_release_to_bid $1)
+if [ -z "$bid" ]; then
+  echo "Cannot find build ID '$1'"
+  exit
+fi
+aosp_dir=$(/usr/local/google/home/tgeng/bin/get_dir_containing .repo)
+if [ -z "$aosp_dir" ]; then
+  echo "Must be under an AOSP dir or subdir."
+  exit
+fi
+current_dir=$(pwd)
+cd /tmp &&\
+/google/data/ro/projects/android/fetch_artifact --bid $bid --target studio "manifest_$bid.xml"  &&\
+mv "manifest_$bid.xml" $aosp_dir/.repo/manifests/ &&\
+cd $current_dir &&\
+repo sync -j128 -d -m manifest_${bid}.xml

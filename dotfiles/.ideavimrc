@@ -1,3 +1,4 @@
+let mapleader = ' '
 inoremap jk <Esc>
 inoremap kj <Esc>
 
@@ -46,6 +47,8 @@ nnoremap R :action RenameElement<CR>
 nnoremap t :action ToggleLineBreakpoint<CR>
 nnoremap Q :action com.andrewbrookins.idea.wrap.WrapAction<CR>
 nnoremap T :action StringManipulation.AlignToColumns<CR>
+nnoremap Y :action IntroduceVariable<CR>
+vnoremap Y :action IntroduceVariable<CR>
 vnoremap Q :<Backspace><Backspace><Backspace><Backspace><Backspace>action com.andrewbrookins.idea.wrap.WrapAction<CR>
 inoremap <M-h> <C-w>h
 vnoremap <M-h> <C-w>h
@@ -59,13 +62,13 @@ nnoremap , :action GotoPreviousError<CR>
 nnoremap . :action GotoNextError<CR>
 nnoremap U :action Vcs.RollbackChangedLines<CR>
 nnoremap <CR> :action ShowErrorDescription<CR>
-nnoremap C :action Blaze.OpenInCodeSearch<CR>
-nnoremap D :action Blaze.FixDepsForFile<CR>
-nnoremap B :action Blaze.OpenCorrespondingBuildFile<CR>
-nnoremap S :action Blaze.PartialSync<CR>
+" nnoremap C :action Blaze.OpenInCodeSearch<CR>
+" nnoremap D :action Blaze.FixDepsForFile<CR>
+" nnoremap B :action Blaze.OpenCorrespondingBuildFile<CR>
+" nnoremap S :action Blaze.PartialSync<CR>
 nnoremap <S-Left> :action MoveElementLeft<CR>
 nnoremap <S-Right> :action MoveElementRight<CR>
-nnoremap I :action GotoImplementation<CR>
+nnoremap D :action GotoTypeDeclaration<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
@@ -77,6 +80,7 @@ nnoremap <S-Up> :action MoveStatementUp<CR>
 nnoremap <S-Down> :action MoveStatementDown<CR>
 inoremap <S-Up> <C-o>:action MoveStatementUp<CR>
 inoremap <S-Down> <C-o>:action MoveStatementDown<CR>
+vnoremap ` va`<Esc>gvovi`<Esc>f`
 vnoremap ' va'<Esc>gvovi'<Esc>f'
 vnoremap " va"<Esc>gvovi"<Esc>f"
 vnoremap ( va)<Esc>gvovi(<Esc>
@@ -98,13 +102,12 @@ nnoremap < vi<
 nnoremap > va<
 nnoremap " vi"
 nnoremap ' vi'
+nnoremap ` F`lvt`
 nnoremap X @q
 vnoremap a <Esc>
 vnoremap i <Esc>
-nnoremap <space> v:action EditorSelectWord<CR>
-vnoremap <space> :action EditorSelectWord<CR>
-nnoremap <S-space> v:action EditorUnselectWord<CR>
-vnoremap <S-space> :action EditorUnselectWord<CR>
+nnoremap <space> :action RunToCursor<CR>
+nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 
 set ignorecase
 set smartcase

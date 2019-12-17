@@ -1,0 +1,9 @@
+#!/bin/bash
+
+current_dir=$(pwd)
+while [ $current_dir != '/' ] && ! [ -e "$current_dir/$1" ] 2>&1; do
+  current_dir=$(dirname $current_dir)
+done
+if [ $current_dir != '/' ]; then
+  echo $current_dir
+fi

@@ -1,5 +1,5 @@
 {
-    "usageCount": 7, 
+    "usageCount": 10, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "ctrl+k", 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "tilda.Tilda|albert.albert", 
+        "regex": "tilda.Tilda|albert.albert|google-chrome.Google-chrome|code.Code", 
         "isRecursive": false
     }, 
     "type": "phrase", 

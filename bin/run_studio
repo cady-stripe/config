@@ -1,0 +1,29 @@
+#!/bin/bash
+cache_dir="$HOME/as-releases"
+bid=$(/usr/local/google/home/tgeng/bin/convert_release_to_bid $1)
+if [ -z "$bid" ]; then
+  echo "Cannot find build matching '$1'"
+  exit 1
+fi
+studio_file="$cache_dir/$(cd $cache_dir && ls | grep $bid || echo -n "nothing")"
+if [ ! -d "$studio_file" ]; then
+  if [ ! -f "$studio_file" ]; then
+    current_dir=$(pwd)
+    mkdir -p $HOME/as-releases
+    cd $HOME/as-releases
+    /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio "android-studio-*$bid.tar.gz"
+    studio_file="$cache_dir/$(ls | grep $bid)"
+    cd $current_dir
+  fi
+  if [ ! -f "$studio_file" ]; then
+    echo "Failed downloading build $bid"
+    exit 1
+  fi
+  studio_dir=${studio_file%.*.*}
+  mkdir -p $studio_dir
+  tar -xvf "$studio_file" -C $studio_dir
+  rm "$studio_dir.tar.gz"
+else
+  studio_dir=$studio_file
+fi
+$studio_dir/android-studio/bin/studio.sh $2

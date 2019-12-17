@@ -65,6 +65,11 @@ nnoremap <Leader>M :CtrlPBranch<CR>
 
 
 Plugin 'itchyny/lightline.vim'
+if !empty($INSIDE_INTELLIJ)
+  let g:lightline = {
+        \ 'colorscheme': 'PaperColor',
+        \ }
+endif
 
 Plugin 'jiangmiao/auto-pairs'
 
@@ -73,7 +78,6 @@ nnoremap T :Tab /
 vnoremap T :Tab /
 
 Plugin 'nathanaelkane/vim-indent-guides'
-set background=dark
 nmap <silent> <C-j> <Plug>IndentGuidesToggle
 autocmd FileType c,python,java,cpp,objc,ruby,yaml,json IndentGuidesEnable
 let g:indent_guides_auto_colors = 0
@@ -83,6 +87,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333333   ctermbg=235
 
 Plugin 'scrooloose/nerdtree'
 nnoremap <leader>a :NERDTreeToggle<CR>
+nnoremap <M-a> :NERDTreeToggle<CR>
+nnoremap <leaders>s :NERDTreeFind<CR>
+nnoremap <M-s> :NERDTreeFind<CR>
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=48
 let NERDTreeMouseMode=3
@@ -128,6 +135,8 @@ Plugin 'ihacklog/HiCursorWords'
 highlight! WordUnderTheCursor cterm=bold,underline gui=bold,underline
 
 Plugin 'idris-hackers/idris-vim'
+
+Plugin 'NLKNguyen/papercolor-theme'
 
 if filereadable('/usr/share/vim/google/google.vim')
   " only load if on Google machine
@@ -182,8 +191,8 @@ if filereadable('/usr/share/vim/google/google.vim')
     inoremap <M-f> <Esc>:FormatCode<CR>
 
     Glug corpweb
-    nnoremap C :CorpWebCsFile<CR>
-    nnoremap D :CorpDocFindFile<CR>
+    " nnoremap C :CorpWebCsFile<CR>
+    " nnoremap D :CorpDocFindFile<CR>
 
     Glug easygoogle
 
@@ -343,7 +352,13 @@ set incsearch
 set smartcase ignorecase
 set showmode
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
-colorscheme molokai_mod
+if empty($INSIDE_INTELLIJ)
+  set background=dark
+  colorscheme molokai_mod
+else
+  set background=light
+  colorscheme PaperColor
+endif
 set guioptions=
 set cul
 syntax sync minlines=64
@@ -380,8 +395,14 @@ nnoremap <Right> *
 nnoremap <Left> #
 nnoremap <up> 3<c-y>
 nnoremap <down> 3<c-e>
-imap <Home> <C-o>^
-map <Home> ^
+map <ESC>[4~    <End>
+map <ESC>[1~    <Home>
+imap <ESC>[4~    <End>
+imap <ESC>[1~    <Home>
+imap <Home> <Left><C-o>g^
+map <Home> hg^
+imap <End> <Right><C-o>g$
+map <End> lg$
 map <c-d> <delete>
 imap <c-d> <Delete>
 nmap <C-d> <Delete>
@@ -441,8 +462,6 @@ nnoremap Q {gq}
 vnoremap Q gq
 nnoremap R :%s/\<<C-r><C-w>\>//g<Left><Left>
 vnoremap R "py:%s/<C-r>p//g<left><left>
-vmap <Right> *
-vmap <Left> #
 nmap <M-a> ggVGy
 nnoremap [ vi[
 nnoremap ] va[
@@ -454,8 +473,10 @@ nnoremap < vi<
 nnoremap > va<
 nnoremap " vi"
 nnoremap ' vi'
+nnoremap ` vi`
 nnoremap X @q
 
+vnoremap ` va`<Esc>gvovi`<Esc>f`
 vnoremap ' va'<Esc>gvovi'<Esc>f'
 vnoremap " va"<Esc>gvovi"<Esc>f"
 vnoremap ( va)<Esc>gvovi(<Esc>

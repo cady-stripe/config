@@ -1,0 +1,6 @@
+#!/bin/bash
+for filename; do
+    echo -e "\033[32;1m$filename\033[0m"
+    cat "$filename"
+    echo
+done
