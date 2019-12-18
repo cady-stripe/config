@@ -2,9 +2,21 @@
   title_transmit_bg_color = "#008cff"
 [keybindings]
   copy = <Alt>c
+  paste = <Alt>v
   edit_window_title = None
   layout_launcher = None
-  paste = <Alt>v
+[profiles]
+  [[default]]
+    background_darkness = 0.76
+    background_type = transparent
+    cursor_color = "#ffffff"
+    font = Hack 11
+    foreground_color = "#ffffff"
+    scrollbar_position = hidden
+    palette = "#2e2e2e:#ff4848:#50ff50:#ffff29:#5891ff:#ff3dff:#56e7e7:#faebd7:#888a85:#ff7474:#97ff97:#ffff96:#9abaff:#ff97ff:#99ffff:#ffffff"
+    use_custom_command = True
+    custom_command = zsh
+    use_system_font = False
 [layouts]
   [[default]]
     [[[child1]]]
@@ -14,15 +26,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    background_darkness = 0.76
-    background_type = transparent
-    cursor_color = "#ffffff"
-    custom_command = bash
-    font = Hack 11
-    foreground_color = "#ffffff"
-    palette = "#2e2e2e:#ff4848:#50ff50:#ffff29:#5891ff:#ff3dff:#56e7e7:#faebd7:#888a85:#ff7474:#97ff97:#ffff96:#9abaff:#ff97ff:#99ffff:#ffffff"
-    scrollbar_position = hidden
-    use_custom_command = True
-    use_system_font = False

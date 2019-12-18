@@ -35,7 +35,7 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=/usr/local/google/home/tgeng/dev/kotlin/kotlin-native-1.0.3/dist/bin:/home/tgeng/anaconda3/bin:/usr/local/google/home/tgeng/bin:/usr/local/google/home/tgeng/.local/bin:/usr/local/google/home/tgeng/.local/node_modules/.bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/node_modules/.bin:$HOME/.cabal/bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -148,7 +148,6 @@ JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jd
 fpath=($HOME/.zplug/repos/gradle/gradle-completion $fpath)
 
 PATH=$HOME/dev/cmake-master-dev/prebuilts/ninja/linux-x86:$(echo "$PATH" | sed -e 's|:/google/data/ro/[^:]*||g')
-PATH=$HOME/.cabal/bin:$PATH
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/usr/local/google/home/tgeng/.sdkman"
 [[ -s "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh"
