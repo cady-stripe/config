@@ -205,6 +205,7 @@ let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
 Plug 'idris-hackers/idris-vim'
 Plug 'derekelkins/agda-vim'
+let g:agda_extraincpaths = ["/home/tgeng/dev/agda/agda/std-lib/src"]
 Plug 'gabrielelana/vim-markdown'
 Plug 'Nymphium/vim-koka'
 Plug 'rhysd/vim-llvm'
@@ -323,11 +324,11 @@ au BufRead,BufNewFile *.json set filetype=json
 "+-----------------------------------------------------------------------------+
 "| Misc settings                                                              |
 "+-----------------------------------------------------------------------------+
+set guifont=Fira\ Code:h12
 if !has("gui_running")
     set t_Co=256
 else
     let g:idris_conceal = 1
-    set guifont=Fira\ Code\ 14
 endif
 if has("mac")
     set clipboard=unnamed
@@ -565,6 +566,11 @@ vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
 
 nnoremap <silent> <S-Esc> :ccl<CR>
+
+noremap <ScrollWheelUp> <C-Y>
+noremap <ScrollWheelDown> <C-E>
+
+cnoremap <M-v> <C-r>"
 
 "+-----------------------------------------------------------------------------+
 "| FileType settings                                                           |

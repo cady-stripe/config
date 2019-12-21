@@ -67,7 +67,7 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='15'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='36'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
 POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND='yellow'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='none'
 _get_client() {
   pwd | sed 's|/usr/local/google/home/tgeng/git/\([^/]\+\).*|\1|' | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|' | sed 's|.*/.*||'
 }
@@ -78,8 +78,8 @@ POWERLEVEL9K_CUSTOM_GET_CLIENT='_get_client'
 POWERLEVEL9K_CUSTOM_GET_CLIENT_FOREGROUND='15'
 POWERLEVEL9K_CUSTOM_GET_CLIENT_BACKGROUND='99'
 POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
-POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
-POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="black"
+POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="248"
+POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="none"
 zplug "~/.zsh_tgeng_extra", from:local, use:"*.zsh", defer:1
 zplug "~/.zsh_tgeng_extra", from:local, use:"delayed/*", defer:3
 
@@ -113,3 +113,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export SDKMAN_DIR="/home/tgeng/.sdkman"
 [[ -s "/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tgeng/.sdkman/bin/sdkman-init.sh"
 -
+
+# opam configuration
+test -r /home/tgeng/.opam/opam-init/init.zsh && . /home/tgeng/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export PATH="$PATH:/home/tgeng/.cabal/bin"

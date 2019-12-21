@@ -50,7 +50,8 @@ alias cdt='cdt_'
 # function o() {
   # nohup oni $@ > /dev/null 2>&1 &
 # }
-alias gvim='NVIM_GTK_NO_HEADERBAR=1 nvim-gtk'
+# alias gvim='NVIM_GTK_NO_HEADERBAR=1 nvim-gtk'
+alias gvim='nvim-qt'
 alias c='clear'
 alias locs='ls | xargs -I % sh -c "echo %; loc %; echo"'
 

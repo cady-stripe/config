@@ -63,6 +63,7 @@ bindsym $mod+grave exec --no-startup-id fetchotp -x
 bindsym $mod+Return split h; exec terminator
 bindsym $mod+Shift+Return split v; exec terminator
 for_window [title="Yoo" ] floating enable
+for_window [class="nvim-qt" ] border none
 for_window [window_role="pop-up"] floating enable move absolute position 3440 px 775 px
 for_window [class="Tilda"] floating enable border none move absolute  position 0 px 0 px
 for_window [instance="desktop-ssh"] border none
@@ -228,6 +229,8 @@ workspace Music output $RIGHT_MONITOR
 bindsym $mod+Mod1+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Mod1+e exec ~/bin/logout.sh
+bindsym --release XF86WakeUp exec ~/bin/snipit
+bindsym --release Mod1+XF86WakeUp exec ~/bin/snipit --upload
 
  mouse_warping none
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -240,8 +243,8 @@ bar {
 bindsym Prior mode "remoteLinux" workspace RemoteLinux
 bindsym Next mode "remoteWindows" workspace RemoteWindows
 mode "remoteLinux" {
-    bindsym Prior mode "default" workspace 1
-    bindsym Shift+Prior move container to workspace 1
+    bindsym Prior mode "default" workspace back_and_forth
+    bindsym Shift+Prior move container to workspace back_and_forth
     bindsym Next mode "remoteWindows" workspace RemoteWindows
     bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
@@ -252,8 +255,8 @@ mode "remoteLinux" {
     bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && killall -SIGUSR1 i3status
 }
 mode "remoteWindows" {
-  bindsym Next mode "default" workspace 1
-    bindsym Shift+Next move container to workspace 1
+  bindsym Next mode "default" workspace back_and_forth
+    bindsym Shift+Next move container to workspace back_and_forth
     bindsym Prior mode "remoteLinux" workspace RemoteLinux
     bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec 10
     bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 10
