@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for f in `find "$1" -name '*.jar'`; do
+    if unzip -l $f | grep "$2" --color=always > /tmp/find-file-in-jars-result; then
+    echo "$f"
+    cat /tmp/find-file-in-jars-result
+  fi
+done

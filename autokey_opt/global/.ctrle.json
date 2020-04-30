@@ -1,31 +1,31 @@
 {
-    "usageCount": 1, 
-    "omitTrigger": false, 
-    "prompt": false, 
-    "description": "ctrl+e", 
-    "abbreviation": {
-        "wordChars": "[\\w]", 
-        "abbreviations": [], 
-        "immediate": false, 
-        "ignoreCase": false, 
-        "backspace": true, 
-        "triggerInside": false
-    }, 
-    "hotkey": {
-        "hotKey": "e", 
-        "modifiers": [
-            "<ctrl>"
-        ]
-    }, 
+    "type": "phrase",
+    "description": "ctrl+e",
     "modes": [
         3
-    ], 
-    "showInTrayMenu": false, 
-    "matchCase": false, 
+    ],
+    "usageCount": 13,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>"
+        ],
+        "hotKey": "e"
+    },
     "filter": {
-        "regex": "tilda.Tilda|albert.albert|google-chrome.Google-chrome|code.Code", 
+        "regex": "tilda.Tilda|albert.albert|.*\\.Google-chrome|code.Code",
         "isRecursive": false
-    }, 
-    "type": "phrase", 
+    },
     "sendMode": "kb"
 }

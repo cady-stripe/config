@@ -35,7 +35,7 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/node_modules/.bin:$HOME/.cabal/bin:$PATH
+export PATH=$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/node_modules/.bin:$HOME/.cabal/bin:$HOME/dev/sbt/bin:$PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -156,5 +156,5 @@ if [ -n "$TMUX" ]; then
   -
 fi
 
-export ANDROID_HOME=/usr/local/google/home/tgeng/Android/Sdk/
-export ANDROID_SDK_ROOT=/usr/local/google/home/tgeng/Android/Sdk/
+# export ANDROID_HOME=/usr/local/google/home/tgeng/Android/Sdk/
+# export ANDROID_SDK_ROOT=/usr/local/google/home/tgeng/Android/Sdk/

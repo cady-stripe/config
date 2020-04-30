@@ -9,6 +9,10 @@ alias gpr='git pull --rebase'
 alias gdiscard='git reset --hard'
 alias guncommit='git reset --soft HEAD~1'
 alias gunamend='git reset --soft HEAD@{1}'
+alias gcam='git commit --amend --no-edit'
+alias gca='git commit -a'
+alias gra='git rebase --abort'
+alias ga='noglob git add'
 return_git_status_files() {
     LBUFFER="${LBUFFER}$(git status -s | fzf -1 --reverse --tac --height=20 --min-height=1 --ansi -m | cut -c4- | sed 's/ -> / /' | tr '\r\n' ' ')"
     local ret=$?

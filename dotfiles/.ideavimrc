@@ -42,6 +42,7 @@ inoremap <C-j> <Down>
 inoremap <C-w> <C-o><C-w>
 nnoremap M bimock<Esc>l~
 nnoremap s :action CommentByLineComment<CR>
+vnoremap s :action CommentByLineComment<CR>
 nnoremap J :action EditorJoinLines<CR>
 nnoremap R :action RenameElement<CR>
 nnoremap t :action ToggleLineBreakpoint<CR>

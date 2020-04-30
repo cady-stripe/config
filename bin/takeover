@@ -7,4 +7,4 @@ fi
 nohup autokey-gtk > /dev/null 2>&1 &
 feh --bg-fill ~/Pictures/wallpaper.jpg
 kbd
-killall albert ; sleep 2 && PATH="$PATH:/usr/local/google/home/tgeng/bin" nohup albert > /dev/null 2>&1 &
+# killall albert ; sleep 2 && PATH="$PATH:/usr/local/google/home/tgeng/bin" nohup albert > /dev/null 2>&1 &

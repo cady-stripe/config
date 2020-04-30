@@ -23,17 +23,6 @@ if [[ -e /usr/local/google/home ]]; then
     fi
   }
 
-  alias gme='g fix5 && g multi export'
-  alias gl='g log5'
-  alias gr='g rb5'
-  alias gms='g multi sync'
-  alias gcm='g commit --amend --no-edit'
-  alias gcam='g commit -a --amend --no-edit'
-  alias gca='g commit -a'
-  alias gfix='g fix5'
-  alias grc='g rebase --continue'
-  alias gra='g rebase --abort'
-  alias ga='noglob g add'
   alias fixjs=/google/src/components/head/google3/third_party/java_src/jscomp/java/com/google/javascript/jscomp/lint/fixjs.sh
   alias apitool='/google/data/ro/teams/cloud-marketplace/apitool'
   function gg() {
@@ -306,4 +295,12 @@ cdgit() {
 
 function greview() {
   git fetch "sso://googleplex-android/platform/tools/base" refs/changes/95/8252395/1 && git checkout FETCH_HEAD && guncommit
+}
+
+function ru() {
+  repo upload --current-branch . -y $@
+}
+
+function rut() {
+  repo upload --current-branch . -o topic=tgeng-$(git symbolic-ref --short HEAD) -y $@
 }

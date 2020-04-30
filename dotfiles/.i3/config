@@ -82,7 +82,9 @@ for_window [title="^MATLAB$" ] border none floating enable
 for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
 bindsym $mod+XF86Launch5 move scratchpad
-bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 1440 1420, move position center
+bindsym $mod+XF86WakeUp move scratchpad
+bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 2560 1420, move position center
+bindsym XF86WakeUp [instance="google-chrome"] scratchpad show, resize set 1920 1058, move position center
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none
@@ -96,6 +98,10 @@ for_window [class="jetbrains-clion" ] border none
 for_window [class="jetbrains-studio.*" ] border none
 for_window [title="^Android Emulator - .*"] floating enable, resize set 540 960, border normal
 for_window [title="^Welcome to Android Studio"] floating enable
+for_window [instance="sun-awt-X11-XWindowPeer"] focus
+for_window [class="Code" ] border none
+for_window [class="Blender" ] border none
+for_window [class="Blender Render" ] floating enable
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
@@ -138,6 +144,7 @@ bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+F11 fullscreen toggle
 bindsym $mod+Ctrl+space border toggle
 
 # change focus between tiling / floating windows
@@ -244,4 +251,4 @@ exec xrdb ~/.dotfiles/.Xresources
 # exec bash -c "sleep 2; tilda"
 exec feh --bg-fill ~/Pictures/wallpaper.jpg
 exec dex -ae i3
-exec --no-startup-id env LOCKED_BY_SESSION_IDLE=true xautolock -time 30 -locker /usr/share/goobuntu-desktop-files/xsecurelock.sh
+exec xautolock -time 15 -locker '~/bin/lock.sh' &

@@ -1,6 +1,6 @@
 #!/bin/sh
-xset dpms 7200 0 0
-xset +dpms
+# xset dpms 7200 0 0 > /dev/null
+# xset +dpms /dev/null
 # gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 40
 # gsettings set org.gnome.desktop.peripherals.keyboard delay 100
 xset r rate 250 75
