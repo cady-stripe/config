@@ -1,9 +1,12 @@
 #!/bin/sh
 revert() {
   xset dpms 0 0 0
-  /home/tgeng/bin/setup_screen.sh
 }
 trap revert SIGHUP SIGINT SIGTERM
-xset +dpms dpms 5 5 5
-i3lock -n
+
+# Lock screen displaying this image.
+i3lock -i /usr/local/google/home/tgeng/Pictures/wallpaper.jpg
+
+# Turn the screen off after a delay.
+sleep 10; pgrep i3lock && xset dpms force off
 revert

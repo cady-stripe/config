@@ -9,12 +9,10 @@ do
   NAME=$(xprop -id $WINDOW_ID | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
   # CURRENT_KEYBOARD="$(setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}')"
   if [[ $NAME == "Windows 10 - Google Chrome" || $NAME == "gLinux - Google Chrome" ]]; then
-    killall albert
-    killall tilda
     killall autokey-gtk
   else
-    execute_once albert
-    execute_once tilda
     execute_once autokey-gtk
+    kbd
+    set_up_wallpaper.sh
   fi
 done < <(xprop -spy -root _NET_ACTIVE_WINDOW)

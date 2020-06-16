@@ -1,13 +1,13 @@
 {
-    "type": "phrase",
-    "description": "close",
+    "type": "script",
+    "description": "scratchpad",
+    "store": {},
     "modes": [
         3
     ],
-    "usageCount": 11,
+    "usageCount": 69,
     "prompt": false,
     "omitTrigger": false,
-    "matchCase": false,
     "showInTrayMenu": false,
     "abbreviation": {
         "abbreviations": [],
@@ -18,14 +18,11 @@
         "wordChars": "[\\w]"
     },
     "hotkey": {
-        "modifiers": [
-            "<alt>"
-        ],
-        "hotKey": "m"
+        "modifiers": [],
+        "hotKey": "<code151>"
     },
     "filter": {
-        "regex": ".*\\.Google-chrome",
+        "regex": null,
         "isRecursive": false
-    },
-    "sendMode": "kb"
+    }
 }

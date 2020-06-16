@@ -1,5 +1,5 @@
 {
-    "usageCount": 8, 
+    "usageCount": 44, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "ctrl+h", 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "^((?!Focus-Proxy-Window.FocusProxy).)*$", 
+        "regex": null, 
         "isRecursive": false
     }, 
     "type": "phrase", 

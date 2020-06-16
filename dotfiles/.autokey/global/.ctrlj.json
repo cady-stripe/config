@@ -1,5 +1,5 @@
 {
-    "usageCount": 26, 
+    "usageCount": 39, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "ctrl+j", 
@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": "^((?!Focus-Proxy-Window.FocusProxy).)*$", 
+        "regex": null, 
         "isRecursive": false
     }, 
     "type": "phrase", 

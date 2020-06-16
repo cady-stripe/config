@@ -324,7 +324,6 @@ au BufRead,BufNewFile *.json set filetype=json
 "+-----------------------------------------------------------------------------+
 "| Misc settings                                                              |
 "+-----------------------------------------------------------------------------+
-set guifont=Fira\ Code:h12
 if !has("gui_running")
     set t_Co=256
 else
@@ -398,7 +397,9 @@ set termencoding=utf-8
 " tell it to use an undo file
 set undofile
 " set a directory to store the undo history
-set undodir=~/.vimundo/
+set undodir=~/.vimundo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 set undolevels=1000
 set undoreload=10000
 set timeoutlen=500

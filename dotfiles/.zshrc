@@ -118,3 +118,4 @@ export SDKMAN_DIR="/home/tgeng/.sdkman"
 test -r /home/tgeng/.opam/opam-init/init.zsh && . /home/tgeng/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export PATH="$PATH:/home/tgeng/.cabal/bin"
+export NVIM_QT_RUNTIME_PATH=/usr/share/nvim-qt/runtime
