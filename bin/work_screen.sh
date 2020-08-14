@@ -3,5 +3,3 @@ xrandr --output DP-7 --off --output DP-6 --off --output DP-0 --mode 2560x1440 --
 nohup compton > /dev/null 2>&1 &
 feh --bg-fill ~/Pictures/wallpaper.jpg
 kbd
-sleep 1
-nohup tilda > /dev/null 2>&1 &

@@ -35,6 +35,8 @@ nnoremap <C-k> 3<c-y>
 nnoremap <C-j> 3<c-e>
 vnoremap <C-k> 3k
 vnoremap <C-j> 3j
+vnoremap <C-h> h
+vnoremap <C-l> l
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 inoremap <C-k> <Up>
@@ -109,6 +111,7 @@ vnoremap a <Esc>
 vnoremap i <Esc>
 nnoremap <space> :action RunToCursor<CR>
 nnoremap <Backspace> :action QuickEvaluateExpression<CR>
+vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
 
 set ignorecase
 set smartcase
@@ -116,3 +119,4 @@ set number
 set clipboard=unnamed
 set timeoutlen=50
 set incsearch
+set idearefactormode=keep

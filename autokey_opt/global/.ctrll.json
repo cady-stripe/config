@@ -4,7 +4,7 @@
     "modes": [
         3
     ],
-    "usageCount": 8,
+    "usageCount": 198,
     "prompt": false,
     "omitTrigger": false,
     "matchCase": false,
@@ -24,7 +24,7 @@
         "hotKey": "l"
     },
     "filter": {
-        "regex": "tilda.Tilda|albert.albert|.*\\.Google-chrome|code.Code",
+        "regex": "tilda.Tilda|albert.albert|.*\\.Google-chrome|code.Code|zeal.Zeal|tilix.Tilix",
         "isRecursive": false
     },
     "sendMode": "kb"

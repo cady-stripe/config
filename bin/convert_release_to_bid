@@ -5,7 +5,7 @@ if [[ $1 =~ ^[0-9]+$ ]]; then
   echo $1
 else
   archive_html="/google/src/head/depot/google3/third_party/devsite/android/en/studio/_downloads_archive.html"
-  version=$(python /usr/local/google/home/tgeng/bin/list_android_studio_builds.py $archive_html | fzf -1 --reverse --height=20 --min-height=1 --ansi -q "$1")
+  version=$(python3 /usr/local/google/home/tgeng/bin/list_android_studio_builds.py $archive_html | fzf -1 --reverse --height=20 --min-height=1 --ansi -q "$1")
   >&2 echo "Selected $version"
   echo $version | sed 's|.*(\(.*\)).*|\1|'
 fi

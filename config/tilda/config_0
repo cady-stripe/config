@@ -1,6 +1,6 @@
 tilda_config_version="1.1.11"
 command="tmux -2 new-session -A -s dropdown"
-font="Fira Mono 12"
+font="JetBrains Mono 10"
 key="F12"
 addtab_key="<Shift><Control>t"
 fullscreen_key="F11"
@@ -93,7 +93,7 @@ inherit_working_dir=true
 command_login_shell=false
 start_fullscreen=false
 confirm_close_tab=false
-back_alpha=45875
+back_alpha=38666
 show_title_tooltip=false
 # max_width=0
 # max_height=0

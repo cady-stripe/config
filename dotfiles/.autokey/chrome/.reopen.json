@@ -1,31 +1,32 @@
 {
-    "usageCount": 0, 
-    "omitTrigger": false, 
-    "prompt": false, 
-    "description": "reopen", 
-    "abbreviation": {
-        "wordChars": "[\\w]", 
-        "abbreviations": [], 
-        "immediate": false, 
-        "ignoreCase": false, 
-        "backspace": true, 
-        "triggerInside": false
-    }, 
-    "hotkey": {
-        "hotKey": "k", 
-        "modifiers": [
-            "<alt>"
-        ]
-    }, 
+    "type": "phrase",
+    "description": "reopen",
     "modes": [
         3
-    ], 
-    "showInTrayMenu": false, 
-    "matchCase": false, 
+    ],
+    "usageCount": 20,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<alt>",
+            "<ctrl>"
+        ],
+        "hotKey": "m"
+    },
     "filter": {
-        "regex": ".*\\.Google-chrome", 
+        "regex": ".*\\.Google-chrome",
         "isRecursive": false
-    }, 
-    "type": "phrase", 
+    },
     "sendMode": "kb"
 }

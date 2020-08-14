@@ -35,7 +35,8 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH=$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/node_modules/.bin:$HOME/.cabal/bin:$HOME/dev/sbt/bin:$PATH
+export PATH=$HOME/.idris2/bin:$HOME/go/bin:$HOME/dev/sbt/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/.idris2/lib:$LD_LIBRARY_PATH
 source ~/.zplug/init.zsh
 
 zplug "arzzen/calc.plugin.zsh", defer:2
@@ -94,6 +95,8 @@ else
   POWERLEVEL9K_TIME_FOREGROUND='darkgray'
   POWERLEVEL9K_TIME_BACKGROUND='white'
 fi
+POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="248"
+POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="none"
 
 # POWERLEVEL9K_CUSTOM_HG_COMMIT='prompt_hg_commit'
 # POWERLEVEL9K_CUSTOM_HG_COMMIT_FOREGROUND='227'
@@ -138,7 +141,8 @@ zstyle ':completion:*' matcher-list '' \
 
 
 # ==================== Android Studio ===================
-JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jdk/linux
+# JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jdk/linux
+# export PATH=$JAVA_HOME:$PATH
 # somehow
 #
 # autoload -U +X compinit && compinit

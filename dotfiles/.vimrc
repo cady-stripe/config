@@ -203,8 +203,11 @@ let g:rustfmt_autosave = 1
 Plug 'tgeng/HiCursorWords'
 let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
-Plug 'idris-hackers/idris-vim'
+" Plug 'idris-hackers/idris-vim'
+Plug 'edwinb/idris2-vim'
+
 Plug 'derekelkins/agda-vim'
+let g:agda_extraincpaths = ["/usr/local/google/home/tgeng/dev/agda/agda/std-lib/src"]
 Plug 'gabrielelana/vim-markdown'
 Plug 'Nymphium/vim-koka'
 Plug 'rhysd/vim-llvm'
@@ -298,11 +301,11 @@ if filereadable('/google/src/cloud')
 "autocmd FileType c,cpp,objc nnoremap ZZ :lcl<bar>w<bar>lcl<bar>q<CR>
 "vmap ZZ vZZ
 
-    Glug youcompleteme-google
-    au Filetype c,cpp,objc,objcpp,python,cs noremap gd :YcmCompleter GoTo<CR>
-    au Filetype c,cpp,objc,objcpp,python,cs noremap gb <C-o>
-    let g:ycm_always_populate_location_list = 1
-    let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+    " Glug youcompleteme-google
+    " au Filetype c,cpp,objc,objcpp,python,cs noremap gd :YcmCompleter GoTo<CR>
+    " au Filetype c,cpp,objc,objcpp,python,cs noremap gb <C-o>
+    " let g:ycm_always_populate_location_list = 1
+    " let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
     Glug gtimporter
 
@@ -438,6 +441,7 @@ set foldnestmax=2      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 set hidden
+set nofixeol
 " skip quick fix for bnext and bprev
 augroup qf
     autocmd!
