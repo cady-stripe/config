@@ -139,6 +139,8 @@ zstyle ':completion:*' matcher-list '' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
 
+zstyle ':completion:*' accept-exact false
+setopt menu_complete
 
 # ==================== Android Studio ===================
 # JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jdk/linux
