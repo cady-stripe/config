@@ -13,6 +13,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-rooter'
+let g:rooter_silent_chdir = 1
 " Plug 'airblade/vim-gitgutter'
 " set signcolumn=yes
 " let g:gitgutter_diff_args = 'HEAD'
@@ -448,10 +449,10 @@ augroup qf
     autocmd FileType qf set nobuflisted
 augroup END
 if has('nvim')
-  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.nviminfo
+  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/nviminfo
 else
   set ttymouse=sgr
-  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/cache/.viminfo
+  set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/viminfo
 endif
 
 autocmd BufWritePre * :%s/\s\+$//e

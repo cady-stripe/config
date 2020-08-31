@@ -3,3 +3,5 @@ cache
 plugged
 swap
 backup
+viminfo
+nviminfo
