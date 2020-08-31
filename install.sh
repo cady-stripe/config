@@ -50,4 +50,10 @@ if [ ! -e ~/bin ]; then
   ln -s $PWD/bin ~/bin
 fi
 
+cat config/tilix | dconf load /com/gexperts/Tilix/
+
+mkdir ~/.vim/swap
+mkdir ~/.vim/backup
+
 cd -
+
