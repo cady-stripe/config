@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export JAVA_HOME=/usr/local/buildtools/java/jdk8
 
 # DEFAULTS may be overridden by calling environment.
 GRADLE="${GRADLE:-gradle}"
