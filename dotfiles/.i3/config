@@ -84,8 +84,8 @@ for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
 bindsym $mod+XF86Launch5 move scratchpad
 bindsym $mod+XF86WakeUp move scratchpad
-bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 2560 1420, move position center
-bindsym XF86WakeUp [instance="google-chrome"] scratchpad show, resize set 1920 1058, move position center
+bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 2560 1416, move position center
+bindsym XF86WakeUp [instance="google-chrome"] scratchpad show, resize set 1920 1056, move position center
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none

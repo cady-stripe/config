@@ -141,6 +141,7 @@ zstyle ':completion:*' matcher-list '' \
 
 zstyle ':completion:*' accept-exact false
 setopt menu_complete
+bindkey -M menuselect '^M' .accept-line
 
 # ==================== Android Studio ===================
 # JAVA_HOME=/usr/local/google/home/tgeng/dev/studio-master-dev/prebuilts/studio/jdk/linux

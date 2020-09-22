@@ -410,6 +410,8 @@ set timeoutlen=500
 set autoread
 set splitbelow
 set previewheight=5
+set shortmess=a
+set cmdheight=2
 
 function! ResCur()
   if line("'\"") <= line("$")
