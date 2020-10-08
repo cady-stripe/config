@@ -8,7 +8,7 @@ do
   WINDOW_ID="$(echo  $line | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')"
   NAME=$(xprop -id $WINDOW_ID | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2)
   # CURRENT_KEYBOARD="$(setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}')"
-  if [[ $NAME == "Windows 10 - Google Chrome" || $NAME == "gLinux - Google Chrome" ]]; then
+  if [[ $NAME == "Windows 10 - Google Chrome" || $NAME == "gLinux - Google Chrome" || $NAME == "Cloudtop 16 core - Google Chrome" ]]; then
     killall autokey-gtk
   else
     execute_once autokey-gtk

@@ -95,6 +95,9 @@ aliases[=]='noglob __calc_plugin'
 
 zplug load
 
+zstyle ':completion:*' accept-exact false
+setopt menu_complete
+
 # if type "nvim" > /dev/null ; then
   # alias vim=nvim
 # fi

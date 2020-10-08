@@ -37,6 +37,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 bar {
+  strip_workspace_numbers yes
   tray_output eDP1
   status_command i3status
   font pango:DejaVu Sans Mono 11
@@ -143,8 +144,9 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym Mod1+Tab workspace back_and_forth
-bindsym $mod+Tab focus output left
+bindsym $mod+Tab workspace back_and_forth
+bindsym Mod1+Tab focus left
+# bindsym $mod+Tab focus output left
 bindsym $mod+Shift+Tab move workspace to output left
 
 
@@ -192,24 +194,25 @@ workspace 2 output $LEFT_MONITOR
 workspace 3 output $LEFT_MONITOR
 workspace 4 output $LEFT_MONITOR
 workspace 5 output $LEFT_MONITOR
-workspace q output $LEFT_MONITOR
-workspace w output $LEFT_MONITOR
-workspace e output $LEFT_MONITOR
-workspace r output $LEFT_MONITOR
-workspace Test output $LEFT_MONITOR
+workspace 11:q output $LEFT_MONITOR
+workspace 12:w output $LEFT_MONITOR
+workspace 13:e output $LEFT_MONITOR
+workspace 14:r output $LEFT_MONITOR
+workspace 15:Test output $LEFT_MONITOR
 
 workspace 6 output $RIGHT_MONITOR
 workspace 7 output $RIGHT_MONITOR
 workspace 8 output $RIGHT_MONITOR
 workspace 9 output $RIGHT_MONITOR
 workspace 10 output $RIGHT_MONITOR
-workspace y output $RIGHT_MONITOR
-workspace u output $RIGHT_MONITOR
-workspace i output $RIGHT_MONITOR
-workspace o output $RIGHT_MONITOR
-workspace p output $RIGHT_MONITOR
-workspace Linux output $RIGHT_MONITOR
-workspace Windows output $RIGHT_MONITOR
+workspace 16:y output $RIGHT_MONITOR
+workspace 17:u output $RIGHT_MONITOR
+workspace 18:i output $RIGHT_MONITOR
+workspace 19:o output $RIGHT_MONITOR
+workspace 20:p output $RIGHT_MONITOR
+workspace 100:Linux output $RIGHT_MONITOR
+workspace 101:Cloudtop output $RIGHT_MONITOR
+workspace 102:Windows output $RIGHT_MONITOR
 
 
 # switch to workspace
@@ -218,23 +221,23 @@ bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
-bindsym $mod+q workspace q
-bindsym $mod+w workspace w
-bindsym $mod+e workspace e
-bindsym $mod+r workspace r
-bindsym $mod+t workspace Test
+bindsym $mod+q workspace 11:q
+bindsym $mod+w workspace 12:w
+bindsym $mod+e workspace 13:e
+bindsym $mod+r workspace 14:r
+bindsym $mod+t workspace 15:Test
 
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+y workspace y
-bindsym $mod+u workspace u
-bindsym $mod+i workspace i
-bindsym $mod+o workspace o
-bindsym $mod+p workspace p
-bindsym $mod+F10 workspace F10
+bindsym $mod+y workspace 16:y
+bindsym $mod+u workspace 17:u
+bindsym $mod+i workspace 18:i
+bindsym $mod+o workspace 19:o
+bindsym $mod+p workspace 20:p
+bindsym $mod+F10 workspace 21:F10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -282,12 +285,22 @@ workspace_auto_back_and_forth yes
 # bindsym Next [instance="crx_akmopbcjmaodehjcgfolkcehjamfeojk" title="Windows 10"] scratchpad show fullscreen enable
 # bindsym XF86Launch7 [instance="crx_akmopbcjmaodehjcgfolkcehjamfeojk" title="Windows 10"] scratchpad show fullscreen enable
 
-for_window [title="^gLinux - Google Chrome"] move to workspace Linux
-for_window [title="^Windows 10 - Google Chrome"] move to workspace Windows
-bindsym Prior workspace Linux
-bindsym Next workspace Windows
-bindsym XF86Launch6 workspace Linux
-bindsym XF86Launch7 workspace Windows
+assign [title="^gLinux - Google Chrome"] 100:Linux
+assign [title="^Cloudtop 16 core - Google Chrome"] 101:Cloudtop
+assign [title="^Windows 10 - Google Chrome"] 102:Windows
+bindsym $mod+Prior move container to workspace prev
+bindsym $mod+Next move container to workspace next
+bindsym Prior workspace prev
+bindsym Next workspace next
+bindsym XF86Launch6 workspace prev
+bindsym XF86Launch7 workspace next
+bindsym $mod+XF86Launch6 move container to workspace prev
+bindsym $mod+XF86Launch7 move container to workspace next
+
+bindsym Mod1+Prior exec /home/tgeng/bin/cycle-remote.py prev
+bindsym Mod1+Next exec /home/tgeng/bin/cycle-remote.py next
+bindsym Mod1+XF86Launch6 exec /home/tgeng/bin/cycle-remote.py prev
+bindsym Mod1+XF86Launch7 exec /home/tgeng/bin/cycle-remote.py next
 
 # bindsym $mod+Next [class=".*"] move workspace to output eDP-1
 
