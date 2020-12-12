@@ -1,6 +1,6 @@
 #!/bin/bash
 
-prodcertstatus --quiet --check_remaining_hours 1 >/dev/null 2>&1 || prodaccess -s 1>&2
+prodcertstatus --quiet --check_remaining_hours 1 >/dev/null 2>&1 || gcert -s 1>&2
 if [[ $1 =~ ^[0-9]+$ ]]; then
   echo $1
 else

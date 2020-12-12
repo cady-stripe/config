@@ -141,6 +141,8 @@ zstyle ':completion:*' matcher-list '' \
 
 zstyle ':completion:*' accept-exact false
 setopt menu_complete
+unsetopt correct
+set -o rmstarsilent
 bindkey -M menuselect '^M' .accept-line
 
 # ==================== Android Studio ===================

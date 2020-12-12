@@ -1,9 +1,10 @@
 #!/bin/bash
 killall autokey-gtk
 rm ~/.autokey/global
-if is_remote_session; then
-  ln -sd ~/.tgeng_config/autokey_opt/global ~/.autokey/
-fi
+# The following is not needed when using Ergodox.
+# if is_remote_session; then
+  # ln -sd ~/.tgeng_config/autokey_opt/global ~/.autokey/
+# fi
 nohup autokey-gtk > /dev/null 2>&1 &
 feh --bg-fill ~/Pictures/wallpaper.jpg
 kbd

@@ -304,3 +304,5 @@ function ru() {
 function rut() {
   repo upload --current-branch . -o topic=tgeng-$(git symbolic-ref --short HEAD) -y $@
 }
+
+alias perfgate=/google/data/ro/teams/perfgate/perfgate

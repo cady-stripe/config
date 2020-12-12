@@ -11,18 +11,28 @@ if [ ! -d "$studio_file" ]; then
     current_dir=$(pwd)
     mkdir -p $HOME/as-releases
     cd $HOME/as-releases
-    /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio "android-studio-*$bid.tar.gz"
+    /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio "android-studio-*$bid.tar.gz" || \
+      /google/data/ro/projects/android/fetch_artifact --bid "$bid" --target studio_linux "artifacts/android-studio.linux.zip"
     studio_file="$cache_dir/$(ls | grep $bid)"
+    if [ ! -f "$studio_file" ]; then
+      studio_file=$cache_dir/andoid-studio-$bid.zip
+      mv android-studio.linux.zip $studio_file
+    fi
     cd $current_dir
   fi
   if [ ! -f "$studio_file" ]; then
     echo "Failed downloading build $bid"
     exit 1
   fi
-  studio_dir=${studio_file%.*.*}
+  studio_dir=$cache_dir/andoid-studio-$bid
   mkdir -p $studio_dir
-  tar -xvf "$studio_file" -C $studio_dir
-  rm "$studio_dir.tar.gz"
+  if [ ${studio_file: -4} == ".zip" ]; then
+    unzip $"$studio_file" -d "$studio_dir"
+  else
+    tar -xvf "$studio_file" -C "$studio_dir"
+  fi
+
+  rm "$studio_file"
 else
   studio_dir=$studio_file
 fi
