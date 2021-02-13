@@ -129,7 +129,7 @@ if [[ -e /usr/local/google/home ]]; then
     project=$(echo "$selection" | sed 's/.* \([^ ]\+\)/\1/')
     cd_aosp && cd $project && git checkout $branch
   }
-  alias prune-all='repo forall -c prune-ng'
+  # alias prune-all='repo forall -c prune-ng'
   return_fig_branch_() {
     LBUFFER="${LBUFFER}$(select_fig_branch_)"
     local ret=$?
@@ -138,13 +138,13 @@ if [[ -e /usr/local/google/home ]]; then
     return $ret
   }
   zle     -N   return_fig_branch_
-  function s() {
-    if [[ $(pwd) == "/google/src/cloud"* ]]; then
-      select_fig_branch_ "$*" | xargs -r hg update
-    else
-      select_aosp_branch_and_cd_to_it_ "$*"
-    fi
-  }
+  # function s() {
+  #   if [[ $(pwd) == "/google/src/cloud"* ]]; then
+  #     select_fig_branch_ "$*" | xargs -r hg update
+  #   else
+  #     select_aosp_branch_and_cd_to_it_ "$*"
+  #   fi
+  # }
   # bindkey '^S' return_fig_branch_
 
   FZF_CTRL_R_OPTS='--reverse'
@@ -274,7 +274,7 @@ function goog-gaia-id-to-email() {
     xargs |
     tr " " "\n"
 }
-function adt_bazel() {
+function bazel() {
   aosp_dir=$(get_dir_containing .repo)
   if [ -z "$aosp_dir" ]; then
     echo "Must be under an AOSP dir or subdir"

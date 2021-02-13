@@ -1,3 +1,6 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 export TERM="xterm-256color"
 stty -ixon -ixoff
 # =============================================================================
@@ -60,45 +63,8 @@ zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "Aloxaf/fzf-tab"
+zplug "mafredri/zsh-async", from:"github", use:"async.zsh"
 zplug "romkatv/powerlevel10k", as:theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_get_client time vcs custom_get_dir newline)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
-# POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
-# POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
-# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
-# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
-# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='33'
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='15'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='88'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='15'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='36'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
-POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND='yellow'
-_get_client() {
-  pwd | sed 's|/usr/local/google/home/tgeng/git/\([^/]\+\).*|\1|' | sed 's|/google/src/cloud/tgeng/\([^/]\+\).*|\1|' | sed 's|.*/.*||'
-}
-_get_dir() {
-  print -rD $PWD | sed 's|.*/google3\(.*\)|G3 /\1|'
-}
-POWERLEVEL9K_CUSTOM_GET_CLIENT='_get_client'
-POWERLEVEL9K_CUSTOM_GET_CLIENT_FOREGROUND='15'
-POWERLEVEL9K_CUSTOM_GET_CLIENT_BACKGROUND='99'
-POWERLEVEL9K_CUSTOM_GET_DIR='_get_dir'
-if [ -z "$INSIDE_INTELLIJ" ]; then
-  POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
-  POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="236"
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-else
-  POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="darkgray"
-  POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="white"
-  POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-  POWERLEVEL9K_TIME_FOREGROUND='darkgray'
-  POWERLEVEL9K_TIME_BACKGROUND='white'
-fi
-POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="248"
-POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="none"
 
 # POWERLEVEL9K_CUSTOM_HG_COMMIT='prompt_hg_commit'
 # POWERLEVEL9K_CUSTOM_HG_COMMIT_FOREGROUND='227'
@@ -164,8 +130,11 @@ export SDKMAN_DIR="/usr/local/google/home/tgeng/.sdkman"
 [[ -s "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh"
 
 if [ -n "$TMUX" ]; then
-  -
+  - > /dev/null
 fi
 
 # export ANDROID_HOME=/usr/local/google/home/tgeng/Android/Sdk/
 # export ANDROID_SDK_ROOT=/usr/local/google/home/tgeng/Android/Sdk/
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source ~/.tgeng_config/p10k.zsh
