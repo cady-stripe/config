@@ -35,6 +35,7 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH=$HOME/.idris2/bin:$HOME/go/bin:$HOME/dev/sbt/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/.idris2/lib:$LD_LIBRARY_PATH
 source ~/.zplug/init.zsh
@@ -58,7 +59,8 @@ zplug "plugins/git-extra", from:oh-my-zsh
 zplug "plugins/jsontools", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
-zplug "bhilburn/powerlevel9k", as:theme
+zplug "Aloxaf/fzf-tab"
+zplug "romkatv/powerlevel10k", as:theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_get_client time vcs custom_get_dir newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
 # POWERLEVEL9K_DIR_HOME_BACKGROUND="black"

@@ -241,7 +241,7 @@ else
   let g:syntastic_rust_checkers = ['cargo']
   let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
 
-  Plug 'Valloric/YouCompleteMe'
+  " Plug 'Valloric/YouCompleteMe'
 endif
 
 " All of your Plugins must be added before the following line
