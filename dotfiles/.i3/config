@@ -51,8 +51,7 @@ bindsym $mod+space exec rofi -show drun
 # Bind the Fn+F3/Fn+F4 keys to lock/lock & suspend respectively
 bindsym XF86ScreenSaver exec --no-startup-id i3lock
 bindsym XF86Sleep exec --no-startup-id i3lock && dbus-send --system --dest=org.freedesktop.UPower --type=method_call --print-reply /org/freedesktop/UPower org.freedesktop.UPower.Suspend
-bindsym XF86Launch5 exec tilix --quake
-bindsym XF86WakeUp exec tilix --quake
+bindsym F12 exec tilix --quake
 
 # Fetch an OTP via bluetooth using Win+Grave
 bindsym $mod+grave exec --no-startup-id fetchotp -x
@@ -84,8 +83,6 @@ for_window [title="Cider$" ] floating disable
 for_window [title="^MATLAB$" ] border none floating enable
 for_window [class="Firefox$" ] border none
 for_window [title="^Terminal$" ] border 1pixel
-bindsym $mod+F12 move scratchpad
-bindsym F12 [instance="google-chrome"] scratchpad show, resize set 2560 1416, move position center
 for_window [class="Terminator" ] border 1pixel
 for_window [title="^WPS" ] border none
 for_window [title="^synapse" ] border none
@@ -104,6 +101,9 @@ for_window [class="Code" ] border none
 for_window [class="Blender" ] border none
 for_window [class="Blender Render" ] floating enable
 for_window [class="Zeal"] floating enable, border none, resize set 1920 1080, move position center
+# dev instance of IntelliJ started from Kotlin project
+for_window [title="^KotlinTest" ] resize set width 40 ppt
+
 # for_window [class="studio.*" ] boUPDATE rder none
 
 assign [title="^Database Console"] 6
@@ -158,6 +158,7 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+workspace_auto_back_and_forth yes
 set $LEFT_MONITOR DP-0
 set $RIGHT_MONITOR DP-2
 
@@ -230,6 +231,13 @@ bindsym $mod+Shift+i move container to workspace i
 bindsym $mod+Shift+o move container to workspace o
 bindsym $mod+Shift+p move container to workspace p
 bindsym $mod+Shift+F10 move container to workspace F10
+
+bindsym $mod+XF86Launch5 move container to workspace 🎛️
+bindsym XF86Launch5 workspace 🎛️
+# bindsym $mod+XF86Launch5 move scratchpad
+# bindsym XF86Launch5 [instance="google-chrome"] scratchpad show, resize set 2560 2136, move position center
+# bindsym $mod+XF86WakeUp move scratchpad
+# bindsym XF86WakeUp [instance="google-chrome"] scratchpad show, resize set 1920 1056, move position center
 
 bindsym $mod+m workspace Music
 bindsym $mod+Shift+m move container to workspace Music
