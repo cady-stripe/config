@@ -394,7 +394,7 @@
       # If local branch name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
-      (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
+      (( $#branch > 64 )) && branch[13,-13]="…"  # <-- this line
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
 
@@ -407,7 +407,7 @@
       # If tag name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show tag name in full without truncation, delete the next line.
-      (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
+      (( $#tag > 64 )) && tag[13,-13]="…"  # <-- this line
       res+="${meta}#${clean}${tag//\%/%%}"
     fi
 
@@ -1694,7 +1694,7 @@
 
   function github_pr() {
     emulate -L zsh
-    hub pr list -s all -h google:prr/$USER/$1 -f '%i%Creset %pS'
+    hub pr list -s all -h google:$1 -f '%i%Creset %pS %sH'
   }
 
   function github_pr_callback() {
@@ -1702,6 +1702,12 @@
     if [[ $3 != '' ]]; then
       typeset -g _github_pr_id=$(echo $3 | cut -d' ' -f1)
       typeset -g _github_pr_status=$(echo $3 | cut -d' ' -f2)
+      typeset -g _github_pr_commit=$(echo $3 | cut -d' ' -f3)
+      if ! git cat-file -e "${_github_pr_commit}"; then
+        _github_pr_id="$_github_pr_id $fg_bold[red](behind)"
+      elif [[ "$_github_pr_commit" != $(git rev-parse HEAD | awk '{$1=$1};1') ]] ;then
+        _github_pr_id="$_github_pr_id $fg_bold[yellow](ahead)"
+      fi
       if [[ $_github_pr_status = "open" ]]; then
         typeset -g _github_pr_is_open=1
       elif [[  $_github_pr_status = "draft" ]]; then
@@ -1722,8 +1728,8 @@
 
   function prompt_github_pr() {
     emulate -L zsh -o extended_glob
-    branch=$(git branch --show-current 2> /dev/null) || return 0
-    typeset -g _github_pr_id= _github_pr_status= _github_pr_is_open= _github_pr_is_closed= _github_pr_is_merged= _github_pr_is_draft=
+    branch=$(_remote_branch 2> /dev/null) || return 0
+    typeset -g _github_pr_id= _github_pr_status= _github_pr_is_open= _github_pr_is_closed= _github_pr_is_merged= _github_pr_is_draft= _github_pr_commit=
     p10k segment -c '$_github_pr_is_draft' -e -t'$_github_pr_id' -b 31 -f 15
     p10k segment -c '$_github_pr_is_open' -e -t'$_github_pr_id' -b 28 -f 15
     p10k segment -c '$_github_pr_is_merged' -e -t'$_github_pr_id' -b 99 -f 15

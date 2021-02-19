@@ -47,7 +47,7 @@ vnoremap s :action CommentByLineComment<CR>
 nnoremap R :action RenameElement<CR>
 nnoremap t :action ToggleLineBreakpoint<CR>
 nnoremap Q :action com.andrewbrookins.idea.wrap.WrapAction<CR>
-nnoremap T :action StringManipulation.AlignToColumns<CR>
+nnoremap <C-g> :action TestData.Navigate<CR>
 nnoremap Y :action IntroduceVariable<CR>
 vnoremap Y :action IntroduceVariable<CR>
 vnoremap Q :<Backspace><Backspace><Backspace><Backspace><Backspace>action com.andrewbrookins.idea.wrap.WrapAction<CR>
@@ -113,6 +113,13 @@ vnoremap i <Esc>
 nnoremap <space> :action RunToCursor<CR>
 nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
+
+set multiple-cursors
+map <Right> <A-n>
+map <Left> <A-p>
+map <C-;> <A-x>
+
+set argtextobj
 
 set ignorecase
 set smartcase

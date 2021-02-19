@@ -167,3 +167,4 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.tgeng_config/p10k.zsh
+source ~/.env

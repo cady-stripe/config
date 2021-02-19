@@ -41,8 +41,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # bindsym XF86ScreenSaver exec sudo pm-suspend
 bindsym Pause exec ~/bin/lock.sh
 bindsym $mod+z exec ~/bin/takeover
-bindsym Mod1+space exec rofi -show run
-bindsym $mod+space exec rofi -show drun
+bindsym Mod1+space exec rofi.sh -show run
+bindsym $mod+space exec rofi.sh -show drun
 # bindsym $mod+c exec sh -c '~/bin/snipit > /tmp/snipit_output'
 
 # bindsym $mod+s split h; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com

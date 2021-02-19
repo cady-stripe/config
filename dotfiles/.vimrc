@@ -573,6 +573,9 @@ vnoremap } va}<Esc>gvovi{<Esc>%
 vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
 
+nnoremap * /\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap # ?\<<C-R>=expand('<cword>')<CR>\><CR>
+
 nnoremap <silent> <S-Esc> :ccl<CR>
 
 "+-----------------------------------------------------------------------------+
