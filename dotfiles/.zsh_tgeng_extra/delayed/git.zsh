@@ -5,7 +5,6 @@ alias gsu='git submodule update --init --recursive'
 alias grs='git rebase --skip'
 alias grc='git rebase --continue'
 alias gri='git rebase -i'
-alias gpr='git pull --rebase'
 alias gdiscard='git reset --hard'
 alias guncommit='git reset --soft HEAD~1'
 alias gunamend='git reset --soft HEAD@{1}'
@@ -18,10 +17,28 @@ alias gcp='git cherry-pick'
 alias gcpc='git cherry-pick --continue'
 alias gcpa='git cherry-pick --abort'
 alias gcps='git cherry-pick --skip'
+alias gtm='git branch -u origin/master'
+
+function gpr() {
+  tracked_branch=$(git for-each-ref --format='%(upstream:short)' "$(git symbolic-ref -q HEAD)")
+  branch=$(_remote_branch)
+  if [[ $tracked_branch = "google/$branch" ]];then
+    gtm
+  fi
+  git pull --rebase
+}
+
+function hco() {
+  hub checkout https://github.com/JetBrains/kotlin/pull/$@ && gtm
+}
 
 function showpr() {
-  branch=$(_remote_branch) && \
-  hub pr show -h google:$branch
+  if [[ $1 = '' ]]; then
+    branch=$(_remote_branch) && \
+    hub pr show -h google:$branch
+  else
+    xdg-open https://github.com/JetBrains/kotlin/pull/$1
+  fi
 }
 
 function listpr() {
@@ -29,10 +46,20 @@ function listpr() {
   hub pr list -s all -h google:$branch -f '%pC%>(8)%i%Creset  %t%  l [%pS]%n%n   %U%n'
 }
 
-function showci() {
-  branch=$(_remote_branch) && \
-    xdg-open "https://teamcity.jetbrains.com/buildConfiguration/Kotlin_KotlinForGoogle_AggregateBranch?branch=${branch}&buildTypeTab=overview&mode=builds"
+# function showci() {
+#   branch=$(_remote_branch) && \
+#     google-chrome --new-window "https://teamcity.jetbrains.com/buildConfiguration/Kotlin_KotlinForGoogle_AggregateBranch?branch=${branch}&buildTypeTab=overview&mode=builds"
+# }
+
+function db() {
+  local branch=$1
+  if ! git branch -D "$branch" 2> /dev/null; then
+    local checkout_location=$(git branch -D "$branch" 2>&1 >/dev/null | cut -d"'" -f 4)
+    pushd $checkout_location >/dev/null && git checkout origin/master 2>/dev/null && git branch -D "$branch" && popd >/dev/null
+  fi
 }
+
+compdef _git db=git-branch
 
 function prune-all() {
   git for-each-ref --format='%(refname:short)' refs/heads | while read branch
@@ -42,7 +69,7 @@ function prune-all() {
     state=$(echo -n $state_and_commit | cut -d' ' -f1)
     commit=$(echo -n $state_and_commit | cut -d' ' -f2)
     if [[ "$state" = "closed" ]] || [[ "$state" = "merged" ]] || ([[ "$commit" != "" ]] && ! git cat-file -e "${commit}"); then
-      git branch -D "$branch" || (git checkout origin/master && git branch -D "$branch")
+      db $branch
     fi
   done
 }
@@ -89,7 +116,6 @@ function dpr() {
 }
 
 function gst() {
-  git fetch origin master
   git checkout -b $1 origin/master
 }
 
@@ -108,7 +134,7 @@ function gb() {
       pr_status=$(echo -n $pr_status_commit_and_id | cut -d' ' -f1)
       pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
       pr_id=$(echo -n $pr_status_commit_and_id | cut -d' ' -f3)
-      pr_summary=$pr_id
+      pr_summary="$pr_id"
       if ! git cat-file -e "${pr_commit}"; then
         pr_summary="$pr_summary $fg_bold[red](behind)"
       elif [[ "$pr_commit" != $(git rev-parse $branch | awk '{$1=$1};1') ]] ;then
@@ -131,7 +157,7 @@ function gb() {
 }
 
 function _echo_bg() {
-  TAG="\e[48;5;${1}m"
+  TAG="\e[48;5;${1}m\e[38;5;15m"
   echo -ne "${TAG} $2 \e[0m"
 }
 

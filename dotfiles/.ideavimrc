@@ -20,9 +20,9 @@ nnoremap w l[bv]w
 vnoremap w ]w
 
 nnoremap W viw
-vnoremap W e
+vnoremap W :<Backspace><Backspace><Backspace><Backspace><Backspace>action EditorSelectWord<CR>
+vnoremap <M-W> :<Backspace><Backspace><Backspace><Backspace><Backspace>action EditorUnSelectWord<CR>
 
-vnoremap P pgvy
 nnoremap <Right> *
 nnoremap <Left> #
 nnoremap <Up> 3<c-y>
@@ -46,10 +46,14 @@ nnoremap s :action CommentByLineComment<CR>
 vnoremap s :action CommentByLineComment<CR>
 nnoremap R :action RenameElement<CR>
 nnoremap t :action ToggleLineBreakpoint<CR>
+nnoremap T :action XDebugger.MuteBreakpoints<CR>
 nnoremap Q :action com.andrewbrookins.idea.wrap.WrapAction<CR>
 nnoremap <C-g> :action TestData.Navigate<CR>
 nnoremap Y :action IntroduceVariable<CR>
 vnoremap Y :action IntroduceVariable<CR>
+nnoremap <C-p> :action PasteMultiple<CR>
+vnoremap <C-p> :action PasteMultiple<CR>
+inoremap <C-p> <C-o>:action ParameterInfo<CR>
 vnoremap Q :<Backspace><Backspace><Backspace><Backspace><Backspace>action com.andrewbrookins.idea.wrap.WrapAction<CR>
 inoremap <M-h> <C-w>h
 vnoremap <M-h> <C-w>h
@@ -61,6 +65,7 @@ nnoremap <M-l> <C-w>l
 cnoremap <M-l> <C-w>l
 nnoremap m :action StepOver<CR>
 nnoremap M :action StepInto<CR>
+nnoremap <M-M> :action StepOut<CR>
 nnoremap , :action GotoPreviousError<CR>
 nnoremap . :action GotoNextError<CR>
 nnoremap U :action Vcs.RollbackChangedLines<CR>
@@ -110,9 +115,12 @@ nnoremap ` F`lvt`
 nnoremap X @q
 vnoremap a <Esc>
 vnoremap i <Esc>
-nnoremap <space> :action RunToCursor<CR>
+nnoremap <space><space> :action RunToCursor<CR>
+nnoremap <space> :action Resume<CR>
 nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
+nnoremap <S-space> :action RunClass<CR>
+nnoremap <S-CR> :action DebugClass<CR>
 
 set multiple-cursors
 map <Right> <A-n>
@@ -126,7 +134,7 @@ set smartcase
 set number
 set clipboard=unnamed
 set clipboard+=ideaput
-set timeoutlen=50
+set timeoutlen=150
 set incsearch
 set ideajoin
 set ideastatusicon=gray

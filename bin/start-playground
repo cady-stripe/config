@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+set -m
+
+trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+
+pushd /usr/local/google/home/tgeng/dev/kotlin-playground
+export JAVA_HOME=/usr/local/google/home/tgeng/.jdks/corretto-11.0.10
+export GRADLE_USER_HOME=/usr/local/google/home/tgeng/.gradle
+export DISPLAY=:20
+./gradlew --stop
+git checkout kotlin-playground
+git pull --rebase
+./gradlew dist ideaPlugin
+./gradlew ideaPlugin -Pidea.fir.plugin=true
+i3-msg workspace q
+./gradlew runIDE -PnoPCE -Pidea.fir.plugin=true &
+sleep 20
+IDEA_ARTIFACTS=`pwd`/dist/artifacts2 IDEA_SANDBOX=`pwd`/local/ideaSandbox2 ./gradlew runIDE -PnoPCE &
+sleep 120
+i3-msg workspace q
+fg

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function _convert_to_remote_branch() {
+  if [[ "$1" = prr/* ]]; then
+    echo -n $1
+  else
+    echo -n prr/tgeng/$1
+  fi
+}
+
+function _remote_branch() {
+  _convert_to_remote_branch $(git branch --show-current)
+}
+
+branch=$(_remote_branch) && \
+  google-chrome --new-window "https://teamcity.jetbrains.com/buildConfiguration/Kotlin_KotlinForGoogle_AggregateBranch?branch=${branch}&buildTypeTab=overview&mode=builds"
