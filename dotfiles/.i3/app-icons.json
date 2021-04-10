@@ -1,6 +1,7 @@
 {
     "firefox": "firefox",
     "chromium-browser": "chrome",
+    "Slack": "chrome",
     "chrome": "chrome",
     "google-chrome": "chrome",
     "x-terminal-emulator": "terminal",
@@ -10,5 +11,5 @@
     "clementine": "music",
     "vlc": "play",
     "signal": "comment",
-    "_no_match": "question"
+    "_no_match": ""
 }

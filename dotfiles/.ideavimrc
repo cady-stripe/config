@@ -15,6 +15,7 @@ vnoremap <Home> ^
 vnoremap <C-e> $
 vnoremap <End> $
 noremap <C-z> <C-a>
+inoremap <C-v> <C-o>:action $Paste<CR>
 
 nnoremap w l[bv]w
 vnoremap w ]w

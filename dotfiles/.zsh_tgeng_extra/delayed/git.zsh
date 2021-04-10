@@ -55,7 +55,9 @@ function db() {
   local branch=$1
   if ! git branch -D "$branch" 2> /dev/null; then
     local checkout_location=$(git branch -D "$branch" 2>&1 >/dev/null | cut -d"'" -f 4)
-    pushd $checkout_location >/dev/null && git checkout origin/master 2>/dev/null && git branch -D "$branch" && popd >/dev/null
+    pushd $checkout_location >/dev/null
+    git checkout origin/master 2>/dev/null && git branch -D "$branch"
+    popd >/dev/null
   fi
 }
 
