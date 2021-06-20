@@ -30,8 +30,8 @@ nnoremap <Up> 3<c-y>
 nnoremap <Down> 3<c-e>
 vnoremap <Up> 3k
 vnoremap <Down> 3j
-nnoremap <C-l> *
-nnoremap <C-h> #
+" nnoremap <C-l> *
+" nnoremap <C-h> #
 nnoremap <C-k> 3<c-y>
 nnoremap <C-j> 3<c-e>
 vnoremap <C-k> 3k
@@ -79,6 +79,7 @@ nnoremap <S-Left> :action MoveElementLeft<CR>
 nnoremap <S-Right> :action MoveElementRight<CR>
 nnoremap D :action GotoTypeDeclaration<CR>
 nnoremap H :action TypeHierarchy<CR>
+vnoremap <C-c> :<Backspace><Backspace><Backspace><Backspace><Backspace>action CopyAsRichText<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
@@ -122,6 +123,7 @@ nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
 nnoremap <S-space> :action RunClass<CR>
 nnoremap <S-CR> :action DebugClass<CR>
+nnoremap gf vi":<Backspace><Backspace><Backspace><Backspace><Backspace>action GotoFile<CR>
 
 set multiple-cursors
 map <Right> <A-n>

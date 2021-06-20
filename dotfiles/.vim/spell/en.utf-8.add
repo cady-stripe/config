@@ -26,3 +26,7 @@ Bigstore
 retriable
 FluentIterable
 RPCs
+arity
+vect
+associativity
+postfix

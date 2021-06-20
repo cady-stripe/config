@@ -1,4 +1,4 @@
-alias gb_='git for-each-ref --color=always --sort=committerdate refs/heads/ --format='\''%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:blue)%(committerdate:relative)%(color:reset))'\'''
+alias gb_='git for-each-ref --color=always --sort=committerdate refs/heads/ --format='\''%(HEAD) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) %(contents:subject) (%(color:blue)%(committerdate:relative)%(color:reset))'\'''
 alias gco='git checkout'
 alias gs='git status'
 alias gsu='git submodule update --init --recursive'
@@ -124,14 +124,14 @@ function gst() {
 function gb() {
   gb_ | while read branch_line
   do
-    branch=$(echo -n $branch_line | sed -r "s/(\* )?\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" | cut -d' ' -f1)
-    if [ "${branch_line:0:2}" != '* ' ]; then
-      echo -n "  "
-    fi
-    echo -n $branch_line
-    echo -n ' '
+    branch=$(echo -n $branch_line | sed -r "s/(\* )?\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" | cut -d' ' -f2)
     remote_branch=$(_convert_to_remote_branch $branch)
     pr_status_commit_and_id=$(hub pr list -s all -h google:$remote_branch -f '%pS %sH %i')
+    if [ "${branch_line:0:2}" = '* ' ]; then
+      echo -n "* "
+    else
+      echo -n "  "
+    fi
     if [[ $pr_status_commit_and_id != "" ]];then
       pr_status=$(echo -n $pr_status_commit_and_id | cut -d' ' -f1)
       pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
@@ -143,7 +143,7 @@ function gb() {
         pr_summary="$pr_summary $fg_bold[yellow](ahead)"
       fi
       if [[ $pr_status = 'draft' ]]; then
-        _echo_bg 31 $pr_summary
+        _echo_bg 241 $pr_summary
       elif [[ $pr_status = 'open' ]]; then
         _echo_bg 28 $pr_summary
       elif [[ $pr_status = 'merged' ]]; then
@@ -153,8 +153,15 @@ function gb() {
       else
         echo -n $pr_summary
       fi
+    else
+      echo -n '       '
     fi
-    echo
+    echo -n ' '
+    if [ "${branch_line:0:2}" = '* ' ]; then
+      echo ${branch_line:2}
+    else
+      echo $branch_line
+    fi
   done
 }
 
@@ -164,7 +171,7 @@ function _echo_bg() {
 }
 
 function s() {
-  selected=$(gb_ | grep -v '^\*' | cut -c3- | grep -v 'heads/' | grep -iF "$1" | fzf -1 --reverse --tac --height=20 --min-height=1 --ansi -m | cut -d' ' -f1)
+  selected=$(gb_ | grep -v '^\*' | cut -c3- | grep -v 'heads/' | grep -v 'kotlin-playground' | grep -iF "$1" | fzf -1 --reverse --tac --height=20 --min-height=1 --ansi -m | cut -d' ' -f2)
   if [[ "$selected" != "" ]]; then
     git checkout $selected
   fi

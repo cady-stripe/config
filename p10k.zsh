@@ -1730,7 +1730,7 @@
     emulate -L zsh -o extended_glob
     branch=$(_remote_branch 2> /dev/null) || return 0
     typeset -g _github_pr_id= _github_pr_status= _github_pr_is_open= _github_pr_is_closed= _github_pr_is_merged= _github_pr_is_draft= _github_pr_commit=
-    p10k segment -c '$_github_pr_is_draft' -e -t'$_github_pr_id' -b 31 -f 15
+    p10k segment -c '$_github_pr_is_draft' -e -t'$_github_pr_id' -b 241 -f 15
     p10k segment -c '$_github_pr_is_open' -e -t'$_github_pr_id' -b 28 -f 15
     p10k segment -c '$_github_pr_is_merged' -e -t'$_github_pr_id' -b 99 -f 15
     p10k segment -c '$_github_pr_is_closed' -e -t'$_github_pr_id' -b 124 -f 15

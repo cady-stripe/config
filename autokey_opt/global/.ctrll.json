@@ -24,7 +24,7 @@
         "hotKey": "l"
     },
     "filter": {
-        "regex": "tilda.Tilda|albert.albert|.*\\.Google-chrome|code.Code|zeal.Zeal|tilix.Tilix",
+        "regex": "tilda.Tilda|albert.albert|.*\\.Google-chrome|code.Code|zeal.Zeal|jetbrains-.*|tilix.Tilix|terminator.Terminator",
         "isRecursive": false
     },
     "sendMode": "kb"

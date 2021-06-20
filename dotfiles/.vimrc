@@ -32,6 +32,10 @@ nmap <silent> w viw
 vmap <silent> w <Plug>CamelCaseMotion_e
 nnoremap W viw
 
+Plug 'kamykn/spelunker.vim'
+Plug 'chrisbra/unicode.vim'
+imap <C-space> <C-x><C-z>
+
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
@@ -162,6 +166,12 @@ let NERDTreeIgnore = ['\.pyc$', '\.ibc$']
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<Right>'
+let g:VM_maps['Find Subword Under'] = '<Right>'
+let g:VM_maps['Remove Region'] = '<Left>'
+
 Plug 'scrooloose/nerdcommenter'
 nnoremap s :call NERDComment(0,"toggle")<C-m>
 vnoremap s :call NERDComment(0,"toggle")<C-m>
@@ -206,6 +216,13 @@ let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
 " Plug 'idris-hackers/idris-vim'
 Plug 'edwinb/idris2-vim'
+let g:idris_indent_if = 3
+let g:idris_indent_case = 5
+let g:idris_indent_let = 4
+let g:idris_indent_where = 6
+let g:idris_indent_do = 3
+let g:idris_indent_rewrite = 8
+" let g:idris_conceal = 1
 
 Plug 'derekelkins/agda-vim'
 let g:agda_extraincpaths = ["/usr/local/google/home/tgeng/dev/agda/agda/std-lib/src"]
@@ -477,8 +494,8 @@ nnoremap <C-Tab> <C-w>w
 vnoremap <C-Tab> <C-w>w
 inoremap <C-Tab> <C-w>w
 inoremap <C-w> <C-o><C-w>
-nnoremap <silent> <Right> *
-nnoremap <silent> <Left> #
+" nnoremap <silent> <Right> *
+" nnoremap <silent> <Left> #
 nnoremap <up> 3<c-y>
 nnoremap <down> 3<c-e>
 imap <Home> <C-o>^

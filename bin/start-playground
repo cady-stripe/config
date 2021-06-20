@@ -12,12 +12,13 @@ export DISPLAY=:20
 ./gradlew --stop
 ./gradlew clean
 git checkout kotlin-playground
+git remote prune origin
 git pull --rebase
 ./gradlew dist ideaPlugin
 ./gradlew ideaPlugin -Pidea.fir.plugin=true
 i3-msg workspace number 11
 ./gradlew runIDE -PnoPCE -Pidea.fir.plugin=true &
-sleep 20
+sleep 30
 IDEA_ARTIFACTS=`pwd`/dist/artifacts2 IDEA_SANDBOX=`pwd`/local/ideaSandbox2 ./gradlew runIDE -PnoPCE &
 sleep 120
 i3-msg workspace number 11
