@@ -265,7 +265,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 bar {
         status_command i3status
-        font pango:Roboto Condensed 12
+        font pango:Roboto Condensed 11
         strip_workspace_numbers yes
 
   colors {
@@ -286,5 +286,5 @@ exec xrdb ~/.dotfiles/.Xresources
 exec feh --bg-fill ~/Pictures/wallpaper.jpg
 exec dex -ae i3
 exec xautolock -time 15 -locker '~/bin/lock.sh' &
-exec_always --no-startup-id exec ~/bin/i3_workspace_names_daemon.py
+exec_always --no-startup-id exec ~/bin/i3_workspace_names_daemon.py --uniq
 focus_on_window_activation urgent

@@ -1,4 +1,6 @@
 [global_config]
+  borderless = True
+  extra_styling = False
   title_transmit_bg_color = "#008cff"
 [keybindings]
   go_next = ""
@@ -9,6 +11,7 @@
   go_right = ""
   copy = <Alt>c
   paste = <Alt>v
+  search = ""
   edit_window_title = None
   layout_launcher = None
 [profiles]
@@ -16,8 +19,9 @@
     background_darkness = 0.76
     background_type = transparent
     cursor_color = "#ffffff"
-    font = JetBrains Mono 11
+    font = JetBrains Mono 10
     foreground_color = "#ffffff"
+    show_titlebar = False
     scrollbar_position = hidden
     palette = "#2e2e2e:#ff4848:#50ff50:#ffff29:#5891ff:#ff3dff:#56e7e7:#faebd7:#888a85:#ff7474:#97ff97:#ffff96:#9abaff:#ff97ff:#99ffff:#ffffff"
     use_custom_command = True

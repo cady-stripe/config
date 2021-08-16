@@ -12,5 +12,6 @@
     "vlc": "play",
     "signal": "comment",
     "terminator": "terminal",
+    "evince": "pdf",
     "_no_match": ""
 }

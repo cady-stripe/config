@@ -33,7 +33,9 @@ vmap <silent> w <Plug>CamelCaseMotion_e
 nnoremap W viw
 
 Plug 'kamykn/spelunker.vim'
-Plug 'chrisbra/unicode.vim'
+nmap zz Zl
+
+Plug 'tgeng/unicode.vim'
 imap <C-space> <C-x><C-z>
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -108,7 +110,7 @@ command! -bang -nargs=* Ag
 "   set grepprg=ag\ --nogroup\ --nocolor
 "
 "   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --smart-case'
+"   let g:ctrlp_user_command = 'ag %s -l --smart-case --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore .git5_specs --ignore review -g ""'
 "
 "   " ag is fast enough that CtrlP doesn't need to cache
 "   let g:ctrlp_use_caching = 0
@@ -259,6 +261,16 @@ else
   let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
 
   Plug 'Valloric/YouCompleteMe'
+
+  let g:ctrlp_user_command = '/usr/bin/ag %s --smart-case --nocolor --nogroup --hidden
+        \ --ignore .git
+        \ --ignore .svn
+        \ --ignore .hg
+        \ --ignore .DS_Store
+        \ --ignore "**/*.pyc"
+        \ --ignore .git5_specs
+        \ --ignore review
+        \ -g ""'
 endif
 
 " All of your Plugins must be added before the following line
@@ -328,16 +340,6 @@ if filereadable('/google/src/cloud')
     Glug gtimporter
 
     Glug relatedfiles plugin[mappings]='<C-f>'
-
-    let g:ctrlp_user_command = '/usr/bin/ag %s -i --nocolor --nogroup --hidden
-          \ --ignore .git
-          \ --ignore .svn
-          \ --ignore .hg
-          \ --ignore .DS_Store
-          \ --ignore "**/*.pyc"
-          \ --ignore .git5_specs
-          \ --ignore review
-          \ -g ""'
 endif
 au BufRead,BufNewFile *.json set filetype=json
 
@@ -552,7 +554,6 @@ nnoremap U :redo<CR>
 nnoremap <silent> <C-s> :wa<CR>
 inoremap <C-s> <Esc>:w<CR>
 vnoremap <C-s> v:w<CR>
-nnoremap zz mz1z=`z
 inoremap <C-g> <Esc>[s1z=`]a
 vnoremap P pgvy
 nmap Q gwic

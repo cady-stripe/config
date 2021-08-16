@@ -1,25 +1,57 @@
 #!/bin/bash
 
+echo "$(date)" >> ~/cron/runs
 set -e
 set -m
 
 trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
-pushd /usr/local/google/home/tgeng/dev/kotlin-playground
+source /usr/local/google/home/tgeng/.env
 export JAVA_HOME=/usr/local/google/home/tgeng/.jdks/corretto-11.0.10
 export GRADLE_USER_HOME=/usr/local/google/home/tgeng/.gradle
 export DISPLAY=:20
-./gradlew --stop
-./gradlew clean
-git checkout kotlin-playground
-git remote prune origin
-git pull --rebase
-./gradlew dist ideaPlugin
-./gradlew ideaPlugin -Pidea.fir.plugin=true
-i3-msg workspace number 11
-./gradlew runIDE -PnoPCE -Pidea.fir.plugin=true &
-sleep 30
-IDEA_ARTIFACTS=`pwd`/dist/artifacts2 IDEA_SANDBOX=`pwd`/local/ideaSandbox2 ./gradlew runIDE -PnoPCE &
-sleep 120
-i3-msg workspace number 11
-fg
+
+pushd /usr/local/google/home/tgeng/dev/kotlin-review
+git fetch origin master
+git reset --hard
+git checkout origin/master
+pushd intellij
+git fetch origin kt-212-master
+git reset --hard
+git checkout origin/kt-212-master
+popd
+pushd /usr/local/google/home/tgeng/dev/kotlin-playground
+git fetch origin master
+git reset --hard
+git checkout origin/master
+pushd intellij
+git fetch origin kt-212-master
+git reset --hard
+git checkout origin/kt-212-master
+popd
+
+# ./gradlew installIdeArtifacts :prepare:ide-plugin-dependencies:kotlin-dist-for-ide:install -Ppublish.ide.plugin.dependencies=true
+
+# ./gradlew dist ideaPlugin
+# ./gradlew ideaPlugin -Pidea.fir.plugin=true
+# i3-msg workspace number 11
+# ./gradlew runIDE -PnoPCE -Pidea.fir.plugin=true &
+# sleep 30
+# IDEA_ARTIFACTS=`pwd`/dist/artifacts2 IDEA_SANDBOX=`pwd`/local/ideaSandbox2 ./gradlew runIDE -PnoPCE &
+# sleep 120
+
+initial_workspace=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
+if ! [ "$initial_workspace" = "11" ]; then
+  i3-msg workspace number 11
+fi
+desktop=$(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-)
+window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intellij .*')
+echo focusing "$window_id"
+xdotool windowactivate --sync $window_id
+xdotool windowactivate --sync $window_id key F6
+sleep 900
+xdotool windowactivate --sync $window_id key F5
+sleep 900
+if ! [ "$initial_workspace" = "11" ]; then
+  i3-msg workspace number 11
+fi

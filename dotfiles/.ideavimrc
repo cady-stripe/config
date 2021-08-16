@@ -100,8 +100,8 @@ vnoremap [ va]<Esc>gvovi[<Esc>
 vnoremap ] va]<Esc>gvovi[<Esc>%
 vnoremap { va}<Esc>gvovi{<Esc>
 vnoremap } va}<Esc>gvovi{<Esc>%
-vnoremap < va><Esc>gvovi<<Esc>
-vnoremap > va><Esc>gvovi<<Esc>%
+vnoremap < va><Esc>gvovix<Esc>r<
+vnoremap > va><Esc>gvovix<Esc>r<%
 
 nnoremap [ vi[
 nnoremap ] va[

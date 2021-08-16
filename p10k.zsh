@@ -1693,8 +1693,21 @@
   # }
 
   function github_pr() {
+    branch=$1
+    remote_branch=$(_convert_to_remote_branch $branch)
     emulate -L zsh
-    hub pr list -s all -h google:$1 -f '%i%Creset %pS %sH'
+    hub_output=$(hub pr list -s all -h $(_remote):$remote_branch -f '%i%Creset %pS %sH' 2> /dev/null)
+    if [ -z "$hub_output" ]; then
+      commit_id=$(git rev-parse --verify space/$remote_branch 2> /dev/null)
+      if [ -n "$commit_id" ]; then
+        echo -e "space space $commit_id"
+      elif [ -f ~/.space_remote_branches/"$branch" ]; then
+        head_commit_id=$(git rev-parse --verify $branch 2> /dev/null)
+        echo -e "space closed $head_commit_id"
+      fi
+    else
+      echo -e $hub_output
+    fi
   }
 
   function github_pr_callback() {
@@ -1703,19 +1716,25 @@
       typeset -g _github_pr_id=$(echo $3 | cut -d' ' -f1)
       typeset -g _github_pr_status=$(echo $3 | cut -d' ' -f2)
       typeset -g _github_pr_commit=$(echo $3 | cut -d' ' -f3)
+    fi
+
+    if [ -n "${_github_pr_commit}" ]; then
       if ! git cat-file -e "${_github_pr_commit}"; then
         _github_pr_id="$_github_pr_id $fg_bold[red](behind)"
       elif [[ "$_github_pr_commit" != $(git rev-parse HEAD | awk '{$1=$1};1') ]] ;then
         _github_pr_id="$_github_pr_id $fg_bold[yellow](ahead)"
       fi
-      if [[ $_github_pr_status = "open" ]]; then
-        typeset -g _github_pr_is_open=1
-      elif [[  $_github_pr_status = "draft" ]]; then
+
+      if [[  "$_github_pr_status" = "draft" ]]; then
         typeset -g _github_pr_is_draft=1
-      elif [[  $_github_pr_status = "merged" ]]; then
+      elif [[  "$_github_pr_status" = "merged" ]]; then
         typeset -g _github_pr_is_merged=1
-      else
+      elif [[  "$_github_pr_status" = "closed" ]]; then
         typeset -g _github_pr_is_closed=1
+      elif [[  "$_github_pr_status" = "open" ]]; then
+        typeset -g _github_pr_is_open=1
+      elif [[  "$_github_pr_status" = "space" ]]; then
+        typeset -g _github_pr_is_space=1
       fi
     fi
     p10k display -r
@@ -1728,12 +1747,17 @@
 
   function prompt_github_pr() {
     emulate -L zsh -o extended_glob
-    branch=$(_remote_branch 2> /dev/null) || return 0
-    typeset -g _github_pr_id= _github_pr_status= _github_pr_is_open= _github_pr_is_closed= _github_pr_is_merged= _github_pr_is_draft= _github_pr_commit=
+    branch=$(_branch 2> /dev/null) || return 0
+    remote_branch=$(_remote_branch 2> /dev/null) || return 0
+    if [ -z "$remote_branch" ]; then
+      return
+    fi
+    typeset -g _github_pr_id= _github_pr_status= _github_pr_is_open= _github_pr_is_closed= _github_pr_is_merged= _github_pr_is_draft= _github_pr_is_space= _github_pr_commit=
     p10k segment -c '$_github_pr_is_draft' -e -t'$_github_pr_id' -b 241 -f 15
     p10k segment -c '$_github_pr_is_open' -e -t'$_github_pr_id' -b 28 -f 15
     p10k segment -c '$_github_pr_is_merged' -e -t'$_github_pr_id' -b 99 -f 15
     p10k segment -c '$_github_pr_is_closed' -e -t'$_github_pr_id' -b 124 -f 15
+    p10k segment -c '$_github_pr_is_space' -e -t'$_github_pr_id' -b 202 -f 15
     async_job my_async_worker github_pr $branch
   }
 

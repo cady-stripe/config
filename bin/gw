@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 export JAVA_HOME=/usr/local/google/home/tgeng/.jdks/corretto-11.0.10
 
 # DEFAULTS may be overridden by calling environment.

@@ -130,6 +130,8 @@ if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then sou
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="ag -g '' --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore '**/*.pyc' --ignore .git5_specs --ignore review"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \

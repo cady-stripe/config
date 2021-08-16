@@ -811,6 +811,7 @@ icons = {
     "pause-circle": u"\uf28b",
     "paw": u"\uf1b0",
     "paypal": u"\uf1ed",
+    "pdf": u"\uf1c1",
     "peace": u"\uf67c",
     "pen": u"\uf304",
     "pen-alt": u"\uf305",
@@ -1307,8 +1308,8 @@ def build_rename(i3, app_icons, args):
     verbose = args.verbose
 
     def get_icon_or_name(leaf, length, branches):
-        if leaf.window_class == 'jetbrains-idea-ce' and leaf.window_title.startswith('kotlin '):
-            match = re.search('[^[]*\\[([^[]+)\\].*', leaf.window_title)
+        if leaf.window_class == 'jetbrains-idea-ce' and (leaf.window_title.startswith('kotlin ') or leaf.window_title.startswith('intellij ')):
+            match = re.search('^[^[]*\\[([^[]+)\\].*', leaf.window_title)
             if match:
                 branch = match.group(1)
                 if branch in branches:
@@ -1330,8 +1331,9 @@ def build_rename(i3, app_icons, args):
             return '?'
 
     def rename(i3, e):
-        result = subprocess.run(['git', 'branch', '--format=%(refname:short)'], stdout=subprocess.PIPE, cwd='/usr/local/google/home/tgeng/dev/kotlin')
-        branches = set(result.stdout.decode("utf-8").splitlines())
+        kotlin_branches = subprocess.run(['git', 'branch', '--format=%(refname:short)'], stdout=subprocess.PIPE, cwd='/usr/local/google/home/tgeng/dev/kotlin')
+        intellij_branches = subprocess.run(['git', 'branch', '--format=%(refname:short)'], stdout=subprocess.PIPE, cwd='/usr/local/google/home/tgeng/dev/intellij-community')
+        branches = set(kotlin_branches.stdout.decode("utf-8").splitlines()).union(intellij_branches.stdout.decode("utf-8").splitlines())
 
         workspaces = i3.get_tree().workspaces()
         # need to use get_workspaces since the i3 con object doesn't have the visible property for some reason
@@ -1348,7 +1350,7 @@ def build_rename(i3, app_icons, args):
             if uniq:
                 seen = set()
                 names = [x for x in names if x not in seen and not seen.add(x)]
-            names = delim.join(set(names))
+            names = delim.join(names)
             workspace_num = int(workspace.num)
             if workspace_num >= 0:
                 if workspace_num == 0:
