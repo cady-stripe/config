@@ -45,7 +45,7 @@ if ! [ "$initial_workspace" = "11" ]; then
   i3-msg workspace number 11
 fi
 desktop=$(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-)
-window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intellij .*')
+window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intellij.*')
 echo focusing "$window_id"
 xdotool windowactivate --sync $window_id
 xdotool windowactivate --sync $window_id key F6
