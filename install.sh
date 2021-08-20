@@ -55,8 +55,5 @@ cat config/tilix | dconf load /com/gexperts/Tilix/
 mkdir ~/.vim/swap
 mkdir ~/.vim/backup
 
-pip3 install --user i3-workspace-names-daemon
-rm ~/.local/lib/python3.8/site-packages/i3_workspace_names_daemon.py && ln -s $PWD/i3_workspace_names_daemon.py ~/.local/lib/python3.8/site-packages/i3_workspace_names_daemon.py
-
 cd -
 
