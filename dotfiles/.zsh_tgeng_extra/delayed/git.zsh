@@ -172,7 +172,7 @@ function gpk() {
       touch ~/.space_remote_branches/"$remote_branch"
     fi
   else
-    echo "Your local branch is behind remote branch $remote_branch"
+    echo "Your local branch is behind remote branch $branch"
   fi
 }
 
@@ -202,6 +202,16 @@ function dpr() {
 
 function gst() {
   git checkout -b $1 origin/$(_master)
+}
+
+function gstc() {
+  remote_branch=$(_remote_branch)
+  if git rev-parse --verify space/$remote_branch > /dev/null ; then
+    # space branch exists
+    git checkout -b $1 space/$remote_branch
+  else
+    git checkout -b $1 origin/$(_master)
+  fi
 }
 
 function gb() {

@@ -28,6 +28,11 @@ pushd intellij
 git fetch origin kt-212-master
 git reset --hard
 git checkout origin/kt-212-master
+rm -r out/artifacts
+rm -r out/idea-system-fir
+rm -r out/kotlinc-dist
+rm -r out/production
+rm -r out/test
 popd
 
 # ./gradlew installIdeArtifacts :prepare:ide-plugin-dependencies:kotlin-dist-for-ide:install -Ppublish.ide.plugin.dependencies=true
@@ -48,6 +53,9 @@ desktop=$(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-)
 window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intellij.*')
 echo focusing "$window_id"
 xdotool windowactivate --sync $window_id
+sleep 900 # wait for indexing
+xdotool windowactivate --sync $window_id key F10
+sleep 900
 xdotool windowactivate --sync $window_id key F6
 sleep 900
 xdotool windowactivate --sync $window_id key F5
