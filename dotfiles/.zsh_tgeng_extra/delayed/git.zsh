@@ -21,7 +21,7 @@ alias gcps='git cherry-pick --skip'
 function _remote() {
   repo_name=$(git_repo_name)
   if [ "$repo_name" = "kotlin-ide" ] || [ "$repo_name" = "intellij" ]; then
-    echo -n tgeng
+    echo -n google
   else
     local branch=$(_remote_branch)
     if [ -z "$(hub pr list -s all -h google:$branch -f '%pS %sH %i')" ]; then
@@ -46,7 +46,7 @@ function gpr() {
 }
 
 function hco() {
-  hub checkout https://github.com/JetBrains/kotlin/pull/$@ && gtm
+  hub checkout https://github.com/JetBrains/intellij-community/pull/$@ && gtm
 }
 
 function showpr() {
@@ -54,7 +54,7 @@ function showpr() {
     branch=$(_remote_branch) && \
       hub pr show -h $(_remote):$branch
   else
-    xdg-open https://github.com/JetBrains/kotlin/pull/$1
+    xdg-open https://github.com/JetBrains/intellij-community/pull/$1
   fi
 }
 
@@ -169,7 +169,7 @@ function gpk() {
     if [ $remote = "space" ]; then
       # push to github to get the tests running
       git push -f google $branch:$remote_branch
-      touch ~/.space_remote_branches/"$remote_branch"
+      touch ~/.space_remote_branches/"$branch"
     fi
   else
     echo "Your local branch is behind remote branch $branch"

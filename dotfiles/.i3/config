@@ -56,7 +56,7 @@ bindsym XF86Tools exec tilix --quake
 bindsym Print exec tilix --quake
 
 # Fetch an OTP via bluetooth using Win+Grave
-bindsym $mod+grave exec --no-startup-id fetchotp -x
+# bindsym $mod+grave exec --no-startup-id fetchotp -x
 bindsym $mod+Return split h; exec terminator
 bindsym $mod+Shift+Return split v; exec terminator
 for_window [window_role="pop-up"] floating enable move absolute position 3440 px 775 px
@@ -189,6 +189,7 @@ workspace p output $RIGHT_MONITOR
 workspace F10:Inbox output $RIGHT_MONITOR
 
 # switch to workspace
+bindsym $mod+grave workspace number 0
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -212,6 +213,7 @@ bindsym $mod+o workspace number 19
 bindsym $mod+p workspace number 20
 
 # move focused container to workspace
+bindsym $mod+Shift+grave move container to workspace number 0
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3

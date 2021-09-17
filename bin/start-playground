@@ -52,12 +52,19 @@ fi
 desktop=$(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-)
 window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intellij.*')
 echo focusing "$window_id"
+# wait for indexing
 xdotool windowactivate --sync $window_id
-sleep 900 # wait for indexing
+sleep 300
+# compile IDE plugin
 xdotool windowactivate --sync $window_id key F10
+sleep 600
+# rebuild
+xdotool windowactivate --sync $window_id key ctrl+shift+alt+b
 sleep 900
+# launch FE1.0 dev instance
 xdotool windowactivate --sync $window_id key F6
 sleep 900
+# launch FIR dev instance
 xdotool windowactivate --sync $window_id key F5
 sleep 900
 if ! [ "$initial_workspace" = "11" ]; then
