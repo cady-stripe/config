@@ -28,11 +28,11 @@ pushd intellij
 git fetch origin kt-212-master
 git reset --hard
 git checkout origin/kt-212-master
-rm -r out/artifacts
-rm -r out/idea-system-fir
-rm -r out/kotlinc-dist
-rm -r out/production
-rm -r out/test
+rm -fr out/artifacts
+rm -fr out/idea-system-fir
+rm -fr out/kotlinc-dist
+rm -fr out/production
+rm -fr out/test
 popd
 
 # ./gradlew installIdeArtifacts :prepare:ide-plugin-dependencies:kotlin-dist-for-ide:install -Ppublish.ide.plugin.dependencies=true
@@ -45,8 +45,10 @@ popd
 # IDEA_ARTIFACTS=`pwd`/dist/artifacts2 IDEA_SANDBOX=`pwd`/local/ideaSandbox2 ./gradlew runIDE -PnoPCE &
 # sleep 120
 
-initial_workspace=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
-if ! [ "$initial_workspace" = "11" ]; then
+function get_workspaces() {
+  i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
+}
+if ! [ $(get_workspaces) = "11" ]; then
   i3-msg workspace number 11
 fi
 desktop=$(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-)
@@ -54,19 +56,19 @@ window_id=$(xdotool search --all --onlyvisible --desktop $desktop  --name 'intel
 echo focusing "$window_id"
 # wait for indexing
 xdotool windowactivate --sync $window_id
-sleep 300
+sleep 100
 # compile IDE plugin
 xdotool windowactivate --sync $window_id key F10
-sleep 600
+sleep 500
 # rebuild
 xdotool windowactivate --sync $window_id key ctrl+shift+alt+b
 sleep 900
-# launch FE1.0 dev instance
-xdotool windowactivate --sync $window_id key F6
-sleep 900
 # launch FIR dev instance
 xdotool windowactivate --sync $window_id key F5
-sleep 900
-if ! [ "$initial_workspace" = "11" ]; then
+sleep 300
+# launch FE1.0 dev instance
+xdotool windowactivate --sync $window_id key shift+F5
+sleep 300
+if ! [ $(get_workspaces) = "11" ]; then
   i3-msg workspace number 11
 fi

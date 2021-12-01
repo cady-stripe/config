@@ -175,8 +175,9 @@ let g:VM_maps['Find Subword Under'] = '<Right>'
 let g:VM_maps['Remove Region'] = '<Left>'
 
 Plug 'scrooloose/nerdcommenter'
-nnoremap s :call NERDComment(0,"toggle")<C-m>
-vnoremap s :call NERDComment(0,"toggle")<C-m>
+
+nnoremap s :call nerdcommenter#Comment(0,"toggle")<C-m>
+vnoremap s :call nerdcommenter#Comment(0,"toggle")<C-m>
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'

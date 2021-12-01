@@ -19,17 +19,18 @@ alias gcpa='git cherry-pick --abort'
 alias gcps='git cherry-pick --skip'
 
 function _remote() {
-  repo_name=$(git_repo_name)
-  if [ "$repo_name" = "kotlin-ide" ] || [ "$repo_name" = "intellij" ]; then
-    echo -n google
-  else
-    local branch=$(_remote_branch)
-    if [ -z "$(hub pr list -s all -h google:$branch -f '%pS %sH %i')" ]; then
-      echo -n space
-    else
-      echo -n google
-    fi
-  fi
+  echo -n space
+  # repo_name=$(git_repo_name)
+  # if [ "$repo_name" = "kotlin-ide" ] || [ "$repo_name" = "intellij" ]; then
+  #   echo -n google
+  # else
+  #   local branch=$(_remote_branch)
+  #   if [ -z "$(hub pr list -s all -h google:$branch -f '%pS %sH %i')" ]; then
+  #     echo -n space
+  #   else
+  #     echo -n google
+  #   fi
+  # fi
 }
 
 function gtm() {
@@ -162,8 +163,10 @@ function gpk() {
 
   branch=$(git branch --show-current)
   remote_branch=$(_remote_branch)
-  pr_status_commit_and_id=$(hub pr list -s all -h $remote:$remote_branch -f '%pS %sH %i')
-  pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
+  if ! [ $remote = "space" ]; then
+    pr_status_commit_and_id=$(hub pr list -s all -h $remote:$remote_branch -f '%pS %sH %i')
+    pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
+  fi
   if [[ "$pr_commit" = "" ]] || git cat-file -e "${pr_commit}"; then
     git push -f $remote $branch:$remote_branch
     if [ $remote = "space" ]; then

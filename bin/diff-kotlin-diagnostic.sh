@@ -4,7 +4,7 @@ set -e
 
 repo=/usr/local/google/home/tgeng/dev/kotlin-diagnostics
 output_dir=/tmp/kotlin-diagnostic-delta/`date "+%F-%T"`
-before=$(git merge-base origin/master HEAD)
+before=$(git rev-parse @{u} 2>/dev/null || git merge-base origin/master HEAD)
 after=$(git rev-parse HEAD)
 
 mkdir -p $output_dir

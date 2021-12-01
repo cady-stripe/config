@@ -117,13 +117,15 @@ nnoremap ` F`lvt`
 nnoremap X @q
 vnoremap a <Esc>
 vnoremap i <Esc>
-nnoremap <space><space> :action RunToCursor<CR>
+nnoremap <tab> :action RunToCursor<CR>
 nnoremap <space> :action Resume<CR>
 nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
 nnoremap <S-space> :action RunClass<CR>
 nnoremap <S-CR> :action DebugClass<CR>
 nnoremap gf vi":<Backspace><Backspace><Backspace><Backspace><Backspace>action GotoFile<CR>
+nnoremap <F6> :action Vcs.ShowTabbedFileHistory<CR>
+vnoremap <F6> :action Vcs.ShowHistoryForBlock<CR>
 
 set multiple-cursors
 map <Right> <A-n>
