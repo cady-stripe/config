@@ -126,6 +126,7 @@ nnoremap <S-CR> :action DebugClass<CR>
 nnoremap gf vi":<Backspace><Backspace><Backspace><Backspace><Backspace>action GotoFile<CR>
 nnoremap <F6> :action Vcs.ShowTabbedFileHistory<CR>
 vnoremap <F6> :action Vcs.ShowHistoryForBlock<CR>
+nnoremap R :action Synchronize<CR>
 
 set multiple-cursors
 map <Right> <A-n>
