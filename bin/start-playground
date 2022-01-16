@@ -46,7 +46,7 @@ popd
 # sleep 120
 
 function get_workspaces() {
-  i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
+  i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2
 }
 if ! [ $(get_workspaces) = "11" ]; then
   i3-msg workspace number 11

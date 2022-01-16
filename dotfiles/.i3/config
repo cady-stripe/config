@@ -94,6 +94,7 @@ for_window [title="^Commit Changes" ] fullscreen enable
 for_window [title="^Database Console" ] floating disable
 # for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [class="jetbrains-idea.*" ] border none
+for_window [class="Fleet" ] border none
 # for_window [class="jetbrains-idea.*" title="^Evaluate$"] resize set 1440 1420, move position center
 for_window [class="jetbrains-clion" ] border none
 for_window [class="jetbrains-studio.*" ] border none
