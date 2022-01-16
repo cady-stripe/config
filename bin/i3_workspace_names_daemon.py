@@ -1268,6 +1268,7 @@ icons = {
     "yoast": u"\uf2b1",
     "youtube": u"\uf167",
     "youtube-square": u"\uf431",
+    "IJ": u"IJ",
 }
 
 I3_CONFIG_PATHS = tuple(os.path.expanduser(path) for path in ("~/.i3", "~/.config/i3", "~/.config/i3-regolith"))
