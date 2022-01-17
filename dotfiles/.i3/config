@@ -52,8 +52,11 @@ bindsym $mod+space exec rofi.sh -show drun
 # Bind the Fn+F3/Fn+F4 keys to lock/lock & suspend respectively
 bindsym XF86ScreenSaver exec --no-startup-id i3lock
 bindsym XF86Sleep exec --no-startup-id i3lock && dbus-send --system --dest=org.freedesktop.UPower --type=method_call --print-reply /org/freedesktop/UPower org.freedesktop.UPower.Suspend
-bindsym XF86Tools exec tilix --quake
-bindsym Print exec tilix --quake
+# bindsym XF86Tools exec ~/bin/toggle-tilix
+# bindsym Print exec  ~/bin/toggle-tilix
+for_window [class="Tilix"] move scratchpad
+bindsym $mod+Print move scratchpad
+bindsym Print scratchpad show
 
 # Fetch an OTP via bluetooth using Win+Grave
 # bindsym $mod+grave exec --no-startup-id fetchotp -x
