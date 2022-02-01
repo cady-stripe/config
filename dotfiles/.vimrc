@@ -32,6 +32,12 @@ nmap <silent> w viw
 vmap <silent> w <Plug>CamelCaseMotion_e
 nnoremap W viw
 
+Plug 'kamykn/spelunker.vim'
+nmap zz Zl
+
+Plug 'tgeng/unicode.vim'
+imap <C-space> <C-x><C-z>
+
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-w>h :TmuxNavigateLeft<cr>
@@ -104,7 +110,7 @@ command! -bang -nargs=* Ag
 "   set grepprg=ag\ --nogroup\ --nocolor
 "
 "   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --smart-case'
+"   let g:ctrlp_user_command = 'ag %s -l --smart-case --nocolor --nogroup --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore "**/*.pyc" --ignore .git5_specs --ignore review -g ""'
 "
 "   " ag is fast enough that CtrlP doesn't need to cache
 "   let g:ctrlp_use_caching = 0
@@ -162,9 +168,16 @@ let NERDTreeIgnore = ['\.pyc$', '\.ibc$']
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<Right>'
+let g:VM_maps['Find Subword Under'] = '<Right>'
+let g:VM_maps['Remove Region'] = '<Left>'
+
 Plug 'scrooloose/nerdcommenter'
-nnoremap s :call NERDComment(0,"toggle")<C-m>
-vnoremap s :call NERDComment(0,"toggle")<C-m>
+
+nnoremap s :call nerdcommenter#Comment(0,"toggle")<C-m>
+vnoremap s :call nerdcommenter#Comment(0,"toggle")<C-m>
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
@@ -206,6 +219,13 @@ let g:HiCursorWords_style = 'cterm=bold,underline gui=bold,underline'
 
 " Plug 'idris-hackers/idris-vim'
 Plug 'edwinb/idris2-vim'
+let g:idris_indent_if = 3
+let g:idris_indent_case = 5
+let g:idris_indent_let = 4
+let g:idris_indent_where = 6
+let g:idris_indent_do = 3
+let g:idris_indent_rewrite = 8
+" let g:idris_conceal = 1
 
 Plug 'derekelkins/agda-vim'
 let g:agda_extraincpaths = ["/usr/local/google/home/tgeng/dev/agda/agda/std-lib/src"]
@@ -242,6 +262,16 @@ else
   let g:syntastic_ignore_files = ['.*/.rustup/toolchains/.*']
 
   " Plug 'Valloric/YouCompleteMe'
+
+  let g:ctrlp_user_command = '/usr/bin/ag %s --smart-case --nocolor --nogroup --hidden
+        \ --ignore .git
+        \ --ignore .svn
+        \ --ignore .hg
+        \ --ignore .DS_Store
+        \ --ignore "**/*.pyc"
+        \ --ignore .git5_specs
+        \ --ignore review
+        \ -g ""'
 endif
 
 " All of your Plugins must be added before the following line
@@ -311,16 +341,6 @@ if filereadable('/google/src/cloud')
     Glug gtimporter
 
     Glug relatedfiles plugin[mappings]='<C-f>'
-
-    let g:ctrlp_user_command = '/usr/bin/ag %s -i --nocolor --nogroup --hidden
-          \ --ignore .git
-          \ --ignore .svn
-          \ --ignore .hg
-          \ --ignore .DS_Store
-          \ --ignore "**/*.pyc"
-          \ --ignore .git5_specs
-          \ --ignore review
-          \ -g ""'
 endif
 au BufRead,BufNewFile *.json set filetype=json
 
@@ -477,8 +497,8 @@ nnoremap <C-Tab> <C-w>w
 vnoremap <C-Tab> <C-w>w
 inoremap <C-Tab> <C-w>w
 inoremap <C-w> <C-o><C-w>
-nnoremap <silent> <Right> *
-nnoremap <silent> <Left> #
+" nnoremap <silent> <Right> *
+" nnoremap <silent> <Left> #
 nnoremap <up> 3<c-y>
 nnoremap <down> 3<c-e>
 imap <Home> <C-o>^
@@ -535,7 +555,6 @@ nnoremap U :redo<CR>
 nnoremap <silent> <C-s> :wa<CR>
 inoremap <C-s> <Esc>:w<CR>
 vnoremap <C-s> v:w<CR>
-nnoremap zz mz1z=`z
 inoremap <C-g> <Esc>[s1z=`]a
 vnoremap P pgvy
 nmap Q gwic
@@ -572,6 +591,9 @@ vnoremap { va}<Esc>gvovi{<Esc>
 vnoremap } va}<Esc>gvovi{<Esc>%
 vnoremap < va><Esc>gvovi<<Esc>
 vnoremap > va><Esc>gvovi<<Esc>%
+
+nnoremap * /\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap # ?\<<C-R>=expand('<cword>')<CR>\><CR>
 
 nnoremap <silent> <S-Esc> :ccl<CR>
 

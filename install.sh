@@ -19,7 +19,7 @@ do
 
   FILE_PATH="$PWD/dotfiles/$f"
   if [ -d $FILE_PATH ]; then
-    ln -s $FILE_PATH ~/$f
+    ln -sd $FILE_PATH ~/$f
   elif [ -f $FILE_PATH ]; then
     ln -s $FILE_PATH ~/$f
   fi
@@ -36,7 +36,7 @@ do
 
   FILE_PATH="$PWD/config/$f"
   if [ -d $FILE_PATH ]; then
-    ln -s $FILE_PATH ~/.config/$f
+    ln -sd $FILE_PATH ~/.config/$f
   elif [ -f $FILE_PATH ]; then
     ln -s $FILE_PATH ~/.config/$f
   fi

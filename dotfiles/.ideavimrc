@@ -15,22 +15,23 @@ vnoremap <Home> ^
 vnoremap <C-e> $
 vnoremap <End> $
 noremap <C-z> <C-a>
+inoremap <C-v> <C-o>:action $Paste<CR>
 
 nnoremap w l[bv]w
 vnoremap w ]w
 
 nnoremap W viw
-vnoremap W e
+vnoremap W :<Backspace><Backspace><Backspace><Backspace><Backspace>action EditorSelectWord<CR>
+vnoremap <M-W> :<Backspace><Backspace><Backspace><Backspace><Backspace>action EditorUnSelectWord<CR>
 
-vnoremap P pgvy
 nnoremap <Right> *
 nnoremap <Left> #
 nnoremap <Up> 3<c-y>
 nnoremap <Down> 3<c-e>
 vnoremap <Up> 3k
 vnoremap <Down> 3j
-nnoremap <C-l> *
-nnoremap <C-h> #
+" nnoremap <C-l> *
+" nnoremap <C-h> #
 nnoremap <C-k> 3<c-y>
 nnoremap <C-j> 3<c-e>
 vnoremap <C-k> 3k
@@ -46,10 +47,14 @@ nnoremap s :action CommentByLineComment<CR>
 vnoremap s :action CommentByLineComment<CR>
 nnoremap R :action RenameElement<CR>
 nnoremap t :action ToggleLineBreakpoint<CR>
+nnoremap T :action XDebugger.MuteBreakpoints<CR>
 nnoremap Q :action com.andrewbrookins.idea.wrap.WrapAction<CR>
-nnoremap T :action StringManipulation.AlignToColumns<CR>
+nnoremap <C-g> :action TestData.Navigate<CR>
 nnoremap Y :action IntroduceVariable<CR>
 vnoremap Y :action IntroduceVariable<CR>
+nnoremap <C-p> :action PasteMultiple<CR>
+vnoremap <C-p> :action PasteMultiple<CR>
+inoremap <C-p> <C-o>:action ParameterInfo<CR>
 vnoremap Q :<Backspace><Backspace><Backspace><Backspace><Backspace>action com.andrewbrookins.idea.wrap.WrapAction<CR>
 inoremap <M-h> <C-w>h
 vnoremap <M-h> <C-w>h
@@ -61,6 +66,7 @@ nnoremap <M-l> <C-w>l
 cnoremap <M-l> <C-w>l
 nnoremap m :action StepOver<CR>
 nnoremap M :action StepInto<CR>
+nnoremap <M-M> :action StepOut<CR>
 nnoremap , :action GotoPreviousError<CR>
 nnoremap . :action GotoNextError<CR>
 nnoremap U :action Vcs.RollbackChangedLines<CR>
@@ -73,6 +79,7 @@ nnoremap <S-Left> :action MoveElementLeft<CR>
 nnoremap <S-Right> :action MoveElementRight<CR>
 nnoremap D :action GotoTypeDeclaration<CR>
 nnoremap H :action TypeHierarchy<CR>
+vnoremap <C-c> :<Backspace><Backspace><Backspace><Backspace><Backspace>action CopyAsRichText<CR>
 
 vnoremap . :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToDotStyleAction<CR>
 vnoremap - :<Backspace><Backspace><Backspace><Backspace><Backspace>action StringManipulation.ToHyphenCaseOrCamelCase<CR>
@@ -93,8 +100,8 @@ vnoremap [ va]<Esc>gvovi[<Esc>
 vnoremap ] va]<Esc>gvovi[<Esc>%
 vnoremap { va}<Esc>gvovi{<Esc>
 vnoremap } va}<Esc>gvovi{<Esc>%
-vnoremap < va><Esc>gvovi<<Esc>
-vnoremap > va><Esc>gvovi<<Esc>%
+vnoremap < va><Esc>gvovix<Esc>r<
+vnoremap > va><Esc>gvovix<Esc>r<%
 
 nnoremap [ vi[
 nnoremap ] va[
@@ -110,25 +117,31 @@ nnoremap ` F`lvt`
 nnoremap X @q
 vnoremap a <Esc>
 vnoremap i <Esc>
-nnoremap <space> :action RunToCursor<CR>
-nnoremap <S-space> :action Run<CR>
-nnoremap <S-CR> :action Debug<CR>
-nnoremap m :action StepOver<CR>
-nnoremap M :action SmartStepInto<CR>
+nnoremap <tab> :action RunToCursor<CR>
+nnoremap <space> :action Resume<CR>
 nnoremap <Backspace> :action QuickEvaluateExpression<CR>
 vnoremap <Backspace> :<Backspace><Backspace><Backspace><Backspace><Backspace>action QuickEvaluateExpression<CR>
-nnoremap H :action TypeHierarchy<CR>
-nnoremap <Left> :action Back<cr>
-nnoremap <Right> :action Forward<cr>
+nnoremap <S-space> :action RunClass<CR>
+nnoremap <S-CR> :action DebugClass<CR>
+nnoremap gf vi":<Backspace><Backspace><Backspace><Backspace><Backspace>action GotoFile<CR>
+nnoremap <F6> :action Vcs.ShowTabbedFileHistory<CR>
+vnoremap <F6> :action Vcs.ShowHistoryForBlock<CR>
+nnoremap R :action Synchronize<CR>
+
+set multiple-cursors
+map <Right> <A-n>
+map <Left> <A-p>
+map <C-;> <A-x>
+
+set argtextobj
 
 set ignorecase
 set smartcase
 set number
 set clipboard=unnamed
 set clipboard+=ideaput
-set timeoutlen=50
+set timeoutlen=150
 set incsearch
 set ideajoin
 set ideastatusicon=gray
 set idearefactormode=keep
-set clipboard+=ideaput

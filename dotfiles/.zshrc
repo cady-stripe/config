@@ -38,7 +38,6 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH=$HOME/.idris2/bin:$HOME/go/bin:$HOME/dev/sbt/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/.idris2/lib:$LD_LIBRARY_PATH
 source ~/.zplug/init.zsh
@@ -65,6 +64,36 @@ zplug "plugins/urltools", from:oh-my-zsh
 zplug "Aloxaf/fzf-tab"
 zplug "mafredri/zsh-async", from:"github", use:"async.zsh"
 zplug "romkatv/powerlevel10k", as:theme
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_get_client time vcs custom_get_github_pr custom_get_dir newline)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
+# POWERLEVEL9K_VCS_CLEAN_BACKGROUND='33'
+# POWERLEVEL9K_VCS_CLEAN_FOREGROUND='15'
+# POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='88'
+# POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='15'
+# POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='36'
+# POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='15'
+# POWERLEVEL9K_VCS_ACTIONFORMAT_FOREGROUND='yellow'
+# if [ -z "$INSIDE_INTELLIJ" ]; then
+#   POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="249"
+#   POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="236"
+#   POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+# else
+#   POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="darkgray"
+#   POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="white"
+#   POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+#   POWERLEVEL9K_TIME_FOREGROUND='darkgray'
+#   POWERLEVEL9K_TIME_BACKGROUND='white'
+# fi
+# POWERLEVEL9K_CUSTOM_GET_DIR_FOREGROUND="248"
+# POWERLEVEL9K_CUSTOM_GET_DIR_BACKGROUND="none"
+#
+# _get_github_pr() {
+#   branch=$(git branch --show-current 2> /dev/null) || return 0
+#   hub pr list -s open -h google:prr/$USER/$branch -f '%i%Creset [%pS]'
+# }
+# POWERLEVEL9K_CUSTOM_GET_GITHUB_PR='_get_github_pr'
+# POWERLEVEL9K_CUSTOM_GET_GITHUB_PR_FOREGROUND='15'
+# POWERLEVEL9K_CUSTOM_GET_GITHUB_PR_BACKGROUND='99'
 
 # POWERLEVEL9K_CUSTOM_HG_COMMIT='prompt_hg_commit'
 # POWERLEVEL9K_CUSTOM_HG_COMMIT_FOREGROUND='227'
@@ -101,6 +130,8 @@ if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/path.zsh.inc' ]; then sou
 if [ -f '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/google/home/tgeng/google-cloud-sdk/completion.zsh.inc'; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="ag -g '' --hidden --ignore .git --ignore .svn --ignore .hg --ignore .DS_Store --ignore '**/*.pyc' --ignore .git5_specs --ignore review"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
@@ -138,3 +169,4 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.tgeng_config/p10k.zsh
+source ~/.env

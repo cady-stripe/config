@@ -1,1 +1,0 @@
-/usr/local/google/home/tgeng/.tgeng_config/dotfiles/.i3
