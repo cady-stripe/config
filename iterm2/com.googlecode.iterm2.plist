@@ -2,12 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>Command</key>
 	<string>tmux-2new-session-A-sdropdown</string>
 	<key>Default Bookmark Guid</key>
 	<string>FA24BD2A-D031-4031-889E-BC64731A01A7</string>
+	<key>DeleteProfile_SilenceUntil</key>
+	<real>665454501.64664805</real>
+	<key>DeleteProfile_selection</key>
+	<integer>0</integer>
 	<key>EnableDivisionView</key>
 	<true/>
+	<key>GlobalKeyMap</key>
+	<dict/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideScrollbar</key>
@@ -15,13 +23,13 @@
 	<key>Hotkey</key>
 	<true/>
 	<key>HotkeyChar</key>
-	<integer>63248</integer>
+	<integer>63302</integer>
 	<key>HotkeyCode</key>
-	<integer>105</integer>
+	<integer>114</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>HotkeyModifiers</key>
-	<integer>8388864</integer>
+	<integer>0</integer>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutMeta_selection</key>
@@ -610,6 +618,8 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
+			<key>Left Option Key Changeable</key>
+			<false/>
 			<key>Link Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -638,6 +648,8 @@
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
+			<false/>
+			<key>Right Option Key Changeable</key>
 			<false/>
 			<key>Right Option Key Sends</key>
 			<integer>2</integer>
@@ -671,6 +683,8 @@
 			<string></string>
 			<key>Silence Bell</key>
 			<false/>
+			<key>Space</key>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -740,6 +754,10 @@
 	<false/>
 	<key>StatusBarPosition</key>
 	<integer>0</integer>
+	<key>SwitchTabModifier</key>
+	<integer>9</integer>
+	<key>SwitchWindowModifier</key>
+	<integer>9</integer>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabViewType</key>
