@@ -42,8 +42,9 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # bindsym Pause exec ~/bin/lock.sh
 bindsym $mod+z exec ~/bin/takeover
 # bindsym Pause exec rofi.sh -show run
-bindsym $mod+Ctrl+space exec rofi.sh -show run
+bindsym Mod1+shift+space exec rofi.sh -show run
 bindsym $mod+space exec rofi.sh -show drun
+bindsym Mod1+space exec rofi.sh -show drun
 # bindsym $mod+c exec sh -c '~/bin/snipit > /tmp/snipit_output'
 
 # bindsym $mod+s split h; exec SHELL=sh urxvt -name desktop-ssh -e ssh tgeng-linux.kir.corp.google.com
@@ -57,6 +58,8 @@ bindsym XF86Sleep exec --no-startup-id i3lock && dbus-send --system --dest=org.f
 for_window [class="Tilix"] move scratchpad
 bindsym $mod+Print move scratchpad
 bindsym Print scratchpad show
+bindsym $mod+XF86Tools move scratchpad
+bindsym XF86Tools scratchpad show
 
 # Fetch an OTP via bluetooth using Win+Grave
 # bindsym $mod+grave exec --no-startup-id fetchotp -x

@@ -26,5 +26,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES="1728x1080,3840x2160"
 
 . "$HOME/.cargo/env"
