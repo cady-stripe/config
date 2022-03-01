@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+
 mkdir -p ~/.vimundo
 
 cd "$(dirname "$0")"
@@ -50,7 +52,7 @@ if [ ! -e ~/bin ]; then
   ln -s $PWD/bin ~/bin
 fi
 
-cat config/tilix | dconf load /com/gexperts/Tilix/
+dconf load /com/gexperts/Tilix/ < $SCRIPT_DIR/config/tilix
 
 mkdir ~/.vim/swap
 mkdir ~/.vim/backup
