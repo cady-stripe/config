@@ -47,38 +47,38 @@ imap <silent> <M-j> <C-w>j
 imap <silent> <M-k> <C-w>k
 imap <silent> <M-l> <C-w>l
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-set rtp+=~/.vim/plugged/LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'haskell': ['hie-wrapper'],
-    \ }
-
-autocmd FileType rust,haskell call SetKeyBindings()
-function SetKeyBindings()
-  nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <silent> <M-/> :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <silent> <M-F7> :call LanguageClient#textDocument_references()<CR>
-  nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <silent> <M-a> :call LanguageClient#textDocument_codeAction()<CR>
-  nnoremap <silent> <M-d> :call LanguageClient_contextMenu()<CR>
-  nnoremap <silent> <CR> :call LanguageClient#explainErrorAtPoint()<CR>
-endfunction
-
-autocmd FileType haskell call SetHaskellOptions()
-function SetHaskellOptions()
-  let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
-endfunction
-
-autocmd Filetype rust call SetRustOptions()
-function SetRustOptions()
-  let g:LanguageClient_diagnosticsEnable = 0
-endfunction
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+" set rtp+=~/.vim/plugged/LanguageClient-neovim
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"     \ 'haskell': ['hie-wrapper'],
+"     \ }
+"
+" autocmd FileType rust,haskell call SetKeyBindings()
+" function SetKeyBindings()
+"   nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"   nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"   nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
+"   nnoremap <silent> <M-/> :call LanguageClient#textDocument_documentSymbol()<CR>
+"   nnoremap <silent> <M-F7> :call LanguageClient#textDocument_references()<CR>
+"   nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>
+"   nnoremap <silent> <M-a> :call LanguageClient#textDocument_codeAction()<CR>
+"   nnoremap <silent> <M-d> :call LanguageClient_contextMenu()<CR>
+"   nnoremap <silent> <CR> :call LanguageClient#explainErrorAtPoint()<CR>
+" endfunction
+"
+" autocmd FileType haskell call SetHaskellOptions()
+" function SetHaskellOptions()
+"   let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+" endfunction
+"
+" autocmd Filetype rust call SetRustOptions()
+" function SetRustOptions()
+"   let g:LanguageClient_diagnosticsEnable = 0
+" endfunction
 
 " (Optional) Multi-entry selection UI.
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

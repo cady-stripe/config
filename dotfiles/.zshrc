@@ -1,7 +1,14 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+autoload -Uz compinit; compinit
+autoload -Uz bashcompinit; bashcompinit
+source ~/.bash_profile
+source ~/.bashrc
+export PATH="$HOME/bin:$PATH"
 export TERM="xterm-256color"
+
 stty -ixon -ixoff
 # =============================================================================
 # history
@@ -38,8 +45,8 @@ export EDITOR=vim
 # =============================================================================
 # zplug
 # =============================================================================
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH=$HOME/.idris2/bin:$HOME/go/bin:$HOME/dev/sbt/bin:$PATH
+# export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# export PATH=$HOME/.idris2/bin:$HOME/go/bin:$HOME/dev/sbt/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/.idris2/lib:$LD_LIBRARY_PATH
 source ~/.zplug/init.zsh
 
@@ -124,7 +131,7 @@ bindkey -M menuselect '^M' .accept-line
 #
 fpath=($HOME/.zplug/repos/gradle/gradle-completion $fpath)
 
-PATH=$HOME/dev/cmake-master-dev/prebuilts/ninja/linux-x86:$(echo "$PATH" | sed -e 's|:/google/data/ro/[^:]*||g')
+# PATH=$HOME/dev/cmake-master-dev/prebuilts/ninja/linux-x86:$(echo "$PATH" | sed -e 's|:/google/data/ro/[^:]*||g')
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/usr/local/google/home/tgeng/.sdkman"
 [[ -s "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh" ]] && source "/usr/local/google/home/tgeng/.sdkman/bin/sdkman-init.sh"
@@ -138,3 +145,5 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.tgeng_config/p10k.zsh
+
+alias b=/Users/cady/stripe/uppsala/bazel

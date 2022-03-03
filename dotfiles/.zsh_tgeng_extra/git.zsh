@@ -20,47 +20,68 @@ alias gcpa='git cherry-pick --abort'
 alias gcps='git cherry-pick --skip'
 
 function showpr() {
-  branch=$(git branch --show-current)
-  hub pr show -h google:prr/$USER/$branch
+  branch=$(_remote_branch) && \
+  hub pr show -h $branch
 }
 
 function listpr() {
-  branch=$(git branch --show-current)
-  hub pr list -s all -h google:prr/$USER/$branch -f '%pC%>(8)%i%Creset  %t%  l [%pS]%n%n   %U%n'
+  branch=$(_remote_branch) && \
+  hub pr list -s all -h $branch -f '%pC%>(8)%i%Creset  %t%  l [%pS]%n%n   %U%n'
 }
+
+# function showci() {
+#   branch=$(_remote_branch) && \
+#     xdg-open "https://teamcity.jetbrains.com/buildConfiguration/Kotlin_KotlinForGoogle_AggregateBranch?branch=${branch}&buildTypeTab=overview&mode=builds"
+# }
 
 function prune-all() {
   git for-each-ref --format='%(refname:short)' refs/heads | while read branch
   do
-    if [[ "$branch" = prr/* ]]; then
+    remote_branch=$(_convert_to_remote_branch $branch)
+    state_and_commit=$(hub pr list -s all -h $remote_branch -f '%S %sH')
+    state=$(echo -n $state_and_commit | cut -d' ' -f1)
+    commit=$(echo -n $state_and_commit | cut -d' ' -f2)
+    if [[ "$state" = "closed" ]] || [[ "$state" = "merged" ]] || ([[ "$commit" != "" ]] && ! git cat-file -e "${commit}"); then
       git branch -D "$branch" || (git checkout origin/master && git branch -D "$branch")
-    else
-      state=$(hub pr list -s all -h google:prr/$USER/$branch -f '%S' -s closed)
-      if [[ "$state" = "closed" ]]; then
-        git branch -D "$branch" || (git checkout origin/master && git branch -D "$branch")
-      fi
     fi
   done
 }
+
+function _remote_branch() {
+  _convert_to_remote_branch $(git branch --show-current)
+}
+
+function _convert_to_remote_branch() {
+    echo -n $1
+}
+
 
 function gpu() {
   git fetch origin master
   KOTLIN_DEV_TAG=$(git describe --tags --abbrev=0 --match 'build-*-dev-*' origin/master)
   echo "pusing $KOTLIN_DEV_TAG" && \
-  git push google $KOTLIN_DEV_TAG && \
+  git push origin $KOTLIN_DEV_TAG && \
   echo "pusing master" && \
-  git push google origin/master:master
+  git push origin origin/master:master
 }
 
-function gpk() {
+function gpf() {
   branch=$(git branch --show-current)
-  git push -f google $branch:prr/$USER/$branch
+  remote_branch=$(_remote_branch)
+  pr_status_commit_and_id=$(hub pr list -s all -h $remote_branch -f '%pS %sH %i')
+  pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
+  if [[ "$pr_commit" = "" ]] || git cat-file -e "${pr_commit}"; then
+    git push -f origin $branch:$remote_branch
+  else
+    echo "Your local branch is behind remote branch $remote_branch"
+  fi
 }
 
 function dpr() {
-  gpk
-  branch=$(git branch --show-current)
-  hub pull-request -d -b JetBrains:master -h google:prr/$USER/$branch $@
+  gpk || return 1
+  branch=$(_remote_branch)
+  hub pull-request -d -b JetBrains:master -h $branch $@ && \
+  hub pr list -s all -h $branch -f '%U' | xclip -selection clipboard
 }
 
 function gst() {
@@ -71,19 +92,50 @@ function gst() {
 function gb() {
   gb_ | while read branch_line
   do
-    branch=$(echo -n $branch_line | sed -r "s/(\* )?\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" | cut -d' ' -f1)
+    branch=$(echo -n $branch_line | gsed "s/\x1b\[[0-9;]*m//g" | cut -d' ' -f1)
     if [ "${branch_line:0:2}" != '* ' ]; then
       echo -n "  "
     fi
-    echo -n $branch_line
-    hub pr list -s all -h google:prr/$USER/$branch -f '%pC%>(8)%i%Creset [%pS]'
+    echo -ne $branch_line
+    echo -n ' '
+    remote_branch=$(_convert_to_remote_branch $branch)
+    pr_status_commit_and_id=$(hub pr list -s all -h $remote_branch -f '%pS %sH %i')
+    if [[ $pr_status_commit_and_id != "" ]];then
+      pr_status=$(echo -n $pr_status_commit_and_id | cut -d' ' -f1)
+      pr_commit=$(echo -n $pr_status_commit_and_id | cut -d' ' -f2)
+      pr_id=$(echo -n $pr_status_commit_and_id | cut -d' ' -f3)
+      pr_summary=$pr_id
+      if ! git cat-file -e "${pr_commit}"; then
+        pr_summary="$pr_summary $fg_bold[red](behind)"
+      elif [[ "$pr_commit" != $(git rev-parse $branch | awk '{$1=$1};1') ]] ;then
+        pr_summary="$pr_summary $fg_bold[yellow](ahead)"
+      fi
+      if [[ $pr_status = 'draft' ]]; then
+        _echo_bg 31 $pr_summary
+      elif [[ $pr_status = 'open' ]]; then
+        _echo_bg 28 $pr_summary
+      elif [[ $pr_status = 'merged' ]]; then
+        _echo_bg 99 $pr_summary
+      elif [[ $pr_status = 'closed' ]]; then
+        _echo_bg 124 $pr_summary
+      else
+        echo -n $pr_summary
+      fi
+    fi
     echo
   done
 }
 
-function s() {
-  selected=$(gb_ | grep -v '^\*' | cut -c3- | grep -v 'heads/' | grep -v 'prr/' | fzf -1 --reverse --tac --height=20 --min-height=1 --ansi -m | cut -d' ' -f1)
-  git checkout $selected
+function _echo_bg() {
+  TAG="\e[48;5;${1}m"
+  echo -ne "${TAG} $2 \e[0m"
+}
+
+function sb() {
+  selected=$(gb_ | grep -v '^\*' | cut -c3- | grep -v 'heads/' | grep -iF "$1" | fzf -1 --reverse --tac --height=20 --min-height=1 --ansi -m | cut -d' ' -f1)
+  if [[ "$selected" != "" ]]; then
+    git checkout $selected
+  fi
 }
 
 return_git_status_files() {
